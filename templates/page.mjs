@@ -203,7 +203,7 @@ export function services({ lang, S, data, manifest }) {
       <thead><tr><th scope="col">${esc(S.services.colService)}</th><th scope="col" class="price">${esc(S.services.colPrice)}</th></tr></thead>
       <tbody>${rows}</tbody>
     </table>
-    <p class="cta-row"><span>${esc(S.services.unsure)}</span>${callButton({ lang, S, data, className: 'btn btn-primary' })}</p>
+    <p class="cta-row">${esc(S.services.unsure).replace('{link}', `<a href="tel:${data.site.phoneTel}">${esc(S.services.unsureLink)}</a>`)}</p>
   </div>
 </section>`;
 }
@@ -296,7 +296,7 @@ export function contact({ lang, S, data, urls }) {
       </div>
       <div class="contact-details">
         <h3>${icons.phone} ${esc(S.contact.phoneLabel)}</h3>
-        <p class="contact-phone">${callButton({ lang, S, data, className: 'btn btn-primary btn-big' })}</p>
+        <p class="contact-phone"><a class="phone-big" href="tel:${s.phoneTel}">${esc(phone)}</a></p>
         ${messenger}
         <ul class="social">
           <li><a href="${s.instagram}" rel="noopener">${icons.instagram}<span>${esc(S.contact.instagram)}</span></a></li>
@@ -317,7 +317,7 @@ export function footer({ lang, S, data, privacyHref, year }) {
   <div class="wrap footer-grid">
     <div>
       <p class="footer-name">${esc(s.name)}</p>
-      <p>${esc(s.address.street)}, ${esc(s.address.postalCode)} ${esc(s.address.city)}<br><a href="tel:${s.phoneTel}">${esc(phone)}</a></p>
+      <p>${esc(s.address.street)}, ${esc(s.address.postalCode)} ${esc(s.address.city)}</p>
       <p>${esc(S.footer.hoursSummary)}</p>
       <ul class="social">
         <li><a href="${s.instagram}" rel="noopener">${icons.instagram}<span>Instagram</span></a></li>

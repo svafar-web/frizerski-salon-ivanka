@@ -98,6 +98,7 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 .lang-switch a { padding: .5rem .25rem; }
 .lang-switch span[aria-current] { color: var(--muted); }
 .btn-call-num { display: none; }
+.btn-call { display: none; } /* on phones the fixed bottom bar is the call button */
 .site-nav { grid-area: nav; }
 .site-nav ul { list-style: none; margin: 0 -.5rem; padding: 0; display: flex; flex-wrap: wrap; gap: 0; }
 .site-nav a { display: inline-block; padding: .55rem .5rem; color: var(--ink); text-decoration: none; font-weight: 600; font-size: 1rem; white-space: nowrap; border-radius: 6px; }
@@ -105,6 +106,7 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 @media (max-width: 359px) { .btn-call-short { display: none; } .btn-call { padding: .4em .7em; } }
 @media (min-width: 760px) {
   .site-header { position: sticky; top: 0; }
+  .btn-call { display: inline-flex; }
   .btn-call-num { display: inline; }
   .btn-call-short { display: none; }
   .site-nav ul { margin: 0 -.9rem; }
@@ -165,7 +167,7 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 .service-thumb img { width: 100%; height: 100%; object-fit: cover; }
 .service-item td { padding: .6rem 0 .6rem 5.5rem; font-size: 1.05rem; }
 .service-item td.price { padding-left: 1rem; }
-.cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: 2rem; font-weight: 600; }
+.cta-row { margin-top: 1.5rem; font-size: 1.15rem; }
 @media (max-width: 480px) { .service-thumb { width: 56px; } .service-item td { padding-left: 4.5rem; } .services-table .price { font-size: 1rem; } }
 
 /* Services: colour swatches next to the creative-colour group */
@@ -242,7 +244,8 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 .contact-grid { display: grid; gap: 2rem; }
 .contact-details h3 { display: flex; align-items: center; gap: .4em; font-family: var(--display); font-size: 1.5rem; margin-bottom: .5rem; }
 .contact-details p { margin-bottom: 1.25rem; }
-.contact-phone .btn { margin: .2rem 0 .3rem; }
+.phone-big { font-family: var(--display); font-size: clamp(2rem, 6vw, 2.6rem); font-weight: 600; color: var(--accent); text-decoration: none; display: inline-block; padding: .2rem 0; letter-spacing: .01em; }
+.phone-big:hover { color: var(--accent-dark); text-decoration: underline; }
 .contact-messenger small { display: block; margin-top: .4rem; }
 .social { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; }
 .social a { display: inline-flex; align-items: center; gap: .45em; min-height: 48px; font-weight: 600; color: var(--ink); }

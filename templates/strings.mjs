@@ -23,7 +23,8 @@ export const strings = {
       colService: 'Usluga',
       colPrice: 'Cijena',
       onRequest: 'Cijena na upit',
-      unsure: 'Niste sigurni što Vam treba? Nazovite pa ćemo dogovoriti.'
+      unsure: 'Niste sigurni što Vam treba? {link} pa ćemo dogovoriti.',
+      unsureLink: 'Nazovite nas'
     },
     gallery: {
       heading: 'Galerija',
@@ -124,7 +125,8 @@ export const strings = {
       colService: 'Service',
       colPrice: 'Price',
       onRequest: 'Price on request',
-      unsure: 'Not sure what you need? Call us and we will work it out together.'
+      unsure: 'Not sure what you need? {link} and we will work it out together.',
+      unsureLink: 'Call us'
     },
     gallery: {
       heading: 'Gallery',

@@ -132,6 +132,7 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 .lang-switch a { padding: .5rem .25rem; }
 .lang-switch span[aria-current] { color: var(--muted); }
 .btn-call-num { display: none; }
+.btn-call { display: none; } /* on phones the fixed bottom bar is the call button */
 .site-nav { grid-area: nav; }
 .site-nav ul { list-style: none; margin: 0 -.5rem; padding: 0; display: flex; flex-wrap: wrap; gap: 0; }
 .site-nav a { display: inline-block; padding: .55rem .5rem; color: var(--ink); text-decoration: none; font-weight: 600; font-size: 1rem; white-space: nowrap; border-radius: 6px; }
@@ -139,6 +140,7 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 @media (max-width: 359px) { .btn-call-short { display: none; } .btn-call { padding: .4em .7em; } }
 @media (min-width: 760px) {
   .site-header { position: sticky; top: 0; }
+  .btn-call { display: inline-flex; }
   .btn-call-num { display: inline; }
   .btn-call-short { display: none; }
   .site-nav ul { margin: 0 -.9rem; }
@@ -199,7 +201,7 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 .service-thumb img { width: 100%; height: 100%; object-fit: cover; }
 .service-item td { padding: .6rem 0 .6rem 5.5rem; font-size: 1.05rem; }
 .service-item td.price { padding-left: 1rem; }
-.cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: 2rem; font-weight: 600; }
+.cta-row { margin-top: 1.5rem; font-size: 1.15rem; }
 @media (max-width: 480px) { .service-thumb { width: 56px; } .service-item td { padding-left: 4.5rem; } .services-table .price { font-size: 1rem; } }
 
 /* Services: colour swatches next to the creative-colour group */
@@ -276,7 +278,8 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 .contact-grid { display: grid; gap: 2rem; }
 .contact-details h3 { display: flex; align-items: center; gap: .4em; font-family: var(--display); font-size: 1.5rem; margin-bottom: .5rem; }
 .contact-details p { margin-bottom: 1.25rem; }
-.contact-phone .btn { margin: .2rem 0 .3rem; }
+.phone-big { font-family: var(--display); font-size: clamp(2rem, 6vw, 2.6rem); font-weight: 600; color: var(--accent); text-decoration: none; display: inline-block; padding: .2rem 0; letter-spacing: .01em; }
+.phone-big:hover { color: var(--accent-dark); text-decoration: underline; }
 .contact-messenger small { display: block; margin-top: .4rem; }
 .social { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; }
 .social a { display: inline-flex; align-items: center; gap: .45em; min-height: 48px; font-weight: 600; color: var(--ink); }
@@ -362,7 +365,7 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 <tr class="service-group" id="usluga-svecane"><td><div class="service-cell"><picture class="service-thumb"><source type="image/webp" srcset="/frizerski-salon-ivanka/images/svecana-punda-400.webp 400w, /frizerski-salon-ivanka/images/svecana-punda-800.webp 800w, /frizerski-salon-ivanka/images/svecana-punda-1080.webp 1080w" sizes="80px"><img src="/frizerski-salon-ivanka/images/svecana-punda-800.jpg" srcset="/frizerski-salon-ivanka/images/svecana-punda-400.jpg 400w, /frizerski-salon-ivanka/images/svecana-punda-800.jpg 800w, /frizerski-salon-ivanka/images/svecana-punda-1080.jpg 1080w" sizes="80px" width="800" height="1000" alt="" loading="lazy" decoding="async"></picture><div><h3>Occasion and bridal hair</h3><p>Updos, braids and waves for weddings, proms and celebrations.</p></div></div></td><td class="price"><span class="muted">Price on request</span></td></tr>
 <tr class="service-group" id="usluga-njega"><td><div class="service-cell"><picture class="service-thumb"><source type="image/webp" srcset="/frizerski-salon-ivanka/images/plava-ravna-duga-400.webp 400w, /frizerski-salon-ivanka/images/plava-ravna-duga-800.webp 800w, /frizerski-salon-ivanka/images/plava-ravna-duga-1080.webp 1080w" sizes="80px"><img src="/frizerski-salon-ivanka/images/plava-ravna-duga-800.jpg" srcset="/frizerski-salon-ivanka/images/plava-ravna-duga-400.jpg 400w, /frizerski-salon-ivanka/images/plava-ravna-duga-800.jpg 800w, /frizerski-salon-ivanka/images/plava-ravna-duga-1080.jpg 1080w" sizes="80px" width="800" height="800" alt="" loading="lazy" decoding="async"></picture><div><h3>Hair care</h3><p>Care and treatments for hair after colouring and lightening, with professional products.</p></div></div></td><td class="price"><span class="muted">Price on request</span></td></tr></tbody>
     </table>
-    <p class="cta-row"><span>Not sure what you need? Call us and we will work it out together.</span><a class="btn btn-primary" href="tel:+38521568427"><svg class="ico" aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg><span>Call to book: +385 21 568 427</span></a></p>
+    <p class="cta-row">Not sure what you need? <a href="tel:+38521568427">Call us</a> and we will work it out together.</p>
   </div>
 </section>
   <section id="o-nama" class="section section-tint" aria-labelledby="o-nama-h">
@@ -447,7 +450,7 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
       </div>
       <div class="contact-details">
         <h3><svg class="ico" aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg> Phone</h3>
-        <p class="contact-phone"><a class="btn btn-primary btn-big" href="tel:+38521568427"><svg class="ico" aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg><span>Call to book: +385 21 568 427</span></a></p>
+        <p class="contact-phone"><a class="phone-big" href="tel:+38521568427">+385 21 568 427</a></p>
         <p class="contact-messenger"><a class="btn btn-secondary" href="https://m.me/frizerskisalonivanka" rel="noopener"><svg class="ico" aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2C6.5 2 2 6.1 2 11.3c0 2.9 1.4 5.5 3.7 7.2V22l3.4-1.9c.9.3 1.9.4 2.9.4 5.5 0 10-4.1 10-9.3S17.5 2 12 2zm1 12.5-2.6-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7-5.4 5.8z"/></svg><span>Message us on Messenger</span></a><br><small>For questions. Appointments are made by phone.</small></p>
         <ul class="social">
           <li><a href="https://www.instagram.com/frizerskii_salon_ivanka/" rel="noopener"><svg class="ico" aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1.1 0-1.7.2-2.1.4-.5.2-.9.4-1.2.8-.4.4-.6.7-.8 1.2-.2.4-.3 1-.4 2.1C2.7 9.8 2.7 10.1 2.7 12s0 3.5.1 4.7c0 1.1.2 1.7.4 2.1.2.5.4.9.8 1.2.4.4.7.6 1.2.8.4.2 1 .3 2.1.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1 0 1.7-.2 2.1-.4.5-.2.9-.4 1.2-.8.4-.4.6-.7.8-1.2.2-.4.3-1 .4-2.1.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c0-1.1-.2-1.7-.4-2.1-.2-.5-.4-.9-.8-1.2-.4-.4-.7-.6-1.2-.8-.4-.2-1-.3-2.1-.4C15.5 4 15.1 4 12 4zm0 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm5.3-2.9a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg><span>Instagram</span></a></li>
@@ -462,7 +465,7 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
   <div class="wrap footer-grid">
     <div>
       <p class="footer-name">Frizerski salon Ivanka</p>
-      <p>Drage Ivaniševića 18, 21000 Split<br><a href="tel:+38521568427">+385 21 568 427</a></p>
+      <p>Drage Ivaniševića 18, 21000 Split</p>
       <p>Mon–Tue 08–15 · Wed–Fri 13–20 · Sat 08–13 · Sun closed</p>
       <ul class="social">
         <li><a href="https://www.instagram.com/frizerskii_salon_ivanka/" rel="noopener"><svg class="ico" aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1.1 0-1.7.2-2.1.4-.5.2-.9.4-1.2.8-.4.4-.6.7-.8 1.2-.2.4-.3 1-.4 2.1C2.7 9.8 2.7 10.1 2.7 12s0 3.5.1 4.7c0 1.1.2 1.7.4 2.1.2.5.4.9.8 1.2.4.4.7.6 1.2.8.4.2 1 .3 2.1.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1 0 1.7-.2 2.1-.4.5-.2.9-.4 1.2-.8.4-.4.6-.7.8-1.2.2-.4.3-1 .4-2.1.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c0-1.1-.2-1.7-.4-2.1-.2-.5-.4-.9-.8-1.2-.4-.4-.7-.6-1.2-.8-.4-.2-1-.3-2.1-.4C15.5 4 15.1 4 12 4zm0 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm5.3-2.9a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg><span>Instagram</span></a></li>
