@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const srcDir = join(root, 'images/source');
 const outDir = join(root, 'images');
-const WIDTHS = [400, 800, 1200];
+const WIDTHS = [400, 600, 800, 1200];
 const force = process.argv.includes('--force');
 
 mkdirSync(outDir, { recursive: true });

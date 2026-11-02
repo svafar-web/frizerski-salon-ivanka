@@ -12,7 +12,8 @@ const read = (p) => readFileSync(join(root, p), 'utf8');
 const write = (p, s) => { mkdirSync(dirname(join(root, p)), { recursive: true }); writeFileSync(join(root, p), s); console.log('wrote', p); };
 
 const data = JSON.parse(read('content/site-data.json'));
-const css = read('css/style.css');
+// The stylesheet is inlined minified: comments stripped, whitespace collapsed.
+const css = read('css/style.css').replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').replace(/\s*([{}:;,>])\s*/g, '$1').replace(/;}/g, '}').trim();
 const manifest = existsSync(join(root, 'images/manifest.json')) ? JSON.parse(read('images/manifest.json')) : {};
 if (!Object.keys(manifest).length) console.warn('! images/manifest.json missing or empty - run `npm run images`; building with placeholder boxes');
 

@@ -74,10 +74,9 @@ export function picture(manifest, file, { alt, sizes, eager = false, className =
     return `<div class="ph ${className}" style="aspect-ratio:${aspect}" role="img" aria-label="${esc(alt)}"><span>FOTO</span><small>${esc(file)}</small></div>`;
   }
   const webp = m.sizes.map((w) => `/images/${file}-${w}.webp ${w}w`).join(', ');
-  const jpg = m.sizes.map((w) => `/images/${file}-${w}.jpg ${w}w`).join(', ');
   const fallback = m.sizes.includes(800) ? 800 : m.sizes[m.sizes.length - 1];
   const h = Math.round(fallback * m.height / m.width);
-  return `<picture class="${className}"><source type="image/webp" srcset="${webp}" sizes="${sizes}"><img src="/images/${file}-${fallback}.jpg" srcset="${jpg}" sizes="${sizes}" width="${fallback}" height="${h}" alt="${esc(alt)}"${eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async"></picture>`;
+  return `<picture class="${className}"><source type="image/webp" srcset="${webp}" sizes="${sizes}"><img src="/images/${file}-${fallback}.jpg" width="${fallback}" height="${h}" alt="${esc(alt)}"${eager ? ' fetchpriority="high" decoding="sync"' : ' loading="lazy" decoding="async"'}></picture>`;
 }
 
 export function fullImage(manifest, file) {
@@ -91,7 +90,7 @@ export function head({ lang, S, data, urls, css, manifest, preloadHero }) {
   const s = data.site;
   const hero = preloadHero && manifest[preloadHero];
   const preload = hero
-    ? `<link rel="preload" as="image" href="/images/${preloadHero}-800.webp" imagesrcset="${hero.sizes.map((w) => `/images/${preloadHero}-${w}.webp ${w}w`).join(', ')}" imagesizes="(min-width: 900px) 260px, 50vw" type="image/webp">`
+    ? `<link rel="preload" as="image" fetchpriority="high" href="/images/${preloadHero}-800.webp" imagesrcset="${hero.sizes.map((w) => `/images/${preloadHero}-${w}.webp ${w}w`).join(', ')}" imagesizes="(min-width: 900px) 440px, 80vw" type="image/webp">`
     : '';
   return `<!DOCTYPE html>
 <html lang="${S.htmlLang}">
@@ -126,6 +125,10 @@ export function head({ lang, S, data, urls, css, manifest, preloadHero }) {
 <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/inter-latin-ext-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/fraunces-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/inter-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/inter-latin-ext-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fraunces-latin-ext-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fraunces-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/fraunces-latin-ext-400-italic.woff2" as="font" type="font/woff2" crossorigin>
 ${preload}
 <style>${css}</style>
@@ -289,7 +292,7 @@ export function hoursSection({ S, data }) {
       <p class="small">${icons.clock} ${esc(S.hours.holidays)}</p>
     </div>
     <div class="hours-card">
-      <p class="status" data-status hidden></p>
+      <p class="status" data-status></p>
       ${hoursTable({ S, data })}
     </div>
   </div>
@@ -384,7 +387,7 @@ ${notice(data.notice[lang])}
         <p class="tagline">${esc(S.heroTagline)}</p>
         <p class="hero-cta">${callButton({ lang, S, data, className: 'btn btn-primary btn-big' })}</p>
         <p class="hero-address">${icons.pin}<a href="${urls.googleMaps}" rel="noopener">${esc(s.address.street)}, ${esc(s.address.postalCode)} ${esc(s.address.city)}</a></p>
-        <p class="status" data-status hidden></p>
+        <p class="status" data-status></p>
       </div>
       <div class="hero-art">${heroTiles}</div>
     </div>
