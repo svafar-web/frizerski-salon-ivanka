@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<title>OG share image template</title>
+<style>
+  @font-face { font-family: 'Fraunces'; font-weight: 600; src: url('../fonts/fraunces-latin-600-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Fraunces'; font-weight: 600; src: url('../fonts/fraunces-latin-ext-600-normal.woff2') format('woff2'); unicode-range: U+0100-024F; }
+  @font-face { font-family: 'Inter'; font-weight: 600; src: url('../fonts/inter-latin-600-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Inter'; font-weight: 600; src: url('../fonts/inter-latin-ext-600-normal.woff2') format('woff2'); unicode-range: U+0100-024F; }
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: #faf6f1; color: #1c1816; }
+  .card { display: grid; grid-template-columns: 1fr 480px; width: 1200px; height: 630px; }
+  .text { padding: 70px 60px; display: flex; flex-direction: column; justify-content: center; }
+  .kicker { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 26px; color: #8e0e25; letter-spacing: .04em; text-transform: uppercase; margin: 0 0 18px; }
+  h1 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 84px; line-height: 1.02; margin: 0 0 28px; letter-spacing: -0.01em; }
+  h1 strong { color: #b3122e; font-weight: 600; display: block; }
+  .bar { width: 90px; height: 8px; background: #b3122e; border-radius: 3px; margin-bottom: 28px; }
+  .line { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 30px; margin: 0; color: #1c1816; }
+  .line + .line { margin-top: 10px; color: #5f5752; font-size: 23px; }
+  .photo { width: 480px; height: 630px; object-fit: cover; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="text">
+    <p class="kicker">Split · Drage Ivaniševića 18</p>
+    <h1>Frizerski salon <strong>Ivanka</strong></h1>
+    <div class="bar"></div>
+    <p class="line">021 568 427</p>
+    <p class="line">Šišanje · bojanje · kreativne boje · svečane frizure</p>
+  </div>
+  <img class="photo" src="{{photo}}" alt="">
+</div>
+</body>
+</html>

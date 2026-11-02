@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="14" fill="#b3122e"/>
+  <!-- Monogram "I" drawn as shapes so it needs no font -->
+  <rect x="18" y="14" width="28" height="7" rx="1.5" fill="#faf6f1"/>
+  <rect x="27.5" y="14" width="9" height="36" fill="#faf6f1"/>
+  <rect x="18" y="43" width="28" height="7" rx="1.5" fill="#faf6f1"/>
+</svg>

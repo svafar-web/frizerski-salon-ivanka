@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /images/source/
+
+Sitemap: https://frizerskisalonivanka.pages.dev/sitemap.xml

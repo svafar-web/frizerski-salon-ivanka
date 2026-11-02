@@ -1,0 +1,11 @@
+node_modules/
+.lighthouse/
+.claude/
+(3) Instagram_files/
+*_n.jpg
+*_n (1).jpg
+images/source/
+images/og-share.png
+*.log
+.DS_Store
+Thumbs.db

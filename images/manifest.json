@@ -1,0 +1,250 @@
+{
+  "bakrena-duga": {
+    "width": 1080,
+    "height": 1350,
+    "sizes": [
+      400,
+      800,
+      1080
+    ]
+  },
+  "bakrene-kovrce": {
+    "width": 1080,
+    "height": 1082,
+    "sizes": [
+      400,
+      800,
+      1080
+    ]
+  },
+  "crvena-bakrena-ravna": {
+    "width": 1080,
+    "height": 1350,
+    "sizes": [
+      400,
+      800,
+      1080
+    ]
+  },
+  "crvena-bakrena-srednja": {
+    "width": 1080,
+    "height": 1082,
+    "sizes": [
+      400,
+      800,
+      1080
+    ]
+  },
+  "crvena-duga-ravna": {
+    "width": 1080,
+    "height": 1082,
+    "sizes": [
+      400,
+      800,
+      1080
+    ]
+  },
+  "crvena-tamna": {
+    "width": 1080,
+    "height": 1082,
+    "sizes": [
+      400,
+      800,
+      1080
+    ]
+  },
+  "kratka-plavo-ljubicasta": {
+    "width": 1080,
+    "height": 1080,
+    "sizes": [
+      400,
+      800,
+      1080
+    ]
+  },
+  "kreativno-sisanje-boja": {
+    "width": 1920,
+    "height": 1920,
+    "sizes": [
+      400,
+      800,
+      1200
+    ]
+  },
+  "ljubicaste-kovrce": {
+    "width": 543,
+    "height": 960,
+    "sizes": [
+      400,
+      543
+    ]
+  },
+  "magenta-ruzicasta-duga": {
+    "width": 1080,
+    "height": 1350,
+    "sizes": [
+      400,
+      800,
+      1080
+    ]
+  },
+  "platinasto-plava": {
+    "width": 1080,
+    "height": 1082,
+    "sizes": [
+      400,
+      800,
+      1080
+    ]
+  },
+  "plava-balayage-duga": {
+    "width": 1080,
+    "height": 1082,
+    "sizes": [
+      400,
+      800,
+      1080
+    ]
+  },
+  "plava-balayage-ravna": {
+    "width": 1080,
+    "height": 1082,
+    "sizes": [
+      400,
+      800,
+      1080
+    ]
+  },
+  "plava-prije-poslije": {
+    "width": 960,
+    "height": 960,
+    "sizes": [
+      400,
+      800,
+      960
+    ]
+  },
+  "plava-ravna-duga": {
+    "width": 1080,
+    "height": 1080,
+    "sizes": [
+      400,
+      800,
+      1080
+    ]
+  },
+  "plava-valovita-duga": {
+    "width": 1080,
+    "height": 1350,
+    "sizes": [
+      400,
+      800,
+      1080
+    ]
+  },
+  "plave-kovrce-tamne": {
+    "width": 720,
+    "height": 960,
+    "sizes": [
+      400,
+      720
+    ]
+  },
+  "plavi-bob": {
+    "width": 1080,
+    "height": 1080,
+    "sizes": [
+      400,
+      800,
+      1080
+    ]
+  },
+  "roze-plava-pastel": {
+    "width": 1080,
+    "height": 1080,
+    "sizes": [
+      400,
+      800,
+      1080
+    ]
+  },
+  "smede-kovrce-duge": {
+    "width": 720,
+    "height": 960,
+    "sizes": [
+      400,
+      720
+    ]
+  },
+  "smede-kovrce": {
+    "width": 1080,
+    "height": 1080,
+    "sizes": [
+      400,
+      800,
+      1080
+    ]
+  },
+  "smedi-lob": {
+    "width": 1080,
+    "height": 1080,
+    "sizes": [
+      400,
+      800,
+      1080
+    ]
+  },
+  "srebrna-lavanda-ombre": {
+    "width": 1080,
+    "height": 1080,
+    "sizes": [
+      400,
+      800,
+      1080
+    ]
+  },
+  "srebrni-bob": {
+    "width": 1080,
+    "height": 1080,
+    "sizes": [
+      400,
+      800,
+      1080
+    ]
+  },
+  "svecana-punda": {
+    "width": 1080,
+    "height": 1350,
+    "sizes": [
+      400,
+      800,
+      1080
+    ]
+  },
+  "svecani-rep": {
+    "width": 1080,
+    "height": 1082,
+    "sizes": [
+      400,
+      800,
+      1080
+    ]
+  },
+  "tirkizne-kovrce": {
+    "width": 720,
+    "height": 960,
+    "sizes": [
+      400,
+      720
+    ]
+  },
+  "zelena-mint-duga": {
+    "width": 1080,
+    "height": 1080,
+    "sizes": [
+      400,
+      800,
+      1080
+    ]
+  }
+}

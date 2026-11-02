@@ -1,0 +1,20 @@
+{
+  "name": "frizerski-salon-ivanka",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static website for Frizerski salon Ivanka, Split",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "images": "node scripts/images.mjs",
+    "og": "node scripts/og.mjs",
+    "check": "node scripts/check.mjs",
+    "check:links": "node scripts/check.mjs --external",
+    "validate": "node scripts/validate.mjs",
+    "serve": "node scripts/serve.mjs",
+    "lighthouse": "node scripts/lighthouse.mjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.3"
+  }
+}
