@@ -59,7 +59,8 @@ export const strings = {
     },
     reviews: {
       heading: 'Što kažu klijentice',
-      summary: '{percent}% preporuka na Facebooku ({count} recenzija)'
+      summary: '{percent}% preporuka na Facebooku ({count} {word})',
+      google: '{rating} na Googleu ({count} {word})'
     },
     contact: {
       heading: 'Kontakt i lokacija',
@@ -163,7 +164,8 @@ export const strings = {
     },
     reviews: {
       heading: 'What clients say',
-      summary: '{percent}% recommend on Facebook ({count} reviews)'
+      summary: '{percent}% recommend on Facebook ({count} {word})',
+      google: '{rating} on Google ({count} {word})'
     },
     contact: {
       heading: 'Contact and location',

@@ -273,13 +273,28 @@ export function gallery({ lang, S, data, manifest }) {
 </dialog>`;
 }
 
-export function reviewsBlock({ S, data, reviews }) {
+// Croatian plural of "recenzija" (1 recenzija, 2–4 recenzije, 5+ recenzija; 11–14 recenzija)
+const recenzija = (n, lang) => {
+  if (lang === 'en') return n === 1 ? 'review' : 'reviews';
+  const m10 = n % 10, m100 = n % 100;
+  return (m10 >= 2 && m10 <= 4 && !(m100 >= 12 && m100 <= 14)) ? 'recenzije' : 'recenzija';
+};
+
+export function reviewsBlock({ lang, S, data, reviews }) {
   const s = data.site;
+  const links = [];
+  if (s.googleReviews && s.googleReviews.url) {
+    const g = s.googleReviews;
+    const rating = lang === 'hr' ? String(g.rating).replace('.', ',') : String(g.rating);
+    links.push(`<li><a href="${g.url}" rel="noopener"><span class="stars" aria-hidden="true">★</span><span>${esc(t(S.reviews.google, { rating, count: g.count, word: recenzija(g.count, lang) }))}</span></a></li>`);
+  }
+  links.push(`<li><a href="${s.facebookReviews}" rel="noopener">${icons.facebook}<span>${esc(t(S.reviews.summary, { ...s.reviewsSummary, word: recenzija(s.reviewsSummary.count, lang) }))}</span></a></li>`);
+  const list = `<ul class="reviews-line">${links.join('')}</ul>`;
   if (reviews.length) {
     const items = reviews.map((r) => `<li><blockquote><p>${esc(r.text)}</p><footer>— ${esc(r.name)}</footer></blockquote></li>`).join('\n');
-    return `<section id="recenzije" class="section" aria-labelledby="recenzije-h"><div class="wrap"><h2 id="recenzije-h">${esc(S.reviews.heading)}</h2><ul class="reviews">${items}</ul><p class="small"><a href="${s.facebookReviews}" rel="noopener">${esc(t(S.reviews.summary, s.reviewsSummary))}</a></p></div></section>`;
+    return `<section id="recenzije" class="section" aria-labelledby="recenzije-h"><div class="wrap"><h2 id="recenzije-h">${esc(S.reviews.heading)}</h2><ul class="reviews">${items}</ul>${list}</div></section>`;
   }
-  return `<p class="wrap reviews-line"><a href="${s.facebookReviews}" rel="noopener">${icons.facebook}<span>${esc(t(S.reviews.summary, s.reviewsSummary))}</span></a></p>`;
+  return `<div class="wrap">${list}</div>`;
 }
 
 export function hoursSection({ S, data }) {
@@ -395,7 +410,7 @@ ${notice(data.notice[lang])}
   ${services({ lang, S, data, manifest })}
   ${about({ lang, S, data, manifest })}
   ${gallery({ lang, S, data, manifest })}
-  ${reviewsBlock({ S, data, reviews })}
+  ${reviewsBlock({ lang, S, data, reviews })}
   ${hoursSection({ S, data })}
   ${contact({ lang, S, data, urls })}
 </main>

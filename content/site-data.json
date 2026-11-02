@@ -31,7 +31,14 @@
       "Matrix",
       "Schwarzkopf Professional",
       "Artego"
-    ]
+    ],
+    "_googleReviews_upute": "Ocjena i broj recenzija na Google kartama (ručno ažurirajte s vremena na vrijeme). url vodi na Google profil salona.",
+    "googleReviews": {
+      "url": "https://maps.google.com/?cid=14532252068756600284",
+      "rating": 4.8,
+      "count": 23
+    },
+    "googleMapsPlace": "https://maps.google.com/?cid=14532252068756600284"
   },
   "_hours_upute": "Vrijeme upišite kao [\"od\", \"do\"] u 24-satnom obliku. Ako je salon taj dan zatvoren, upišite null.",
   "hours": {

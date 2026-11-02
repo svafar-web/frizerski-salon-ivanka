@@ -249,7 +249,8 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 @media (max-width: 700px) { .lightbox-prev, .lightbox-next { top: auto; bottom: 1rem; transform: none; } .lightbox-fig img { max-height: calc(100dvh - 9.5rem); } }
 
 /* Reviews */
-.reviews-line { margin: 0 auto; padding-top: 0; padding-bottom: 3rem; }
+.reviews-line { list-style: none; margin: 0 0 3rem; padding: 0; display: flex; flex-wrap: wrap; gap: .75rem; }
+.reviews-line .stars { color: #e3a008; font-size: 1.2em; line-height: 1; }
 .reviews-line a { display: inline-flex; align-items: center; gap: .5em; color: var(--ink); font-weight: 600; text-decoration: none; border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: .6rem 1.1rem; }
 .reviews-line a:hover { border-color: var(--ink); }
 .reviews { list-style: none; padding: 0; margin: 0 0 1.5rem; display: grid; gap: 1rem; }

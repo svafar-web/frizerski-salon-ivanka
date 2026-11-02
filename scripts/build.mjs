@@ -46,7 +46,7 @@ const urls = {
   hr: `${base}/`,
   en: `${base}/en/`,
   og: `${base}/images/og-share.jpg`,
-  googleMaps: `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`,
+  googleMaps: data.site.googleMapsPlace || `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`,
   appleMaps: `https://maps.apple.com/?q=${encodeURIComponent(data.site.name)}&ll=${lat},${lng}`,
   directions: `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`
 };
