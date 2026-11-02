@@ -126,6 +126,7 @@ export function head({ lang, S, data, urls, css, manifest, preloadHero }) {
 <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/inter-latin-ext-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/fraunces-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fraunces-latin-ext-400-italic.woff2" as="font" type="font/woff2" crossorigin>
 ${preload}
 <style>${css}</style>
 </head>`;
@@ -151,7 +152,6 @@ export function header({ lang, S, data, switchHref, home }) {
       <nav class="lang-switch" aria-label="${esc(S.switchLabel)}">
         <span aria-current="page" lang="${lang}">${lang.toUpperCase()}</span><span aria-hidden="true"> | </span><a href="${switchHref}" hreflang="${other}" lang="${other}">${other.toUpperCase()}</a>
       </nav>
-      <a class="btn btn-call" href="tel:${s.phoneTel}" aria-label="${esc(t(S.callAria, { phone }))}">${icons.phone}<span class="btn-call-num">${esc(phone)}</span><span class="btn-call-short">${esc(S.callShort)}</span></a>
     </div>
   </div>
 </header>`;
@@ -188,22 +188,25 @@ export function callButton({ lang, S, data, className = 'btn btn-primary' }) {
 }
 
 export function services({ lang, S, data, manifest }) {
-  const rows = data.services.map((g) => {
+  const rows = data.services.map((g, i) => {
     const price = g.price && g.price.trim() ? esc(g.price) : `<span class="muted">${esc(S.services.onRequest)}</span>`;
     const items = (g.items || []).map((it) => `<tr class="service-item"><td>${esc(it.name?.[lang] ?? it.name)}</td><td class="price">${it.price && it.price.trim() ? esc(it.price) : `<span class="muted">${esc(S.services.onRequest)}</span>`}</td></tr>`).join('\n');
-    const img = g.image ? picture(manifest, g.image, { alt: '', sizes: '80px', className: 'service-thumb', aspect: '1 / 1' }) : '';
     const swatches = g.accent === 'rainbow' ? ' <span class="swatches" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>' : '';
-    return `<tr class="service-group" id="usluga-${esc(g.id)}"><td><div class="service-cell">${img}<div><h3>${esc(g.name[lang])}${swatches}</h3><p>${esc(g.desc[lang])}</p></div></div></td><td class="price">${price}</td></tr>${items}`;
+    return `<tr class="service-group" id="usluga-${esc(g.id)}"><td><div class="service-cell"><span class="num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span><div><h3>${esc(g.name[lang])}${swatches}</h3><p>${esc(g.desc[lang])}</p></div></div></td><td class="price">${price}</td></tr>${items}`;
   }).join('\n');
+  const art = data.servicesImage ? `<figure class="services-art">${picture(manifest, data.servicesImage, { alt: data.heroAlt?.[data.servicesImage]?.[lang] || '', sizes: '(min-width: 900px) 420px, 100vw' })}</figure>` : '';
   return `<section id="usluge" class="section" aria-labelledby="usluge-h">
-  <div class="wrap">
-    <h2 id="usluge-h">${esc(S.services.heading)}</h2>
-    <p class="lead">${esc(S.services.intro)}</p>
-    <table class="services-table">
-      <thead><tr><th scope="col">${esc(S.services.colService)}</th><th scope="col" class="price">${esc(S.services.colPrice)}</th></tr></thead>
-      <tbody>${rows}</tbody>
-    </table>
-    <p class="cta-row">${esc(S.services.unsure).replace('{link}', `<a href="tel:${data.site.phoneTel}">${esc(S.services.unsureLink)}</a>`)}</p>
+  <div class="wrap services-grid">
+    <div>
+      <p class="eyebrow">01 <span>${esc(S.eyebrows.services)}</span></p>
+      <h2 id="usluge-h">${esc(S.services.heading)}</h2>
+      <p class="lead">${esc(S.services.intro)}</p>
+      <table class="services-table">
+        <thead><tr><th scope="col">${esc(S.services.colService)}</th><th scope="col" class="price">${esc(S.services.colPrice)}</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+    ${art}
   </div>
 </section>`;
 }
@@ -216,6 +219,7 @@ export function about({ lang, S, data, manifest }) {
   <div class="wrap about-grid">
     ${pic}
     <div class="about-text">
+      <p class="eyebrow">02 <span>${esc(S.about.eyebrow)}</span></p>
       <h2 id="o-nama-h">${esc(S.about.heading)}</h2>
       ${a[lang].map((p) => `<p>${esc(p)}</p>`).join('\n')}
     </div>
@@ -232,12 +236,22 @@ export function gallery({ lang, S, data, manifest }) {
     const inner = full.jpg
       ? `<a class="gallery-link" href="${full.jpg}" data-full="${full.webp}" data-alt="${esc(alt)}" data-credit="${esc(g.credit || '')}" aria-label="${esc(t(S.gallery.open, { alt }))}">${pic}</a>`
       : pic;
-    return `<li><figure>${inner}${credit}</figure></li>`;
+    return `<li><figure id="rad-${esc(g.file)}">${inner}${credit}</figure></li>`;
   }).join('\n');
+  const inGallery = new Set(data.gallery.map((g) => g.file));
+  const palette = (data.palette || []).length ? `<div class="palette">
+      <p class="palette-title">${esc(S.palette.title)} <span class="muted">· ${esc(S.palette.hint)}</span></p>
+      <ul class="palette-list">${data.palette.map((c) => {
+        const label = `<span class="chip" style="--chip:${esc(c.hex)}"></span><span class="chip-name">${esc(c.name[lang])}</span>`;
+        return inGallery.has(c.file) ? `<li><a href="#rad-${esc(c.file)}">${label}</a></li>` : `<li><span class="chip-static">${label}</span></li>`;
+      }).join('')}</ul>
+    </div>` : '';
   return `<section id="galerija" class="section" aria-labelledby="galerija-h">
   <div class="wrap">
+    <p class="eyebrow">03 <span>${esc(S.eyebrows.gallery)}</span></p>
     <h2 id="galerija-h">${esc(S.gallery.heading)}</h2>
     <p class="lead">${esc(S.gallery.intro)}</p>
+    ${palette}
     <ul class="gallery-grid">${items}</ul>
     <p class="more"><a href="${data.site.instagram}" rel="noopener">${esc(S.gallery.more)}</a></p>
   </div>
@@ -266,13 +280,18 @@ export function reviewsBlock({ S, data, reviews }) {
 }
 
 export function hoursSection({ S, data }) {
-  return `<section id="radno-vrijeme" class="section" aria-labelledby="radno-vrijeme-h">
-  <div class="wrap narrow">
-    <h2 id="radno-vrijeme-h">${esc(S.hours.heading)}</h2>
-    <p class="status" data-status hidden></p>
-    <p class="lead">${esc(S.hours.intro)}</p>
-    ${hoursTable({ S, data })}
-    <p class="small">${icons.clock} ${esc(S.hours.holidays)}</p>
+  return `<section id="radno-vrijeme" class="section section-tint" aria-labelledby="radno-vrijeme-h">
+  <div class="wrap hours-grid">
+    <div class="hours-text">
+      <p class="eyebrow">04 <span>${esc(S.eyebrows.hours)}</span></p>
+      <h2 id="radno-vrijeme-h">${esc(S.hours.heading)}</h2>
+      <p class="lead">${esc(S.hours.intro)}</p>
+      <p class="small">${icons.clock} ${esc(S.hours.holidays)}</p>
+    </div>
+    <div class="hours-card">
+      <p class="status" data-status hidden></p>
+      ${hoursTable({ S, data })}
+    </div>
   </div>
 </section>`;
 }
@@ -280,9 +299,10 @@ export function hoursSection({ S, data }) {
 export function contact({ lang, S, data, urls }) {
   const s = data.site;
   const phone = lang === 'hr' ? s.phoneDisplay : s.phoneDisplayIntl;
-  const messenger = s.showMessenger ? `<p class="contact-messenger"><a class="btn btn-secondary" href="${s.messenger}" rel="noopener">${icons.messenger}<span>${esc(S.contact.messenger)}</span></a><br><small>${esc(S.contact.messengerNote)}</small></p>` : '';
+  const messenger = s.showMessenger ? `<p class="contact-messenger"><a class="btn btn-secondary" href="${s.messenger}" rel="noopener">${icons.messenger}<span>${esc(S.contact.messenger)}</span></a></p>` : '';
   return `<section id="kontakt" class="section" aria-labelledby="kontakt-h">
   <div class="wrap">
+    <p class="eyebrow">05 <span>${esc(S.eyebrows.contact)}</span></p>
     <h2 id="kontakt-h">${esc(S.contact.heading)}</h2>
     <div class="contact-grid">
       <div class="map-card">
@@ -296,7 +316,7 @@ export function contact({ lang, S, data, urls }) {
       </div>
       <div class="contact-details">
         <h3>${icons.phone} ${esc(S.contact.phoneLabel)}</h3>
-        <p class="contact-phone"><a class="phone-big" href="tel:${s.phoneTel}">${esc(phone)}</a></p>
+        <p class="contact-phone"><a class="phone-big" href="tel:${s.phoneTel}">${esc(phone)}</a><br><small>${esc(S.phoneOnly)}</small></p>
         ${messenger}
         <ul class="social">
           <li><a href="${s.instagram}" rel="noopener">${icons.instagram}<span>${esc(S.contact.instagram)}</span></a></li>
@@ -350,7 +370,7 @@ export function homePage(ctx) {
   const heroTiles = data.hero.map((file, i) => {
     const g = data.gallery.find((x) => x.file === file);
     const alt = data.heroAlt?.[file]?.[lang] ?? (g ? g.alt[lang] : '');
-    return picture(manifest, file, { alt, sizes: '(min-width: 900px) 260px, 33vw', eager: i === 0, className: 'hero-tile', aspect: i === 0 ? '4 / 5' : '1 / 1' });
+    return picture(manifest, file, { alt, sizes: i === 0 ? '(min-width: 900px) 440px, 80vw' : '(min-width: 900px) 200px, 38vw', eager: i === 0, className: `hero-tile hero-tile-${i + 1}`, aspect: i === 0 ? '4 / 5' : '1 / 1' });
   }).join('\n');
   return `${head({ lang, S, data, urls: { ...urls, title: S.title, description: S.description, canonical: urls.home }, css, manifest, preloadHero: data.hero[0] })}
 <body>
@@ -363,11 +383,10 @@ ${notice(data.notice[lang])}
         <h1 id="hero-h"><span class="h1-small">Frizerski salon</span> <span class="h1-name">Ivanka</span></h1>
         <p class="tagline">${esc(S.heroTagline)}</p>
         <p class="hero-cta">${callButton({ lang, S, data, className: 'btn btn-primary btn-big' })}</p>
-        <p class="hero-note">${esc(S.phoneOnly)}</p>
         <p class="hero-address">${icons.pin}<a href="${urls.googleMaps}" rel="noopener">${esc(s.address.street)}, ${esc(s.address.postalCode)} ${esc(s.address.city)}</a></p>
         <p class="status" data-status hidden></p>
       </div>
-      <div class="hero-collage" aria-hidden="false">${heroTiles}</div>
+      <div class="hero-art">${heroTiles}</div>
     </div>
   </section>
   ${services({ lang, S, data, manifest })}

@@ -1,6 +1,5 @@
 {
   "_upute": "Ovo je jedina datoteka koju trebate mijenjati. Upute su u UPUTE.md. Sve u uglatim zagradama [OVAKO] je privremeno i treba ga zamijeniti pravim podatkom.",
-
   "site": {
     "url": "https://svafar.github.io/frizerski-salon-ivanka",
     "name": "Frizerski salon Ivanka",
@@ -15,33 +14,55 @@
       "country": "Hrvatska",
       "countryCode": "HR"
     },
-    "geo": { "lat": 43.5129585, "lng": 16.4627209 },
+    "geo": {
+      "lat": 43.5129585,
+      "lng": 16.4627209
+    },
     "facebook": "https://www.facebook.com/frizerskisalonivanka/",
     "facebookReviews": "https://www.facebook.com/frizerskisalonivanka/reviews",
     "messenger": "https://m.me/frizerskisalonivanka",
     "showMessenger": true,
     "instagram": "https://www.instagram.com/frizerskii_salon_ivanka/",
-    "reviewsSummary": { "percent": 96, "count": 21 },
-    "brands": ["Matrix", "Schwarzkopf Professional", "Artego"]
+    "reviewsSummary": {
+      "percent": 96,
+      "count": 21
+    },
+    "brands": [
+      "Matrix",
+      "Schwarzkopf Professional",
+      "Artego"
+    ]
   },
-
   "_hours_upute": "Vrijeme upišite kao [\"od\", \"do\"] u 24-satnom obliku. Ako je salon taj dan zatvoren, upišite null.",
   "hours": {
-    "mon": ["08:00", "15:00"],
-    "tue": ["08:00", "15:00"],
-    "wed": ["13:00", "20:00"],
-    "thu": ["13:00", "20:00"],
-    "fri": ["13:00", "20:00"],
-    "sat": ["08:00", "13:00"],
+    "mon": [
+      "08:00",
+      "15:00"
+    ],
+    "tue": [
+      "08:00",
+      "15:00"
+    ],
+    "wed": [
+      "13:00",
+      "20:00"
+    ],
+    "thu": [
+      "13:00",
+      "20:00"
+    ],
+    "fri": [
+      "13:00",
+      "20:00"
+    ],
+    "sat": [
+      "08:00",
+      "13:00"
+    ],
     "sun": null
   },
-
   "_notice_upute": "Obavijest na vrhu stranice, npr. za godišnji odmor. Ostavite prazno (\"\") kad nema obavijesti.",
-  "notice": {
-    "hr": "",
-    "en": ""
-  },
-
+  "notice": { "hr": "", "en": "" },
   "_about_upute": "Odlomci u dijelu 'O nama'. Svaki redak u listi je jedan odlomak. Slika: naziv datoteke iz images/source bez nastavka.",
   "about": {
     "hr": [
@@ -55,106 +76,198 @@
     "image": "ivanka-i-valentina",
     "alt": { "hr": "Ivanka i Valentina, frizerke salona Ivanka", "en": "Ivanka and Valentina, the hairdressers of Salon Ivanka" }
   },
-
   "_services_upute": "Cijenu upišite kao tekst, npr. \"od 20 €\" ili \"25 €\". Prazno (\"\") znači 'Cijena na upit'. Stavke (items) su neobavezne.",
   "services": [
     {
       "id": "sisanje",
       "name": { "hr": "Šišanje i styling", "en": "Cuts and styling" },
-      "desc": {
-        "hr": "Žensko šišanje, feniranje, kovrče i ravnanje – za svaki dan i za posebne prilike.",
-        "en": "Women's haircuts, blow-dries, curls and straightening, for every day and for special occasions."
-      },
+      "desc": { "hr": "Žensko šišanje, feniranje, kovrče i ravnanje – za svaki dan i za posebne prilike.", "en": "Women's haircuts, blow-dries, curls and straightening, for every day and for special occasions." },
       "price": "",
-      "items": [],
-      "image": "plavi-bob"
+      "items": []
     },
     {
       "id": "bojanje",
       "name": { "hr": "Bojanje i pramenovi", "en": "Colour and highlights" },
-      "desc": {
-        "hr": "Bojanje cijele kose, pramenovi, balayage i posvjetljivanje – plave, srebrne, bakrene i crvene nijanse.",
-        "en": "Full colour, highlights, balayage and lightening, from blondes and silvers to coppers and reds."
-      },
+      "desc": { "hr": "Bojanje cijele kose, pramenovi, balayage i posvjetljivanje – plave, srebrne, bakrene i crvene nijanse.", "en": "Full colour, highlights, balayage and lightening, from blondes and silvers to coppers and reds." },
       "price": "",
-      "items": [],
-      "image": "plava-balayage-ravna"
+      "items": []
     },
     {
       "id": "kreativne-boje",
       "name": { "hr": "Kreativne i fashion boje", "en": "Creative and fashion colour" },
-      "desc": {
-        "hr": "Pastelne i neonske nijanse, ružičasta, ljubičasta, plava, dugine boje. Ono po čemu nas prepoznaju.",
-        "en": "Pastel and neon shades, pink, violet, blue, rainbow colour. What we are known for."
-      },
+      "desc": { "hr": "Pastelne i neonske nijanse, ružičasta, ljubičasta, plava, dugine boje. Ono po čemu nas prepoznaju.", "en": "Pastel and neon shades, pink, violet, blue, rainbow colour. What we are known for." },
       "price": "",
       "items": [],
-      "image": "plave-kovrce-tamne",
       "accent": "rainbow"
     },
     {
       "id": "svecane",
       "name": { "hr": "Svečane i svadbene frizure", "en": "Occasion and bridal hair" },
-      "desc": {
-        "hr": "Punđe, pletenice i valovi za vjenčanja, mature i proslave.",
-        "en": "Updos, braids and waves for weddings, proms and celebrations."
-      },
+      "desc": { "hr": "Punđe, pletenice i valovi za vjenčanja, mature i proslave.", "en": "Updos, braids and waves for weddings, proms and celebrations." },
       "price": "",
-      "items": [],
-      "image": "svecana-punda"
+      "items": []
     },
     {
       "id": "njega",
       "name": { "hr": "Njega kose", "en": "Hair care" },
-      "desc": {
-        "hr": "Njega i tretmani za kosu nakon bojanja i posvjetljivanja, profesionalnim proizvodima.",
-        "en": "Care and treatments for hair after colouring and lightening, with professional products."
-      },
+      "desc": { "hr": "Njega i tretmani za kosu nakon bojanja i posvjetljivanja, profesionalnim proizvodima.", "en": "Care and treatments for hair after colouring and lightening, with professional products." },
       "price": "",
-      "items": [],
-      "image": "plava-ravna-duga"
+      "items": []
     }
   ],
-
   "_gallery_upute": "Svaka slika: naziv datoteke bez nastavka (iz mape images/source), opis slike na hrvatskom i engleskom, i po potrebi 'credit' (npr. šminkerica). Redoslijed ovdje je redoslijed na stranici. Slike u 'hero' (vrh stranice) i uz usluge ne ponavljaju se u galeriji.",
-  "hero": ["plava-valovita-duga", "magenta-ruzicasta-duga", "kratka-plavo-ljubicasta"],
+  "hero": [
+    "plava-valovita-duga",
+    "magenta-ruzicasta-duga",
+    "plave-kovrce-tamne"
+  ],
   "heroAlt": {
     "plava-valovita-duga": { "hr": "Duga plava kosa s mekim valovima", "en": "Long blonde hair with soft waves" },
     "magenta-ruzicasta-duga": { "hr": "Duga ravna kosa obojana u intenzivnu magenta ružičastu nijansu", "en": "Long straight hair coloured an intense magenta pink" },
-    "kratka-plavo-ljubicasta": { "hr": "Kratka kosa u plavim, ljubičastim i ružičastim tonovima", "en": "Short hair in blue, violet and pink tones" }
+    "plave-kovrce-tamne": { "hr": "Tamnoplave kovrče", "en": "Dark blue curls" }
   },
   "gallery": [
-    { "file": "bakrena-duga", "alt": { "hr": "Duga kosa u toploj bakrenoj nijansi", "en": "Long hair in a warm copper shade" } },
-    { "file": "srebrna-lavanda-ombre", "alt": { "hr": "Ombre prijelaz iz tamnog korijena u srebrno-lavanda nijansu", "en": "Ombre from dark roots into a silver-lavender shade" } },
-    { "file": "zelena-mint-duga", "alt": { "hr": "Duga kosa u mint zelenoj nijansi", "en": "Long hair in a mint green shade" } },
-    { "file": "platinasto-plava", "alt": { "hr": "Platinasto plava kosa", "en": "Platinum blonde hair" } },
-    { "file": "tirkizne-kovrce", "alt": { "hr": "Tirkizne kovrče", "en": "Turquoise curls" } },
-    { "file": "crvena-duga-ravna", "alt": { "hr": "Duga ravna kosa obojana u crvenu", "en": "Long straight hair coloured red" } },
-    { "file": "roze-plava-pastel", "alt": { "hr": "Plava kosa s pastelno ružičastim pramenovima", "en": "Blonde hair with pastel pink strands" } },
-    { "file": "crvena-bakrena-ravna", "alt": { "hr": "Sjajna ravna kosa u crveno-bakrenoj boji", "en": "Glossy straight hair in red-copper" } },
-    { "file": "ljubicaste-kovrce", "alt": { "hr": "Tamnoljubičaste kovrče", "en": "Dark purple curls" } },
-    { "file": "srebrni-bob", "alt": { "hr": "Srebrno-sivi bob", "en": "Silver-grey bob" } },
-    { "file": "smede-kovrce", "alt": { "hr": "Smeđa kosa s krupnim kovrčama", "en": "Brown hair with loose curls" } },
-    { "file": "plava-balayage-duga", "alt": { "hr": "Duga kosa s plavim balayage pramenovima", "en": "Long hair with blonde balayage highlights" } },
-    { "file": "kreativno-sisanje-boja", "alt": { "hr": "Kratko šišanje s plavo-ružičastim uzorkom na zatiljku", "en": "Short cut with a blue and pink pattern at the nape" } },
-    { "file": "crvena-tamna", "alt": { "hr": "Tamnocrvena duga kosa", "en": "Dark red long hair" } },
-    { "file": "bakrene-kovrce", "alt": { "hr": "Bakrena kosa s valovima", "en": "Copper hair with waves" } },
-    { "file": "smede-kovrce-duge", "alt": { "hr": "Duga smeđa kosa s kovrčama", "en": "Long brown hair with curls" } },
-    { "file": "plava-prije-poslije", "alt": { "hr": "Prije i poslije: bojanje u plavu", "en": "Before and after: colouring blue" } },
-    { "file": "crvena-bakrena-srednja", "alt": { "hr": "Crveno-bakrena kosa srednje dužine", "en": "Red-copper hair of medium length" } }
+    {
+      "file": "bakrena-duga",
+      "alt": { "hr": "Duga kosa u toploj bakrenoj nijansi", "en": "Long hair in a warm copper shade" }
+    },
+    {
+      "file": "srebrna-lavanda-ombre",
+      "alt": { "hr": "Ombre prijelaz iz tamnog korijena u srebrno-lavanda nijansu", "en": "Ombre from dark roots into a silver-lavender shade" }
+    },
+    {
+      "file": "zelena-mint-duga",
+      "alt": { "hr": "Duga kosa u mint zelenoj nijansi", "en": "Long hair in a mint green shade" }
+    },
+    {
+      "file": "platinasto-plava",
+      "alt": { "hr": "Platinasto plava kosa", "en": "Platinum blonde hair" }
+    },
+    {
+      "file": "tirkizne-kovrce",
+      "alt": { "hr": "Tirkizne kovrče", "en": "Turquoise curls" }
+    },
+    {
+      "file": "crvena-duga-ravna",
+      "alt": { "hr": "Duga ravna kosa obojana u crvenu", "en": "Long straight hair coloured red" }
+    },
+    {
+      "file": "roze-plava-pastel",
+      "alt": { "hr": "Plava kosa s pastelno ružičastim pramenovima", "en": "Blonde hair with pastel pink strands" }
+    },
+    {
+      "file": "crvena-bakrena-ravna",
+      "alt": { "hr": "Sjajna ravna kosa u crveno-bakrenoj boji", "en": "Glossy straight hair in red-copper" }
+    },
+    {
+      "file": "ljubicaste-kovrce",
+      "alt": { "hr": "Tamnoljubičaste kovrče", "en": "Dark purple curls" }
+    },
+    {
+      "file": "srebrni-bob",
+      "alt": { "hr": "Srebrno-sivi bob", "en": "Silver-grey bob" }
+    },
+    {
+      "file": "smede-kovrce",
+      "alt": { "hr": "Smeđa kosa s krupnim kovrčama", "en": "Brown hair with loose curls" }
+    },
+    {
+      "file": "plava-balayage-duga",
+      "alt": { "hr": "Duga kosa s plavim balayage pramenovima", "en": "Long hair with blonde balayage highlights" }
+    },
+    {
+      "file": "kreativno-sisanje-boja",
+      "alt": { "hr": "Kratko šišanje s plavo-ružičastim uzorkom na zatiljku", "en": "Short cut with a blue and pink pattern at the nape" }
+    },
+    {
+      "file": "crvena-tamna",
+      "alt": { "hr": "Tamnocrvena duga kosa", "en": "Dark red long hair" }
+    },
+    {
+      "file": "bakrene-kovrce",
+      "alt": { "hr": "Bakrena kosa s valovima", "en": "Copper hair with waves" }
+    },
+    {
+      "file": "smede-kovrce-duge",
+      "alt": { "hr": "Duga smeđa kosa s kovrčama", "en": "Long brown hair with curls" }
+    },
+    {
+      "file": "plava-prije-poslije",
+      "alt": { "hr": "Prije i poslije: bojanje u plavu", "en": "Before and after: colouring blue" }
+    },
+    {
+      "file": "crvena-bakrena-srednja",
+      "alt": { "hr": "Crveno-bakrena kosa srednje dužine", "en": "Red-copper hair of medium length" }
+    },
+    {
+      "file": "plavi-bob",
+      "alt": { "hr": "Kratki plavi bob", "en": "Short blonde bob" }
+    },
+    {
+      "file": "svecana-punda",
+      "alt": { "hr": "Svečana niska punđa", "en": "Low formal updo" }
+    },
+    {
+      "file": "plava-balayage-ravna",
+      "alt": { "hr": "Ravna kosa s plavim balayage pramenovima", "en": "Straight hair with blonde balayage highlights" }
+    },
+    {
+      "file": "plava-ravna-duga",
+      "alt": { "hr": "Sjajna duga plava kosa", "en": "Glossy long blonde hair" }
+    }
   ],
-
   "_directions_upute": "Kratka uputa kako doći do salona i gdje parkirati. Zamijenite tekst u uglatim zagradama.",
-  "directions": {
-    "hr": "[UPUTE: npr. blizu …, parking …]",
-    "en": "[DIRECTIONS: e.g. near …, parking …]"
-  },
-
+  "directions": { "hr": "[UPUTE: npr. blizu …, parking …]", "en": "[DIRECTIONS: e.g. near …, parking …]" },
   "_legal_upute": "Zakon traži da web stranica obrta prikaže naziv, OIB i registar. Zamijenite tekst u uglatim zagradama. E-mail nije obavezan: ostavite prazno (\"\") ako ga ne želite prikazati.",
   "legal": {
     "name": "[PUNI NAZIV OBRTA / TVRTKE]",
     "oib": "[OIB]",
     "register": "[NADLEŽNI REGISTAR / OBRTNI REGISTAR]",
     "email": "[E-MAIL — opcionalno]"
-  }
+  },
+  "_servicesImage_upute": "Velika slika uz popis usluga (naziv datoteke iz images/source bez nastavka).",
+  "servicesImage": "kratka-plavo-ljubicasta",
+  "_palette_upute": "Paleta boja iznad galerije: naziv boje, hex vrijednost boje i slika iz galerije na koju vodi (naziv datoteke bez nastavka).",
+  "palette": [
+    {
+      "name": { "hr": "Vatreno crvena", "en": "Fire red" },
+      "hex": "#c0262b",
+      "file": "crvena-duga-ravna"
+    },
+    {
+      "name": { "hr": "Bakrena", "en": "Copper" },
+      "hex": "#b5552a",
+      "file": "bakrena-duga"
+    },
+    {
+      "name": { "hr": "Pastelno roza", "en": "Pastel pink" },
+      "hex": "#e6a9b8",
+      "file": "roze-plava-pastel"
+    },
+    {
+      "name": { "hr": "Lavanda", "en": "Lavender" },
+      "hex": "#9a8bb5",
+      "file": "srebrna-lavanda-ombre"
+    },
+    {
+      "name": { "hr": "Ljubičasta", "en": "Violet" },
+      "hex": "#5e2a5c",
+      "file": "ljubicaste-kovrce"
+    },
+    {
+      "name": { "hr": "Tirkizna", "en": "Turquoise" },
+      "hex": "#2a8c96",
+      "file": "tirkizne-kovrce"
+    },
+    {
+      "name": { "hr": "Mint", "en": "Mint" },
+      "hex": "#7fa894",
+      "file": "zelena-mint-duga"
+    },
+    {
+      "name": { "hr": "Platinasta", "en": "Platinum" },
+      "hex": "#e6dcc8",
+      "file": "platinasto-plava"
+    }
+  ]
 }
