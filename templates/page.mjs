@@ -187,23 +187,37 @@ export function callButton({ lang, S, data, className = 'btn btn-primary' }) {
 }
 
 export function services({ lang, S, data, manifest }) {
-  const brands = data.site.brands;
-  const brandText = brands.length > 1 ? `${brands.slice(0, -1).join(', ')} ${lang === 'hr' ? 'i' : 'and'} ${brands[brands.length - 1]}` : brands[0];
   const rows = data.services.map((g) => {
     const price = g.price && g.price.trim() ? esc(g.price) : `<span class="muted">${esc(S.services.onRequest)}</span>`;
     const items = (g.items || []).map((it) => `<tr class="service-item"><td>${esc(it.name?.[lang] ?? it.name)}</td><td class="price">${it.price && it.price.trim() ? esc(it.price) : `<span class="muted">${esc(S.services.onRequest)}</span>`}</td></tr>`).join('\n');
     const img = g.image ? picture(manifest, g.image, { alt: '', sizes: '80px', className: 'service-thumb', aspect: '1 / 1' }) : '';
-    return `<tr class="service-group" id="usluga-${esc(g.id)}"><td><div class="service-cell">${img}<div><h3>${esc(g.name[lang])}</h3><p>${esc(g.desc[lang])}</p></div></div></td><td class="price">${price}</td></tr>${items}`;
+    const swatches = g.accent === 'rainbow' ? ' <span class="swatches" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>' : '';
+    return `<tr class="service-group" id="usluga-${esc(g.id)}"><td><div class="service-cell">${img}<div><h3>${esc(g.name[lang])}${swatches}</h3><p>${esc(g.desc[lang])}</p></div></div></td><td class="price">${price}</td></tr>${items}`;
   }).join('\n');
   return `<section id="usluge" class="section" aria-labelledby="usluge-h">
   <div class="wrap">
     <h2 id="usluge-h">${esc(S.services.heading)}</h2>
-    <p class="lead">${esc(t(S.services.intro, { brands: brandText }))}</p>
+    <p class="lead">${esc(S.services.intro)}</p>
     <table class="services-table">
       <thead><tr><th scope="col">${esc(S.services.colService)}</th><th scope="col" class="price">${esc(S.services.colPrice)}</th></tr></thead>
       <tbody>${rows}</tbody>
     </table>
     <p class="cta-row"><span>${esc(S.services.unsure)}</span>${callButton({ lang, S, data, className: 'btn btn-primary' })}</p>
+  </div>
+</section>`;
+}
+
+export function about({ lang, S, data, manifest }) {
+  const a = data.about;
+  if (!a || !a[lang] || !a[lang].length) return '';
+  const pic = a.image ? picture(manifest, a.image, { alt: a.alt?.[lang] || '', sizes: '(min-width: 760px) 420px, 100vw', className: 'about-pic', aspect: '1 / 1' }) : '';
+  return `<section id="o-nama" class="section section-tint" aria-labelledby="o-nama-h">
+  <div class="wrap about-grid">
+    ${pic}
+    <div class="about-text">
+      <h2 id="o-nama-h">${esc(S.about.heading)}</h2>
+      ${a[lang].map((p) => `<p>${esc(p)}</p>`).join('\n')}
+    </div>
   </div>
 </section>`;
 }
@@ -270,23 +284,23 @@ export function contact({ lang, S, data, urls }) {
   <div class="wrap">
     <h2 id="kontakt-h">${esc(S.contact.heading)}</h2>
     <div class="contact-grid">
-      <div class="contact-details">
-        <p class="contact-address"><strong>${esc(S.contact.addressLabel)}</strong><br><span>${esc(s.address.street)}<br>${esc(s.address.postalCode)} ${esc(s.address.city)}${lang === 'hr' ? '' : ', Croatia'}</span></p>
-        <p class="contact-phone"><strong>${esc(S.contact.phoneLabel)}</strong><br>${callButton({ lang, S, data, className: 'btn btn-primary btn-big' })}<br><small>${esc(S.phoneOnly)}</small></p>
-        ${messenger}
-        <ul class="social">
-          <li><a href="${s.instagram}" rel="noopener">${icons.instagram}<span>${esc(S.contact.instagram)}</span></a></li>
-          <li><a href="${s.facebook}" rel="noopener">${icons.facebook}<span>${esc(S.contact.facebook)}</span></a></li>
-        </ul>
-      </div>
       <div class="map-card">
-        <h3>${icons.pin} ${esc(S.contact.mapHeading)}</h3>
-        <p class="map-address">${esc(s.address.street)}, ${esc(s.address.postalCode)} ${esc(s.address.city)}</p>
+        <h3>${icons.pin} ${esc(S.contact.addressLabel)}</h3>
+        <p class="map-address">${esc(s.address.street)}<br>${esc(s.address.postalCode)} ${esc(s.address.city)}${lang === 'hr' ? '' : ', Croatia'}</p>
         <p class="map-buttons">
           <a class="btn btn-secondary" href="${urls.googleMaps}" rel="noopener">${esc(S.contact.googleMaps)}${icons.external}</a>
           <a class="btn btn-secondary" href="${urls.appleMaps}" rel="noopener">${esc(S.contact.appleMaps)}${icons.external}</a>
         </p>
         <p class="directions"><strong>${esc(S.contact.directionsLabel)}</strong> ${ph(data.directions[lang])}</p>
+      </div>
+      <div class="contact-details">
+        <h3>${icons.phone} ${esc(S.contact.phoneLabel)}</h3>
+        <p class="contact-phone">${callButton({ lang, S, data, className: 'btn btn-primary btn-big' })}</p>
+        ${messenger}
+        <ul class="social">
+          <li><a href="${s.instagram}" rel="noopener">${icons.instagram}<span>${esc(S.contact.instagram)}</span></a></li>
+          <li><a href="${s.facebook}" rel="noopener">${icons.facebook}<span>${esc(S.contact.facebook)}</span></a></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -334,7 +348,7 @@ export function homePage(ctx) {
   const home = lang === 'hr' ? '/' : '/en/';
   const heroTiles = data.hero.map((file, i) => {
     const g = data.gallery.find((x) => x.file === file);
-    const alt = g ? g.alt[lang] : '';
+    const alt = data.heroAlt?.[file]?.[lang] ?? (g ? g.alt[lang] : '');
     return picture(manifest, file, { alt, sizes: '(min-width: 900px) 260px, 33vw', eager: i === 0, className: 'hero-tile', aspect: i === 0 ? '4 / 5' : '1 / 1' });
   }).join('\n');
   return `${head({ lang, S, data, urls: { ...urls, title: S.title, description: S.description, canonical: urls.home }, css, manifest, preloadHero: data.hero[0] })}
@@ -345,7 +359,7 @@ ${notice(data.notice[lang])}
   <section class="hero" aria-labelledby="hero-h">
     <div class="wrap hero-grid">
       <div class="hero-text">
-        <h1 id="hero-h">${esc(s.name)}</h1>
+        <h1 id="hero-h"><span class="h1-small">Frizerski salon</span> <span class="h1-name">Ivanka</span></h1>
         <p class="tagline">${esc(S.heroTagline)}</p>
         <p class="hero-cta">${callButton({ lang, S, data, className: 'btn btn-primary btn-big' })}</p>
         <p class="hero-note">${esc(S.phoneOnly)}</p>
@@ -356,6 +370,7 @@ ${notice(data.notice[lang])}
     </div>
   </section>
   ${services({ lang, S, data, manifest })}
+  ${about({ lang, S, data, manifest })}
   ${gallery({ lang, S, data, manifest })}
   ${reviewsBlock({ S, data, reviews })}
   ${hoursSection({ S, data })}

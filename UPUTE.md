@@ -93,6 +93,11 @@ Upišite tekst između navodnika, na hrvatskom i engleskom:
 Obavijest se prikazuje kao tamna traka ispod zaglavlja. Kad je više ne trebate, obrišite
 tekst tako da ostanu samo prazni navodnici `""`, kao gore. Tada se traka ne prikazuje.
 
+## Tekst „O nama”
+
+Potražite `"about"`. Svaki redak u listi `"hr"` (hrvatski) i `"en"` (engleski) je jedan odlomak.
+Slika uz tekst je `"image"` (naziv datoteke iz `images/source` bez `.jpg`), a `"alt"` je kratak opis slike.
+
 ## Cijene i usluge
 
 Potražite `"services"`. Svaka grupa usluga izgleda ovako:
