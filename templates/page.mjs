@@ -124,6 +124,7 @@ export function head({ lang, S, data, urls, css, manifest, preloadHero }) {
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#b3122e">
 <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/inter-latin-ext-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/fraunces-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
 ${preload}
 <style>${css}</style>

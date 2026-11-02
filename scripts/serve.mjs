@@ -15,7 +15,9 @@ export function start(port = 8080) {
     let p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
     if (basePath) {
       if (p === basePath) { res.writeHead(301, { Location: basePath + '/' }); return res.end(); }
-      if (!p.startsWith(basePath + '/')) { res.writeHead(302, { Location: basePath + '/' }); return res.end(); }
+      if (p === '/') { res.writeHead(302, { Location: basePath + '/' }); return res.end(); }
+      // Anything else outside the sub-path is a 404, like on the real host (so /robots.txt at the domain root is "absent", not a redirect).
+      if (!p.startsWith(basePath + '/')) { res.writeHead(404, { 'content-type': 'text/plain' }); return res.end('Not found'); }
       p = p.slice(basePath.length);
     }
     let file = normalize(join(root, p));
