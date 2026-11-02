@@ -50,7 +50,20 @@ Add a gallery entry in `site-data.json` with Croatian and English alt text.
 
 ## Deployment
 
-### Cloudflare Pages (recommended, free)
+### Current: GitHub Pages via GitHub Actions
+
+The repository `svafar/frizerski-salon-ivanka` deploys automatically. On every push to `main`,
+`.github/workflows/deploy.yml` runs `node scripts/build.mjs` and publishes the folder to
+GitHub Pages at `https://svafar.github.io/frizerski-salon-ivanka/`. Editing
+`content/site-data.json` in the GitHub web editor is therefore enough to republish.
+
+Because the site lives under a sub-path, `site.url` in `site-data.json` includes `/frizerski-salon-ivanka`
+and the build prefixes every root-relative URL with it. When the site moves to its own domain
+(or to Cloudflare Pages), set `site.url` to the new origin and rebuild; the prefix disappears.
+`.nojekyll` keeps GitHub from running Jekyll over the files. GitHub Pages ignores `_headers`
+(no custom caching or CSP there); `404.html` is honoured.
+
+### Cloudflare Pages (free, alternative with better caching headers)
 
 1. Push this folder to a GitHub repository (do **not** commit `node_modules/` or `images/source/`; `.gitignore` handles it).
 2. Cloudflare dashboard → Workers & Pages → Create → Pages → Connect to Git → pick the repo.

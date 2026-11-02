@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /images/source/
+Disallow: /frizerski-salon-ivanka/images/source/
 
-Sitemap: https://frizerskisalonivanka.pages.dev/sitemap.xml
+Sitemap: https://svafar.github.io/frizerski-salon-ivanka/sitemap.xml

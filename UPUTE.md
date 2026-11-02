@@ -34,11 +34,12 @@ Pravila koja treba poštovati da se ništa ne pokvari:
 Stranica se nalazi na GitHubu (to je mjesto gdje su spremljene datoteke). Pristup ima osoba
 koja je stranicu postavila; ona vam može dati korisnički račun.
 
-1. Otvorite u pregledniku: `https://github.com/[KORISNIK]/[REPOZITORIJ]/blob/main/content/site-data.json`
+1. Otvorite u pregledniku: `https://github.com/svafar/frizerski-salon-ivanka/blob/main/content/site-data.json`
 2. Kliknite ikonu olovke (gore desno, „Edit this file”). Promijenite što trebate.
 3. Kliknite zeleni gumb **Commit changes…** i još jednom **Commit changes**.
 
-Za otprilike jednu minutu promjena je vidljiva na stranici. Osvježite stranicu u pregledniku
+Za otprilike dvije minute promjena je vidljiva na stranici
+(`https://svafar.github.io/frizerski-salon-ivanka/`). Osvježite stranicu u pregledniku
 (na mobitelu povucite prema dolje).
 
 ## Radno vrijeme
@@ -189,8 +190,8 @@ a na stranici je žuto. To je namjerno, da se ne zaboravi.
 
 ## Objava promjene
 
-- **Preko GitHuba (najjednostavnije):** uredite datoteku kako je opisano gore i kliknite *Commit changes*. Cloudflare sam objavi novu verziju za oko minutu.
-- **Ako je netko mijenjao datoteke na računalu:** u mapi stranice pokrenite `npm run build`, zatim pošaljite promjene na GitHub (program GitHub Desktop: *Commit* pa *Push*). Ili, bez GitHuba, cijelu mapu stranice povucite na Cloudflare Pages → *Upload assets*.
+- **Preko GitHuba (najjednostavnije):** uredite datoteku kako je opisano gore i kliknite *Commit changes*. GitHub sam izradi i objavi novu verziju za oko dvije minute (na kartici *Actions* vidi se zelena kvačica kad je gotovo).
+- **Ako je netko mijenjao datoteke na računalu** (npr. dodao fotografije): pošaljite promjene na GitHub (program GitHub Desktop: *Commit* pa *Push*). Objava je opet automatska.
 
 ## Ako se nešto pokvari
 

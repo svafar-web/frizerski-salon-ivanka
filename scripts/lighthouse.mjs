@@ -13,9 +13,10 @@ mkdirSync(outDir, { recursive: true });
 const chrome = [process.env.CHROME_PATH, 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe'].filter(Boolean).find((p) => existsSync(p));
 const port = 8089;
 const server = await start(port);
-const pages = ['/', '/en/'];
+const basePath = new URL(JSON.parse(readFileSync(join(root, 'content/site-data.json'), 'utf8')).site.url).pathname.replace(/\/$/, '');
+const pages = [`${basePath}/`, `${basePath}/en/`];
 for (const page of pages) {
-  const name = page === '/' ? 'hr' : 'en';
+  const name = page.endsWith('/en/') ? 'en' : 'hr';
   const out = join(outDir, name);
   // One quoted command string: on Windows npx is a .cmd and needs a shell, and the
   // --chrome-flags value contains no spaces so it survives the shell untouched.

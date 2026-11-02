@@ -9,6 +9,8 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const pages = ['index.html', 'en/index.html', 'privatnost/index.html', 'en/privacy/index.html', '404.html'];
 const external = process.argv.includes('--external');
 const siteUrl = JSON.parse(readFileSync(join(root, 'content/site-data.json'), 'utf8')).site.url.replace(/\/$/, '');
+const basePath = new URL(siteUrl).pathname.replace(/\/$/, '');
+const stripBase = (p) => (basePath && p.startsWith(basePath + '/')) ? p.slice(basePath.length) : p;
 let errors = 0, warnings = 0;
 const err = (m) => { errors++; console.error('ERROR  ' + m); };
 const warn = (m) => { warnings++; console.warn('WARN   ' + m); };
@@ -31,7 +33,8 @@ for (const page of pages) {
   for (const u of urls) {
     if (/^(https?:)?\/\//.test(u)) { if (/^https?:/.test(u) && !u.startsWith(siteUrl)) externalUrls.add(u); continue; }
     if (/^(tel:|mailto:|data:)/.test(u)) continue;
-    const [p, hash] = u.split('#');
+    const [p0, hash] = u.split('#');
+    const p = stripBase(p0);
     if (!p) { if (hash && !ids.has(hash)) err(`${page}: anchor #${hash} not found`); continue; }
     if (hash && (p === '/' || p === '/en/')) {
       const target = readFileSync(join(root, p === '/' ? 'index.html' : 'en/index.html'), 'utf8');

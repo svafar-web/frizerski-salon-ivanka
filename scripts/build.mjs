@@ -28,6 +28,16 @@ if (existsSync(join(root, 'content/reviews.md'))) {
 }
 
 const base = data.site.url.replace(/\/$/, '');
+// Sub-path support (e.g. https://user.github.io/repo): every root-relative URL gets this prefix.
+// Empty when the site lives at the root of its domain.
+const basePath = new URL(base).pathname.replace(/\/$/, '');
+const applyBase = (html) => {
+  if (!basePath) return html;
+  return html
+    .replace(/(href|src|data-full)="\/(?!\/)/g, `$1="${basePath}/`)
+    .replace(/(srcset|imagesrcset)="([^"]*)"/g, (m, a, v) => `${a}="${v.replace(/(^|,\s*)\/(?!\/)/g, `$1${basePath}/`)}"`)
+    .replace(/url\('\/(?!\/)/g, `url('${basePath}/`);
+};
 const { lat, lng } = data.site.geo;
 const urls = {
   base,
@@ -42,11 +52,16 @@ const urls = {
 data._urls = urls;
 const year = new Date().getFullYear();
 
-write('index.html', homePage({ lang: 'hr', S: strings.hr, data, manifest, urls: { ...urls, home: urls.hr }, css, reviews, year }));
-write('en/index.html', homePage({ lang: 'en', S: strings.en, data, manifest, urls: { ...urls, home: urls.en }, css, reviews, year }));
-write('privatnost/index.html', privacyPage({ lang: 'hr', S: strings.hr, data, manifest, urls, css, year }));
-write('en/privacy/index.html', privacyPage({ lang: 'en', S: strings.en, data, manifest, urls, css, year }));
-write('404.html', notFoundPage({ strings, data, urls, css, year }));
+write('index.html', applyBase(homePage({ lang: 'hr', S: strings.hr, data, manifest, urls: { ...urls, home: urls.hr }, css, reviews, year })));
+write('en/index.html', applyBase(homePage({ lang: 'en', S: strings.en, data, manifest, urls: { ...urls, home: urls.en }, css, reviews, year })));
+write('privatnost/index.html', applyBase(privacyPage({ lang: 'hr', S: strings.hr, data, manifest, urls, css, year })));
+write('en/privacy/index.html', applyBase(privacyPage({ lang: 'en', S: strings.en, data, manifest, urls, css, year })));
+write('404.html', applyBase(notFoundPage({ strings, data, urls, css, year })));
+write('site.webmanifest', JSON.stringify({
+  name: data.site.name, short_name: 'Salon Ivanka', lang: 'hr', start_url: `${basePath}/`, display: 'browser',
+  background_color: '#faf6f1', theme_color: '#b3122e',
+  icons: [{ src: `${basePath}/favicon-192.png`, sizes: '192x192', type: 'image/png' }, { src: `${basePath}/favicon-512.png`, sizes: '512x512', type: 'image/png' }]
+}, null, 2) + '\n');
 
 const today = new Date().toISOString().slice(0, 10);
 const pages = [
@@ -67,4 +82,4 @@ ${pages.map((p) => `  <url>
 </urlset>
 `;
 write('sitemap.xml', sitemap);
-write('robots.txt', `User-agent: *\nAllow: /\nDisallow: /images/source/\n\nSitemap: ${base}/sitemap.xml\n`);
+write('robots.txt', `User-agent: *\nAllow: /\nDisallow: ${basePath}/images/source/\n\nSitemap: ${base}/sitemap.xml\n`);
