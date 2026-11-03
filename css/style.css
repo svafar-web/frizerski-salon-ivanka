@@ -229,6 +229,7 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 .qr-code svg { width: 100%; height: 100%; display: block; }
 .qr-title { font-weight: 600; margin: 0; }
 .request-nav { display: flex; gap: .75rem; margin: 1.5rem 0 0; }
+.request-nav .btn { min-width: 6.5rem; }
 
 @media (max-width: 559px) { .request-dialog { width: 100vw; max-width: none; max-height: 100dvh; border-radius: 0; margin: 0; height: 100dvh; } .request { padding: 1rem 1rem calc(1.5rem + env(safe-area-inset-bottom, 0px)); } }
 @media (hover: none), (pointer: coarse) { .qr { display: none !important; } }
