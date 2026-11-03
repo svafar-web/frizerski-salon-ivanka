@@ -221,6 +221,95 @@
     });
   }
 
+  /* ---------- 2c. Request an appointment by text ----------
+     Composes the message from the answers; the visitor sends it from their own phone
+     (sms: link) or scans a QR code on desktop. Nothing leaves the browser otherwise. */
+  function requestForm() {
+    var form = document.querySelector('[data-request]');
+    var dataEl = document.getElementById('request-data');
+    if (!form || !dataEl) return;
+    var cfg; try { cfg = JSON.parse(dataEl.textContent); } catch (e) { return; }
+    var preview = form.querySelector('[data-preview]');
+    var smsLink = form.querySelector('[data-sms]');
+    var copyBtn = form.querySelector('[data-copy]');
+    var qrWrap = form.querySelector('[data-qr]');
+    var qrBox = form.querySelector('[data-qr-box]');
+    var fmt = function (tpl, vars) { return tpl.replace(/\{(\w+)\}/g, function (_, k) { return vars[k] == null ? '' : vars[k]; }); };
+    var val = function (name) { var el = form.querySelector('input[name="' + name + '"]:checked, input[name="' + name + '"]:not([type=radio]):not([type=checkbox])'); return el ? el.value.trim() : ''; };
+    var smsUrl = '';
+
+    function compose() {
+      var M = cfg.msg;
+      var name = val('name').replace(/\s+/g, ' ').slice(0, 40);
+      var service = val('service');
+      var length = val('length');
+      var days = Array.prototype.slice.call(form.querySelectorAll('input[name="day"]:checked')).map(function (i) { return cfg.dayPhrase[i.value]; });
+      var part = val('part');
+      var work = val('work').replace(/\D/g, '');
+      var parts = [M.hi];
+      if (name) parts.push(fmt(M.iam, { name: name }));
+      var want = fmt(M.want, { service: service }) + (length ? fmt(M.length, { length: cfg.lengthPhrase[length] }) : '') + (work ? fmt(M.work, { n: work }) : '') + '.';
+      parts.push(want);
+      if (days.length) {
+        var dayText = days.length > 1 ? days.slice(0, -1).join(', ') + cfg.or + days[days.length - 1] : days[0];
+        parts.push(fmt(M.when, { days: dayText, part: part ? cfg.partPhrase[part] : '' }));
+      }
+      parts.push(M.ask);
+      var text = parts.join(' ');
+      preview.textContent = text;
+      // "?&body=" works in both iOS and Android messaging apps.
+      smsUrl = 'sms:' + cfg.phone + '?&body=' + encodeURIComponent(text);
+      smsLink.href = smsUrl;
+      drawQr();
+      return text;
+    }
+
+    var qrLib = null, qrLoading = false;
+    function drawQr() {
+      if (!qrWrap || qrWrap.hidden || !qrBox) return;
+      if (!qrLib) {
+        if (typeof window.qrcode === 'function') qrLib = window.qrcode;
+        else if (!qrLoading) {
+          qrLoading = true;
+          var sc = document.createElement('script');
+          sc.src = cfg.qrSrc;
+          sc.onload = function () { qrLib = window.qrcode; drawQr(); };
+          document.head.appendChild(sc);
+        }
+        return;
+      }
+      try {
+        var q = qrLib(0, 'M');
+        q.addData(smsUrl);
+        q.make();
+        qrBox.innerHTML = q.createSvgTag({ cellSize: 4, margin: 16, scalable: true }); // 4-module quiet zone
+        var svg = qrBox.querySelector('svg');
+        if (svg) { svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', 'QR'); }
+      } catch (e) { qrWrap.hidden = true; }
+    }
+
+    // Desktop (mouse + hover) gets the QR code; phones use the sms: link directly.
+    var desktop = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (desktop && qrWrap) {
+      qrWrap.hidden = false;
+      smsLink.hidden = true; // no messaging app on a desktop: scan the code or copy the text instead
+      var hint = form.querySelector('.request-send-hint');
+      if (hint) hint.hidden = true;
+    }
+
+    form.addEventListener('input', compose);
+    form.addEventListener('change', compose);
+    form.addEventListener('submit', function (e) { e.preventDefault(); });
+    copyBtn.addEventListener('click', function () {
+      var text = compose();
+      var done = function () { var old = copyBtn.textContent; copyBtn.textContent = cfg.copied; setTimeout(function () { copyBtn.textContent = old; }, 1500); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, function () {});
+      else { var r = document.createRange(); r.selectNodeContents(preview); var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r); try { document.execCommand('copy'); done(); } catch (e) {} }
+    });
+    form.hidden = false;
+    compose();
+  }
+
   /* ---------- 3. Footer year ---------- */
   function year() {
     var y = document.querySelector('[data-year]');
@@ -230,5 +319,6 @@
   openingStatus();
   lightbox();
   galleryFilter();
+  requestForm();
   year();
 })();

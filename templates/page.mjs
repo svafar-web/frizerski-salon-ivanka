@@ -305,11 +305,57 @@ export function reviewsBlock({ lang, S, data, reviews }) {
   return `<div class="wrap">${list}</div>`;
 }
 
+// "Request an appointment by text": three questions, a composed message, an sms: link
+// (phones) or a QR code (desktop). Nothing is sent by the site itself.
+export function requestSection({ lang, S, data }) {
+  const R = S.request;
+  const s = data.site;
+  const phone = lang === 'hr' ? s.phoneDisplay : s.phoneDisplayIntl;
+  const pills = (name, opts, type = 'radio', checkedFirst = false) => opts.map(([val, label], i) =>
+    `<label class="pill"><input type="${type}" name="${name}" value="${esc(val)}"${checkedFirst && i === 0 ? ' checked' : ''}><span>${esc(label)}</span></label>`).join('');
+  const services = data.services.map((g) => [g.name[lang], g.name[lang]]);
+  const cfg = { phone: s.phoneTel, phoneDisplay: phone, lengthPhrase: R.lengthPhrase, dayPhrase: R.dayPhrase, partPhrase: R.partPhrase, msg: R.msg, or: R.or, copied: R.copied, qrSrc: (data._basePath || '') + '/js/qr.min.js' };
+  return `<section id="zatrazi-termin" class="section section-request" aria-labelledby="zatrazi-h">
+  <div class="wrap">
+    <p class="eyebrow">04 <span>${esc(R.eyebrow)}</span></p>
+    <h2 id="zatrazi-h">${esc(R.heading)}</h2>
+    <p class="lead">${esc(R.intro)}</p>
+    <noscript><p class="request-nojs">${esc(t(R.noJs, { phone })).replace(esc(phone), `<a href="sms:${s.phoneTel}">${esc(phone)}</a>`)}</p></noscript>
+    <form class="request" data-request hidden>
+      <div class="request-steps">
+        <fieldset class="step"><legend>${esc(R.q1)}</legend><div class="pills">${pills('service', services, 'radio', true)}</div></fieldset>
+        <fieldset class="step"><legend>${esc(R.q2)}</legend><div class="pills">${pills('length', R.lengths)}</div></fieldset>
+        <fieldset class="step"><legend>${esc(R.q3)}</legend><div class="pills">${pills('day', R.days, 'checkbox')}</div><div class="pills pills-sub">${pills('part', R.parts, 'radio', true)}</div></fieldset>
+        <div class="step step-inline">
+          <label class="field"><span>${esc(R.q4)} <small>(${esc(R.q4hint)})</small></span><input type="number" name="work" inputmode="numeric" min="1" max="${data.gallery.length}" placeholder="7"></label>
+          <label class="field"><span>${esc(R.q5)} <small>(${esc(R.q5hint)})</small></span><input type="text" name="name" autocomplete="given-name" maxlength="40"></label>
+        </div>
+      </div>
+      <div class="request-out">
+        <p class="request-label">${esc(R.previewLabel)}</p>
+        <div class="bubble" data-preview aria-live="polite"></div>
+        <p class="request-actions">
+          <a class="btn btn-primary btn-big" href="sms:${s.phoneTel}" data-sms>${icons.phone}<span>${esc(R.send)}</span></a>
+          <button type="button" class="btn btn-secondary" data-copy>${esc(R.copy)}</button>
+        </p>
+        <p class="small request-send-hint">${esc(R.sendHint)}</p>
+        <div class="qr" data-qr hidden>
+          <div class="qr-code" data-qr-box></div>
+          <div><p class="qr-title">${esc(R.qrTitle)}</p><p class="small">${esc(R.qrHint)}</p></div>
+        </div>
+        <p class="small">${esc(t(R.smsNote, { phone }))}</p>
+      </div>
+    </form>
+    <script type="application/json" id="request-data">${JSON.stringify(cfg).replace(/</g, '\\u003c')}</script>
+  </div>
+</section>`;
+}
+
 export function hoursSection({ S, data }) {
   return `<section id="radno-vrijeme" class="section section-tint" aria-labelledby="radno-vrijeme-h">
   <div class="wrap hours-grid">
     <div class="hours-text">
-      <p class="eyebrow">04 <span>${esc(S.eyebrows.hours)}</span></p>
+      <p class="eyebrow">05 <span>${esc(S.eyebrows.hours)}</span></p>
       <h2 id="radno-vrijeme-h">${esc(S.hours.heading)}</h2>
       <p class="lead">${esc(S.hours.intro)}</p>
       <p class="small">${icons.clock} ${esc(S.hours.holidays)}</p>
@@ -328,7 +374,7 @@ export function contact({ lang, S, data, urls }) {
   const messenger = s.showMessenger ? `<p class="contact-messenger"><a class="btn btn-secondary" href="${s.messenger}" rel="noopener">${icons.messenger}<span>${esc(S.contact.messenger)}</span></a></p>` : '';
   return `<section id="kontakt" class="section" aria-labelledby="kontakt-h">
   <div class="wrap">
-    <p class="eyebrow">05 <span>${esc(S.eyebrows.contact)}</span></p>
+    <p class="eyebrow">06 <span>${esc(S.eyebrows.contact)}</span></p>
     <h2 id="kontakt-h">${esc(S.contact.heading)}</h2>
     <div class="contact-grid">
       <div class="map-card">
@@ -409,6 +455,7 @@ ${notice(data.notice[lang])}
         <h1 id="hero-h"><span class="h1-small">Frizerski salon</span> <span class="h1-name">Ivanka</span></h1>
         <p class="tagline">${esc(S.heroTagline)}</p>
         <p class="hero-cta">${callButton({ lang, S, data, className: 'btn btn-primary btn-big' })}</p>
+        <p class="hero-alt"><a href="#zatrazi-termin">${esc(S.request.heroLink)}</a></p>
         <p class="hero-address">${icons.pin}<a href="${urls.googleMaps}" rel="noopener">${esc(s.address.street)}, ${esc(s.address.postalCode)} ${esc(s.address.city)}</a></p>
         <p class="status" data-status></p>
         <p class="hero-remind" data-remind-wrap hidden><a class="btn btn-secondary" href="#radno-vrijeme" data-remind>${icons.clock}<span>${esc(S.remind.label)}</span></a><br><small>${esc(S.remind.hint)}</small></p>
@@ -420,6 +467,7 @@ ${notice(data.notice[lang])}
   ${about({ lang, S, data, manifest })}
   ${gallery({ lang, S, data, manifest })}
   ${reviewsBlock({ lang, S, data, reviews })}
+  ${requestSection({ lang, S, data })}
   ${hoursSection({ S, data })}
   ${contact({ lang, S, data, urls })}
 </main>

@@ -200,6 +200,37 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
   .services-art { position: sticky; top: 6rem; }
 }
 
+/* Request an appointment by text */
+.section-request { background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.hero-alt { margin: .4rem 0 0; font-size: 1rem; }
+.request { display: grid; gap: 2rem; margin-top: 1.5rem; }
+.request fieldset { border: 0; padding: 0; margin: 0 0 1.5rem; min-width: 0; }
+.request legend, .request .field > span { display: block; font-family: var(--display); font-weight: 600; font-size: 1.3rem; margin-bottom: .6rem; padding: 0; }
+.request .field > span small { font-family: var(--text); font-weight: 400; font-size: .95rem; color: var(--muted); }
+.pills { display: flex; flex-wrap: wrap; gap: .5rem; }
+.pills-sub { margin-top: .6rem; }
+.pill { position: relative; display: inline-flex; }
+.pill input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.pill span { display: inline-flex; align-items: center; min-height: 48px; padding: .4em 1.1em; border-radius: 999px; border: 1.5px solid var(--line); background: var(--bg); font-weight: 600; font-size: 1.05rem; cursor: pointer; transition: background-color .15s, border-color .15s, color .15s; }
+.pill:hover span { border-color: var(--ink); }
+.pill input:checked + span { background: var(--ink); border-color: var(--ink); color: #fff; }
+.pill input:focus-visible + span { outline: 3px solid var(--ink); outline-offset: 3px; }
+.step-inline { display: grid; gap: 1rem; }
+.field input { width: 100%; max-width: 20rem; min-height: 48px; padding: .5em .9em; font: inherit; border: 1.5px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); }
+.field input:focus { border-color: var(--ink); outline: 3px solid var(--ink); outline-offset: 2px; }
+.request-label { font-weight: 600; font-size: 1rem; color: var(--muted); margin-bottom: .5rem; }
+.bubble { position: relative; background: var(--bg-2); border-radius: 18px 18px 18px 4px; padding: 1.1rem 1.3rem; font-size: 1.15rem; line-height: 1.5; min-height: 5rem; white-space: pre-wrap; }
+.request-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1.25rem 0 .5rem; }
+.request-send-hint { margin-bottom: 1.25rem; }
+.qr { display: flex; gap: 1.25rem; align-items: center; padding: 1rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); margin-bottom: 1rem; }
+.qr-code { flex: none; width: 150px; height: 150px; background: #fff; border-radius: 8px; padding: 6px; }
+.qr-code svg { width: 100%; height: 100%; display: block; }
+.qr-title { font-weight: 600; margin-bottom: .25rem; }
+.request-nojs { font-size: 1.15rem; }
+@media (min-width: 560px) { .step-inline { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 900px) { .request { grid-template-columns: 1.1fr 1fr; gap: 4rem; align-items: start; } .request-out { position: sticky; top: 6rem; } }
+@media (hover: none), (pointer: coarse) { .qr { display: none !important; } }
+
 /* About */
 .about-grid { display: grid; gap: 1.75rem; align-items: center; }
 .about-pic, .about-grid .ph { display: block; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 50% 50% 14px 14px / 40% 40% 14px 14px; max-width: 420px; }

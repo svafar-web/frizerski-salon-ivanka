@@ -51,6 +51,7 @@ const urls = {
   directions: `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`
 };
 data._urls = urls;
+data._basePath = basePath;
 const year = new Date().getFullYear();
 
 write('index.html', applyBase(homePage({ lang: 'hr', S: strings.hr, data, manifest, urls: { ...urls, home: urls.hr }, css, reviews, year })));

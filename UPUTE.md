@@ -164,6 +164,13 @@ bez razmaka, s +385). Promijenite sva tri.
 
 Ako ne želite prikazivati Messenger, stavite `"showMessenger": false`.
 
+## Poruke (SMS) sa stranice
+
+Na stranici postoji dio „Zatražite termin porukom”. Klijentica odgovori na tri pitanja, a stranica
+sastavi SMS koji ona pošalje sa svog mobitela na broj salona (021 568 427). Stranica sama ništa ne
+šalje i ništa ne sprema. **Važno:** na te poruke treba odgovoriti (porukom ili pozivom), inače
+klijentica čeka. Ako ne želite primati takve poruke, javite osobi koja održava stranicu da isključi taj dio.
+
 ## Recenzije
 
 Stranica ne izmišlja recenzije. Ako želite prikazati prave recenzije klijentica (uz njihov
