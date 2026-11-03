@@ -179,7 +179,7 @@ export function hoursTable({ S, data }) {
 }
 
 export function hoursData({ S, data }) {
-  const payload = { hours: data.hours, status: S.hours.status };
+  const payload = { hours: data.hours, status: S.hours.status, remind: { ...S.remind, location: `${data.site.address.street}, ${data.site.address.postalCode} ${data.site.address.city}`, tel: data.site.phoneTel } };
   return `<script type="application/json" id="hours-data">${JSON.stringify(payload).replace(/</g, '\\u003c')}</script>`;
 }
 
@@ -403,6 +403,7 @@ ${notice(data.notice[lang])}
         <p class="hero-cta">${callButton({ lang, S, data, className: 'btn btn-primary btn-big' })}</p>
         <p class="hero-address">${icons.pin}<a href="${urls.googleMaps}" rel="noopener">${esc(s.address.street)}, ${esc(s.address.postalCode)} ${esc(s.address.city)}</a></p>
         <p class="status" data-status></p>
+        <p class="hero-remind" data-remind-wrap hidden><a class="btn btn-secondary" href="#radno-vrijeme" data-remind>${icons.clock}<span>${esc(S.remind.label)}</span></a><br><small>${esc(S.remind.hint)}</small></p>
       </div>
       <div class="hero-art">${heroTiles}</div>
     </div>

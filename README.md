@@ -99,6 +99,7 @@ in both places in sync whenever they change.
 
 - Total JS ≈ 6 KB. Only the open/closed line and the lightbox need it.
 - The open/closed status is computed client-side in the `Europe/Zagreb` time zone, not the visitor's zone.
+- While the salon is closed, the hero shows "Podsjeti me kad otvorimo": a calendar event (.ics) for the next opening time, with the phone number, generated in the browser as a Blob. No server, no tracking. Hidden without JS and while the salon is open.
 - No external requests at all (fonts and images are self-hosted), so no cookie banner is needed.
 - Reviews: paste real reviews into `content/reviews.md` as `## Name` followed by the text. Empty file = a single factual line linking to the Facebook reviews page.
 - `images/source/` is git-ignored on purpose; keep the originals somewhere safe. The generated `images/` folder is committed.

@@ -28,12 +28,13 @@
     var fmt = function (tpl, vars) { return tpl.replace(/\{(\w+)\}/g, function (_, k) { return vars[k]; }); };
 
     var h = cfg.hours[keys[today]];
-    var text, open = false;
+    var text, open = false, nextOpen = null; // nextOpen: { daysAhead, time: 'HH:MM' }
     if (h && now >= toMin(h[0]) && now < toMin(h[1])) {
       open = true;
       text = fmt(cfg.status.openNow, { t: h[1] });
     } else if (h && now < toMin(h[0])) {
       text = fmt(cfg.status.opensToday, { t: h[0] });
+      nextOpen = { daysAhead: 0, time: h[0] };
     } else {
       for (var d = 1; d <= 7; d++) {
         var idx = (today + d) % 7;
@@ -42,6 +43,7 @@
         if (today === 6 && idx === 0) text = fmt(cfg.status.sunday, { t: nh[0] });
         else if (d === 1) text = fmt(cfg.status.opensTomorrow, { t: nh[0] });
         else text = fmt(cfg.status.opensOn, { d: cfg.status.daysOn[idx], t: nh[0] });
+        nextOpen = { daysAhead: d, time: nh[0] };
         break;
       }
     }
@@ -51,12 +53,64 @@
       targets[i].classList.add(open ? 'is-open' : 'is-closed');
       targets[i].hidden = false;
     }
+    if (nextOpen && cfg.remind) callReminder(cfg.remind, nextOpen, got);
     var row = document.querySelector('.hours-table tr[data-day="' + today + '"]');
     if (row) {
       row.classList.add('today');
       var tag = row.querySelector('.today-tag');
       if (tag) tag.hidden = false;
     }
+  }
+
+  /* ---------- 1b. "Remind me when you open": a calendar file (.ics) built in the browser ----------
+     Shown only while the salon is closed. The event is set to the next opening time in
+     Europe/Zagreb and carries the phone number, so the visitor calls at the right moment. */
+  function callReminder(R, nextOpen, zagrebNow) {
+    var wrap = document.querySelector('[data-remind-wrap]');
+    var btn = document.querySelector('[data-remind]');
+    if (!wrap || !btn || typeof Blob === 'undefined' || typeof URL === 'undefined' || !URL.createObjectURL) return;
+
+    // Today's calendar date in Zagreb, then add the days until the next opening.
+    var dp = {};
+    new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Zagreb', year: 'numeric', month: '2-digit', day: '2-digit' })
+      .formatToParts(new Date()).forEach(function (p) { dp[p.type] = p.value; });
+    var target = new Date(Date.UTC(+dp.year, +dp.month - 1, +dp.day + nextOpen.daysAhead));
+    var hm = nextOpen.time.split(':');
+    var y = target.getUTCFullYear(), mo = target.getUTCMonth(), d = target.getUTCDate(), hh = +hm[0], mi = +hm[1];
+
+    // Convert that Zagreb wall-clock time to a UTC instant (two passes handle DST edges).
+    function zagrebToUtc(y, mo, d, hh, mi) {
+      var guess = Date.UTC(y, mo, d, hh, mi);
+      for (var k = 0; k < 2; k++) {
+        var q = {};
+        new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Zagreb', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' })
+          .formatToParts(new Date(guess)).forEach(function (p) { q[p.type] = p.value; });
+        var seen = Date.UTC(+q.year, +q.month - 1, +q.day, +q.hour, +q.minute);
+        guess += Date.UTC(y, mo, d, hh, mi) - seen;
+      }
+      return guess;
+    }
+    var start = zagrebToUtc(y, mo, d, hh, mi);
+    var stamp = function (ms) { return new Date(ms).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, ''); };
+    var escIcs = function (s) { return String(s).replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/[,;]/g, function (c) { return '\\' + c; }); };
+    var ics = [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Frizerski salon Ivanka//Podsjetnik//HR', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+      'BEGIN:VEVENT',
+      'UID:' + stamp(start) + '-ivanka@svafar.github.io',
+      'DTSTAMP:' + stamp(Date.now()),
+      'DTSTART:' + stamp(start),
+      'DTEND:' + stamp(start + 15 * 60000),
+      'SUMMARY:' + escIcs(R.title),
+      'DESCRIPTION:' + escIcs(R.desc + '\ntel:' + R.tel),
+      'LOCATION:' + escIcs(R.location),
+      'URL:tel:' + R.tel,
+      'BEGIN:VALARM', 'TRIGGER:-PT0M', 'ACTION:DISPLAY', 'DESCRIPTION:' + escIcs(R.title), 'END:VALARM',
+      'END:VEVENT', 'END:VCALENDAR', ''
+    ].join('\r\n');
+    var url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
+    btn.href = url;
+    btn.setAttribute('download', R.file);
+    wrap.hidden = false;
   }
 
   /* ---------- 2. Lightbox ---------- */

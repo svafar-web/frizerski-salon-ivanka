@@ -145,7 +145,11 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 .hero-note { color: var(--muted); font-size: 1rem; }
 .hero-address { display: flex; align-items: center; gap: .5em; font-weight: 600; margin-top: 1.4rem; }
 .hero-address a { color: var(--ink); }
-.status { display: flex; align-items: center; gap: .55em; font-weight: 600; margin: .5rem 0 0; min-height: 1.6em; } /* space is reserved so the JS-filled text never shifts the layout */
+.status { display: inline-flex; align-items: center; gap: .55em; font-weight: 600; margin: .5rem 0 0; min-height: 2.4em; padding: 0 .9em; border-radius: 999px; background: transparent; transition: background-color .2s; }
+.status.is-open { background: #e3f3e7; color: #155c2c; }
+.status.is-closed { background: var(--accent-soft); color: var(--accent-dark); }
+.hero-remind { margin: .9rem 0 0; }
+.hero-remind small { display: block; margin-top: .35rem; } /* space is reserved so the JS-filled text never shifts the layout */
 .status::before { content: ''; width: .8em; height: .8em; border-radius: 50%; background: var(--muted); flex: none; display: none; }
 .status.is-open::before, .status.is-closed::before { display: block; }
 .status.is-open::before { background: var(--open); }
@@ -262,7 +266,8 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 /* Hours: text + dark card */
 .hours-grid { display: grid; gap: 2rem; }
 .hours-card { background: var(--ink); color: var(--bg); border-radius: 18px; padding: 1.5rem 1.25rem; box-shadow: 0 30px 60px -30px rgba(28, 24, 22, .6); }
-.hours-card .status { font-size: 1.15rem; margin: 0 0 1rem; color: #fff; }
+.hours-card .status { font-size: 1.15rem; margin: 0 0 1rem; color: #fff; padding: 0; background: transparent; }
+.hours-card .status.is-open, .hours-card .status.is-closed { background: transparent; color: #fff; }
 .hours-table { font-size: 1.15rem; margin: 0; }
 .hours-table th, .hours-table td { padding: .8rem .4rem; border-bottom: 1px solid rgba(250, 246, 241, .16); }
 .hours-table thead th { font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; color: rgba(250, 246, 241, .7); font-weight: 600; padding-top: 0; border-bottom-color: rgba(250, 246, 241, .4); }
