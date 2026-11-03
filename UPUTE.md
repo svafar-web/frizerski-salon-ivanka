@@ -4,7 +4,7 @@ Ove upute su za vlasnicu salona ili osobu koja joj pomaže. Ne treba znati progr
 
 ## Najvažnije pravilo
 
-Sve što se mijenja (telefon, radno vrijeme, obavijest, usluge, cijene, slike u galeriji,
+Sve što se mijenja (telefon, radno vrijeme, obavijest, usluge, slike u galeriji,
 podaci o obrtu) nalazi se u **jednoj datoteci**:
 
 ```
@@ -19,7 +19,7 @@ stranica se sama ponovno izradi na hrvatskom i engleskom.
 Datoteka je običan tekst. Svaki podatak ima svoje ime, dvotočku i vrijednost u navodnicima:
 
 ```
-"phoneDisplay": "021 568 427",
+"phoneDisplay": "095 855 5532",
 ```
 
 Pravila koja treba poštovati da se ništa ne pokvari:
@@ -98,34 +98,22 @@ tekst tako da ostanu samo prazni navodnici `""`, kao gore. Tada se traka ne prik
 Potražite `"about"`. Svaki redak u listi `"hr"` (hrvatski) i `"en"` (engleski) je jedan odlomak.
 Slika uz tekst je `"image"` (naziv datoteke iz `images/source` bez `.jpg`), a `"alt"` je kratak opis slike.
 
-## Cijene i usluge
+## Usluge
 
-Potražite `"services"`. Svaka grupa usluga izgleda ovako:
+Potražite `"services"`. Svaka usluga izgleda ovako (cijene se ne prikazuju):
 
 ```
 {
   "id": "sisanje",
   "name": { "hr": "Šišanje i styling", "en": "Cuts and styling" },
   "desc": { "hr": "…", "en": "…" },
-  "price": "",
-  "items": [],
-  "image": "plavi-bob"
+  "short": { "hr": "šišanje", "en": "a cut" }
 },
 ```
 
-- **Cijena grupe**: upišite tekst u `"price"`, npr. `"price": "od 20 €"`. Dok je prazno (`""`), piše „Cijena na upit”.
-- **Pojedinačne stavke s cijenama** (neobavezno): u `"items"` dodajte retke ovako:
-
-```
-"items": [
-  { "name": { "hr": "Žensko šišanje", "en": "Women's haircut" }, "price": "20 €" },
-  { "name": { "hr": "Feniranje", "en": "Blow-dry" }, "price": "od 15 €" }
-],
-```
-
-Pazite na zarez između stavki i da zadnja stavka nema zarez iza sebe.
-
-- **Opis usluge**: promijenite tekst u `"desc"` → `"hr"` i `"en"`.
+- **Naziv i opis**: promijenite tekst u `"name"` i `"desc"` → `"hr"` i `"en"`.
+- **`"short"`** je kratki naziv koji se ubacuje u SMS poruku („Zanima me šišanje i bojanje”).
+- Pazite na zarez između usluga i da zadnja usluga nema zarez iza sebe.
 
 ## Zamjena ili dodavanje fotografije
 
@@ -167,7 +155,7 @@ Ako ne želite prikazivati Messenger, stavite `"showMessenger": false`.
 ## Poruke (SMS) sa stranice
 
 Na stranici postoji dio „Zatražite termin porukom”. Klijentica odgovori na tri pitanja, a stranica
-sastavi SMS koji ona pošalje sa svog mobitela na broj salona (021 568 427). Stranica sama ništa ne
+sastavi SMS koji ona pošalje sa svog mobitela na broj salona (095 855 5532). Stranica sama ništa ne
 šalje i ništa ne sprema. **Važno:** na te poruke treba odgovoriti (porukom ili pozivom), inače
 klijentica čeka. Ako ne želite primati takve poruke, javite osobi koja održava stranicu da isključi taj dio.
 
@@ -186,19 +174,21 @@ Super boja, točno kakvu sam htjela.
 
 Dok je datoteka prazna, na stranici stoji samo rečenica o postotku preporuka na Facebooku.
 
-## Podaci o obrtu (žuto označeno)
+## Podaci o obrtu
 
-Sve što je na stranici označeno **žutom bojom** su podaci koje još treba upisati: naziv obrta,
-OIB, registar, upute kako doći. Nalaze se u dijelovima `"legal"` i `"directions"`. Zamijenite
-tekst u uglatim zagradama pravim podatkom, npr.:
+U dijelu `"legal"` je naziv obrta koji se prikazuje u podnožju stranice. OIB i registar su
+neobavezni: ako ih želite prikazati, upišite ih, npr.:
 
 ```
-"name": "Frizerski salon Ivanka, vl. Ivanka [PREZIME]",
+"name": "Frizerski salon Ivanka, vl. Ivanka Prezime",
 "oib": "12345678901",
+"register": "Obrtni registar"
 ```
 
-Dok god je negdje tekst u uglatim zagradama `[OVAKO]`, provjera `npm run check` javlja grešku,
-a na stranici je žuto. To je namjerno, da se ne zaboravi.
+Dok je neko polje prazno (`""`), ne prikazuje se.
+
+Ako se ikad negdje pojavi tekst u uglatim zagradama `[OVAKO]`, to je privremeni podatak koji
+treba zamijeniti: provjera `npm run check` tada javlja grešku, a na stranici je žuto.
 
 ## Objava promjene
 

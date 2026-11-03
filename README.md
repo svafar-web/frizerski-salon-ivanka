@@ -9,7 +9,7 @@ developers.
 ## How it works
 
 ```
-content/site-data.json   ← the only file the owner edits (phone, hours, notice, services, prices, gallery, legal)
+content/site-data.json   ← the only file the owner edits (phone, hours, notice, services, gallery, legal)
 content/reviews.md       ← real reviews, pasted by hand (empty = no testimonials section)
 templates/*.mjs          ← HTML templates + UI strings (hr/en)
 css/style.css            ← stylesheet (inlined into every page at build time)
@@ -91,7 +91,7 @@ address is fine.
 
 For a phone-booking local business this matters more than the website. Claim or create the
 profile at business.google.com with **exactly** the same name, address, phone and opening hours
-as on the site (`Frizerski salon Ivanka`, `Drage Ivaniševića 18, 21000 Split`, `021 568 427`,
+as on the site (`Frizerski salon Ivanka`, `Drage Ivaniševića 18, 21000 Split`, `095 855 5532`,
 the hours in `site-data.json`), add the website URL, and upload the same photos. Keep the hours
 in both places in sync whenever they change.
 

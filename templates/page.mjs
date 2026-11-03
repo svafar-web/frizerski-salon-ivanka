@@ -193,10 +193,8 @@ export function callButton({ lang, S, data, className = 'btn btn-primary' }) {
 
 export function services({ lang, S, data, manifest }) {
   const rows = data.services.map((g, i) => {
-    const price = g.price && g.price.trim() ? esc(g.price) : `<span class="muted">${esc(S.services.onRequest)}</span>`;
-    const items = (g.items || []).map((it) => `<tr class="service-item"><td>${esc(it.name?.[lang] ?? it.name)}</td><td class="price">${it.price && it.price.trim() ? esc(it.price) : `<span class="muted">${esc(S.services.onRequest)}</span>`}</td></tr>`).join('\n');
     const swatches = g.accent === 'rainbow' ? ' <span class="swatches" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>' : '';
-    return `<tr class="service-group" id="usluga-${esc(g.id)}"><td><div class="service-cell"><span class="num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span><div><h3>${esc(g.name[lang])}${swatches}</h3><p>${esc(g.desc[lang])}</p></div></div></td><td class="price">${price}</td></tr>${items}`;
+    return `<li class="service-group" id="usluga-${esc(g.id)}"><div class="service-cell"><span class="num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span><div><h3>${esc(g.name[lang])}${swatches}</h3><p>${esc(g.desc[lang])}</p></div></div></li>`;
   }).join('\n');
   const art = data.servicesImage ? `<figure class="services-art">${picture(manifest, data.servicesImage, { alt: data.heroAlt?.[data.servicesImage]?.[lang] || '', sizes: '(min-width: 900px) 420px, 100vw' })}</figure>` : '';
   return `<section id="usluge" class="section" aria-labelledby="usluge-h">
@@ -205,10 +203,9 @@ export function services({ lang, S, data, manifest }) {
       <p class="eyebrow">01 <span>${esc(S.eyebrows.services)}</span></p>
       <h2 id="usluge-h">${esc(S.services.heading)}</h2>
       <p class="lead">${esc(S.services.intro)}</p>
-      <table class="services-table">
-        <thead><tr><th scope="col">${esc(S.services.colService)}</th><th scope="col" class="price">${esc(S.services.colPrice)}</th></tr></thead>
-        <tbody>${rows}</tbody>
-      </table>
+      <ol class="services-list">
+        ${rows}
+      </ol>
     </div>
     ${art}
   </div>
@@ -396,7 +393,6 @@ export function contact({ lang, S, data, urls }) {
         <div class="contact-actions">
           <a class="btn btn-secondary" href="${urls.googleMaps}" data-map-google="${urls.googleMaps}" data-map-apple="${urls.appleMaps}" target="_blank" rel="noopener">${esc(S.contact.openMaps)}${icons.external}</a>
         </div>
-        <p class="directions"><strong>${esc(S.contact.directionsLabel)}</strong> ${ph(data.directions[lang])}</p>
       </div>
     </div>
   </div>
@@ -407,16 +403,15 @@ export function footer({ lang, S, data, privacyHref, year }) {
   const s = data.site;
   const phone = lang === 'hr' ? s.phoneDisplay : s.phoneDisplayIntl;
   const L = data.legal;
-  const email = L.email && L.email.trim() ? `<li><span>${esc(S.footer.email)}:</span> ${ph(L.email)}</li>` : '';
+  const optional = (label, value) => value && value.trim() ? `<li><span>${esc(label)}:</span> ${ph(value)}</li>` : '';
   return `<footer class="site-footer">
   <div class="wrap footer-row">
     <div class="legal">
       <p class="footer-name">${esc(S.footer.legalHeading)}</p>
       <ul>
         <li>${ph(L.name)}</li>
-        <li><span>${esc(S.footer.oib)}:</span> ${ph(L.oib)}</li>
-        <li><span>${esc(S.footer.register)}:</span> ${ph(L.register)}</li>
-        ${email}
+        ${optional(S.footer.oib, L.oib)}
+        ${optional(S.footer.register, L.register)}
       </ul>
     </div>
     <p class="footer-meta">© <span data-year>${year}</span> ${esc(s.name)} · <a href="${privacyHref}">${esc(S.footer.privacy)}</a></p>

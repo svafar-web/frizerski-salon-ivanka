@@ -4,9 +4,9 @@
     "url": "https://svafar.github.io/frizerski-salon-ivanka",
     "name": "Frizerski salon Ivanka",
     "instagramName": "Hair Salon Ivanka",
-    "phoneDisplay": "021 568 427",
-    "phoneDisplayIntl": "+385 21 568 427",
-    "phoneTel": "+38521568427",
+    "phoneDisplay": "095 855 5532",
+    "phoneDisplayIntl": "+385 95 855 5532",
+    "phoneTel": "+385958555532",
     "address": {
       "street": "Drage Ivaniševića 18",
       "postalCode": "21000",
@@ -28,9 +28,9 @@
       "count": 21
     },
     "brands": [
-      "Matrix",
-      "Schwarzkopf Professional",
-      "Artego"
+      "Nook",
+      "Cotril",
+      "Montibello"
     ],
     "_googleReviews_upute": "Ocjena i broj recenzija na Google kartama (ručno ažurirajte s vremena na vrijeme). url vodi na Google profil salona.",
     "googleReviews": {
@@ -83,30 +83,24 @@
     "image": "ivanka-i-valentina",
     "alt": { "hr": "Ivanka i Valentina, frizerke salona Ivanka", "en": "Ivanka and Valentina, the hairdressers of Salon Ivanka" }
   },
-  "_services_upute": "Cijenu upišite kao tekst, npr. \"od 20 €\" ili \"25 €\". Prazno (\"\") znači 'Cijena na upit'. Stavke (items) su neobavezne. \"short\" je kratki naziv koji se koristi u SMS poruci (npr. \"Zanima me šišanje i bojanje\").",
+  "_services_upute": "Popis usluga bez cijena. \"short\" je kratki naziv koji se koristi u SMS poruci (npr. \"Zanima me šišanje i bojanje\").",
   "services": [
     {
       "id": "sisanje",
       "name": { "hr": "Šišanje i styling", "en": "Cuts and styling" },
       "desc": { "hr": "Žensko šišanje, feniranje, kovrče i ravnanje – za svaki dan i za posebne prilike.", "en": "Women's haircuts, blow-dries, curls and straightening, for every day and for special occasions." },
-      "price": "",
-      "items": [],
       "short": { "hr": "šišanje", "en": "a cut" }
     },
     {
       "id": "bojanje",
       "name": { "hr": "Bojanje i pramenovi", "en": "Colour and highlights" },
       "desc": { "hr": "Bojanje cijele kose, pramenovi, balayage i posvjetljivanje – plave, srebrne, bakrene i crvene nijanse.", "en": "Full colour, highlights, balayage and lightening, from blondes and silvers to coppers and reds." },
-      "price": "",
-      "items": [],
       "short": { "hr": "bojanje", "en": "colour" }
     },
     {
       "id": "kreativne-boje",
       "name": { "hr": "Kreativne i fashion boje", "en": "Creative and fashion colour" },
       "desc": { "hr": "Pastelne i neonske nijanse, ružičasta, ljubičasta, plava, dugine boje. Ono po čemu nas prepoznaju.", "en": "Pastel and neon shades, pink, violet, blue, rainbow colour. What we are known for." },
-      "price": "",
-      "items": [],
       "accent": "rainbow",
       "short": { "hr": "kreativna boja", "en": "creative colour" }
     },
@@ -114,16 +108,12 @@
       "id": "svecane",
       "name": { "hr": "Svečane i svadbene frizure", "en": "Occasion and bridal hair" },
       "desc": { "hr": "Punđe, pletenice i valovi za vjenčanja, mature i proslave.", "en": "Updos, braids and waves for weddings, proms and celebrations." },
-      "price": "",
-      "items": [],
       "short": { "hr": "svečana frizura", "en": "occasion hair" }
     },
     {
       "id": "njega",
       "name": { "hr": "Njega kose", "en": "Hair care" },
-      "desc": { "hr": "Njega i tretmani za kosu nakon bojanja i posvjetljivanja, profesionalnim proizvodima.", "en": "Care and treatments for hair after colouring and lightening, with professional products." },
-      "price": "",
-      "items": [],
+      "desc": { "hr": "Njega i tretmani za kosu nakon bojanja i posvjetljivanja, profesionalnim proizvodima Nook, Cotril i Montibello.", "en": "Care and treatments for hair after colouring and lightening, with professional Nook, Cotril and Montibello products." },
       "short": { "hr": "njega kose", "en": "hair care" }
     }
   ],
@@ -260,14 +250,11 @@
       "tags": ["svecane", "smede"]
     }
   ],
-  "_directions_upute": "Kratka uputa kako doći do salona i gdje parkirati. Zamijenite tekst u uglatim zagradama.",
-  "directions": { "hr": "[UPUTE: npr. blizu …, parking …]", "en": "[DIRECTIONS: e.g. near …, parking …]" },
-  "_legal_upute": "Zakon traži da web stranica obrta prikaže naziv, OIB i registar. Zamijenite tekst u uglatim zagradama. E-mail nije obavezan: ostavite prazno (\"\") ako ga ne želite prikazati.",
+  "_legal_upute": "Naziv obrta se prikazuje u podnožju stranice. OIB i registar su neobavezni: upišite ih ako ih želite prikazati, inače ostavite prazno (\"\").",
   "legal": {
-    "name": "[PUNI NAZIV OBRTA / TVRTKE]",
-    "oib": "[OIB]",
-    "register": "[NADLEŽNI REGISTAR / OBRTNI REGISTAR]",
-    "email": "[E-MAIL — opcionalno]"
+    "name": "Frizerski salon Ivanka",
+    "oib": "",
+    "register": ""
   },
   "_servicesImage_upute": "Velika slika uz popis usluga (naziv datoteke iz images/source bez nastavka).",
   "servicesImage": "kratka-plavo-ljubicasta",

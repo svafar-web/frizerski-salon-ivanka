@@ -5,7 +5,7 @@ export const strings = {
     lang: 'hr',
     htmlLang: 'hr',
     title: 'Frizerski salon Ivanka – frizer u Splitu | Drage Ivaniševića 18',
-    description: 'Frizerski salon Ivanka u Splitu: šišanje, bojanje, pramenovi, kreativne boje i svečane frizure. Drage Ivaniševića 18. Naručite se telefonom: 021 568 427.',
+    description: 'Frizerski salon Ivanka u Splitu: šišanje, bojanje, pramenovi, kreativne boje i svečane frizure. Drage Ivaniševića 18. Naručite se telefonom: 095 855 5532.',
     skip: 'Preskoči na sadržaj',
     nav: { services: 'Usluge', gallery: 'Galerija', hours: 'Radno vrijeme', contact: 'Kontakt' },
     switchLabel: 'Jezik',
@@ -44,13 +44,10 @@ export const strings = {
 
     heroImgAlt: 'Radovi salona: ',
     openStatusLoading: 'Radno vrijeme pogledajte niže.',
-    remind: { label: 'Podsjeti me kad otvorimo', hint: 'Dodaje podsjetnik u Vaš kalendar, s brojem telefona.', title: 'Nazvati Frizerski salon Ivanka', desc: 'Naručite se telefonom ili porukom: 021 568 427.', file: 'podsjetnik-salon-ivanka.ics' },
+    remind: { label: 'Podsjeti me kad otvorimo', hint: 'Dodaje podsjetnik u Vaš kalendar, s brojem telefona.', title: 'Nazvati Frizerski salon Ivanka', desc: 'Naručite se telefonom ili porukom: 095 855 5532.', file: 'podsjetnik-salon-ivanka.ics' },
     services: {
       heading: 'Usluge',
       intro: 'Sve frizerske usluge za žene – od šišanja i feniranja do potpune promjene boje.',
-      colService: 'Usluga',
-      colPrice: 'Cijena',
-      onRequest: 'Cijena na upit',
       unsure: 'Niste sigurni što Vam treba? {link} pa ćemo dogovoriti.',
       unsureLink: 'Nazovite nas'
     },
@@ -102,8 +99,7 @@ export const strings = {
       instagram: 'Instagram',
       facebook: 'Facebook',
       mapHeading: 'Kako do nas',
-      openMaps: 'Otvori u kartama',
-      directionsLabel: 'Upute i parking:'
+      openMaps: 'Otvori u kartama'
     },
     bottomBar: { call: 'Nazovi', directions: 'Upute', directionsAria: 'Upute do salona u Google Kartama' },
     footer: {
@@ -111,8 +107,7 @@ export const strings = {
       privacy: 'Privatnost',
       legalHeading: 'Podaci o pružatelju usluge',
       oib: 'OIB',
-      register: 'Registar',
-      email: 'E-mail'
+      register: 'Registar'
     },
     privacy: {
       title: 'Privatnost – Frizerski salon Ivanka',
@@ -140,7 +135,7 @@ export const strings = {
     lang: 'en',
     htmlLang: 'en',
     title: 'Hair Salon Ivanka – hairdresser in Split, Croatia | Drage Ivaniševića 18',
-    description: 'Hair Salon Ivanka in Split, Croatia: cuts, colour, highlights, creative colour and occasion hair. Drage Ivaniševića 18. Book by phone: +385 21 568 427.',
+    description: 'Hair Salon Ivanka in Split, Croatia: cuts, colour, highlights, creative colour and occasion hair. Drage Ivaniševića 18. Book by phone: +385 95 855 5532.',
     skip: 'Skip to content',
     nav: { services: 'Services', gallery: 'Gallery', hours: 'Opening hours', contact: 'Contact' },
     switchLabel: 'Language',
@@ -179,13 +174,10 @@ export const strings = {
 
     heroImgAlt: 'Work from the salon: ',
     openStatusLoading: 'See opening hours below.',
-    remind: { label: 'Remind me when you open', hint: 'Adds a reminder with the phone number to your calendar.', title: 'Call Hair Salon Ivanka', desc: 'Book by phone or text: +385 21 568 427.', file: 'reminder-salon-ivanka.ics' },
+    remind: { label: 'Remind me when you open', hint: 'Adds a reminder with the phone number to your calendar.', title: 'Call Hair Salon Ivanka', desc: 'Book by phone or text: +385 95 855 5532.', file: 'reminder-salon-ivanka.ics' },
     services: {
       heading: 'Services',
       intro: 'All hairdressing services for women, from a cut and blow-dry to a complete colour change.',
-      colService: 'Service',
-      colPrice: 'Price',
-      onRequest: 'Price on request',
       unsure: 'Not sure what you need? {link} and we will work it out together.',
       unsureLink: 'Call us'
     },
@@ -237,8 +229,7 @@ export const strings = {
       instagram: 'Instagram',
       facebook: 'Facebook',
       mapHeading: 'How to find us',
-      openMaps: 'Open in Maps',
-      directionsLabel: 'Directions and parking:'
+      openMaps: 'Open in Maps'
     },
     bottomBar: { call: 'Call', directions: 'Directions', directionsAria: 'Directions to the salon in Google Maps' },
     footer: {
@@ -246,8 +237,7 @@ export const strings = {
       privacy: 'Privacy',
       legalHeading: 'Service provider details',
       oib: 'OIB (tax ID)',
-      register: 'Register',
-      email: 'E-mail'
+      register: 'Register'
     },
     privacy: {
       title: 'Privacy – Hair Salon Ivanka',

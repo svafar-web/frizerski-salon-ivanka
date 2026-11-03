@@ -172,20 +172,15 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 
 /* Services */
 .services-grid { display: grid; gap: 2.5rem; }
-.services-table, .hours-table { width: 100%; border-collapse: collapse; }
-.services-table th, .hours-table th { text-align: left; }
-.services-table thead th { font-size: .9rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 0 0 .6rem; border-bottom: 2px solid var(--ink); }
-.services-table td { padding: 1.2rem 0; border-bottom: 1px solid var(--line); vertical-align: top; }
-.services-table .price { text-align: right; white-space: nowrap; }
-.services-table td.price { padding-left: 1rem; font-weight: 600; }
-.services-table tbody tr { transition: background-color .15s; }
-.services-table tbody tr:hover { background: rgba(255, 255, 255, .5); }
+.hours-table { width: 100%; border-collapse: collapse; }
+.hours-table th { text-align: left; }
+.services-list { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+.services-list li { padding: 1.2rem 0; border-bottom: 1px solid var(--line); transition: background-color .15s; }
+.services-list li:hover { background: rgba(255, 255, 255, .5); }
 .service-cell { display: flex; gap: 1rem; align-items: baseline; }
 .service-cell .num { font-family: var(--display); font-weight: 600; font-size: 1rem; color: var(--accent); min-width: 2em; }
 .service-cell h3 { margin: 0 0 .25em; font-size: 1.45rem; }
 .service-cell p { margin: 0; color: var(--muted); font-size: 1.05rem; }
-.service-item td { padding: .6rem 0 .6rem 3rem; font-size: 1.05rem; }
-.service-item td.price { padding-left: 1rem; }
 .cta-row { margin-top: 1.5rem; font-size: 1.15rem; }
 .services-art { margin: 0; }
 .services-art picture, .services-art .ph { display: block; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 14px; }
@@ -193,7 +188,7 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 .swatches { display: inline-flex; gap: .2em; vertical-align: middle; margin-left: .4em; }
 .swatches i { width: .55em; height: .55em; border-radius: 50%; display: block; }
 .swatches i:nth-child(1) { background: #d4145a; } .swatches i:nth-child(2) { background: #7b2cbf; } .swatches i:nth-child(3) { background: #1f6fd1; } .swatches i:nth-child(4) { background: #1aa6a0; } .swatches i:nth-child(5) { background: #f2a0c6; }
-@media (max-width: 480px) { .services-table .price { font-size: 1rem; } .service-cell { gap: .7rem; } .service-item td { padding-left: 2.6rem; } }
+@media (max-width: 480px) { .service-cell { gap: .7rem; } }
 @media (min-width: 900px) {
   .services-grid { grid-template-columns: 1fr 400px; gap: 4rem; align-items: start; }
   .services-art { position: sticky; top: 6rem; }
@@ -337,7 +332,6 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 .contact-actions > .btn-secondary { background: var(--ink); color: #fff; border-color: var(--ink); }
 .contact-actions > .btn-secondary:hover { background: #fff; color: var(--ink); border-color: var(--ink); }
 .request-block { display: contents; }
-.directions { margin: 0; font-size: 1rem; color: var(--muted); }
 .social { list-style: none; padding: 0; margin: .25rem 0 0; display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; }
 .social a { display: inline-flex; align-items: center; gap: .45em; min-height: 44px; font-weight: 600; color: var(--ink); text-decoration: none; }
 .social a:hover { color: var(--accent-dark); text-decoration: underline; }
