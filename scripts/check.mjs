@@ -32,7 +32,7 @@ for (const page of pages) {
   for (const m of html.matchAll(/\s(?:srcset|imagesrcset)="([^"]+)"/g)) for (const part of m[1].split(',')) urls.add(part.trim().split(/\s+/)[0]);
   for (const u of urls) {
     if (/^(https?:)?\/\//.test(u)) { if (/^https?:/.test(u) && !u.startsWith(siteUrl)) externalUrls.add(u); continue; }
-    if (/^(tel:|mailto:|data:)/.test(u)) continue;
+    if (/^(tel:|sms:|mailto:|data:)/.test(u)) continue;
     const [p0, hash] = u.split('#');
     const p = stripBase(p0);
     if (!p) { if (hash && !ids.has(hash)) err(`${page}: anchor #${hash} not found`); continue; }
