@@ -382,7 +382,7 @@ export function contact({ lang, S, data, urls }) {
         <h3>${icons.pin} ${esc(S.contact.addressLabel)}</h3>
         <p class="contact-big">${esc(s.address.street)}<br>${esc(s.address.postalCode)} ${esc(s.address.city)}${lang === 'hr' ? '' : ', Croatia'}</p>
         <div class="contact-actions">
-          <a class="btn btn-secondary" href="${urls.googleMaps}" data-map-google="${urls.googleMaps}" data-map-apple="${urls.appleMaps}" rel="noopener">${esc(S.contact.openMaps)}${icons.external}</a>
+          <a class="btn btn-secondary" href="${urls.googleMaps}" data-map-google="${urls.googleMaps}" data-map-apple="${urls.appleMaps}" target="_blank" rel="noopener">${esc(S.contact.openMaps)}${icons.external}</a>
         </div>
         <p class="directions"><strong>${esc(S.contact.directionsLabel)}</strong> ${ph(data.directions[lang])}</p>
         <div class="contact-card">

@@ -337,7 +337,7 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 .social { list-style: none; padding: 0; margin: .25rem 0 0; display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; }
 .social a { display: inline-flex; align-items: center; gap: .45em; min-height: 44px; font-weight: 600; color: var(--ink); text-decoration: none; }
 .social a:hover { color: var(--accent-dark); text-decoration: underline; }
-@media (min-width: 860px) { .contact-grid { grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; } }
+@media (min-width: 700px) { .contact-grid { grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; } }
 
 /* Footer */
 .site-footer { background: var(--ink); color: rgba(250, 246, 241, .75); padding: 2.25rem 0 2rem; font-size: 1rem; border-top: 6px solid var(--accent); }
