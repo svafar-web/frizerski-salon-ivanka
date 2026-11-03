@@ -102,8 +102,7 @@ export const strings = {
       instagram: 'Instagram',
       facebook: 'Facebook',
       mapHeading: 'Kako do nas',
-      googleMaps: 'Otvori u Google Kartama',
-      appleMaps: 'Otvori u Apple Kartama',
+      openMaps: 'Otvori u kartama',
       directionsLabel: 'Upute i parking:'
     },
     bottomBar: { call: 'Nazovi', directions: 'Upute', directionsAria: 'Upute do salona u Google Kartama' },
@@ -238,8 +237,7 @@ export const strings = {
       instagram: 'Instagram',
       facebook: 'Facebook',
       mapHeading: 'How to find us',
-      googleMaps: 'Open in Google Maps',
-      appleMaps: 'Open in Apple Maps',
+      openMaps: 'Open in Maps',
       directionsLabel: 'Directions and parking:'
     },
     bottomBar: { call: 'Call', directions: 'Directions', directionsAria: 'Directions to the salon in Google Maps' },

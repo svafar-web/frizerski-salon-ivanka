@@ -336,6 +336,15 @@
     if (desktop) smsLink.hidden = true; // no messaging app on a desktop: scan the code or copy the text instead
   }
 
+  /* ---------- 2d. One map button: Apple Maps on Apple devices, Google Maps elsewhere ---------- */
+  function mapButton() {
+    var a = document.querySelector('[data-map-apple]');
+    if (!a) return;
+    var ua = navigator.userAgent || '';
+    var apple = /iPhone|iPad|iPod|Macintosh/.test(ua) && !/Android/.test(ua);
+    if (apple) a.href = a.getAttribute('data-map-apple');
+  }
+
   /* ---------- 3. Footer year ---------- */
   function year() {
     var y = document.querySelector('[data-year]');
@@ -346,5 +355,6 @@
   lightbox();
   galleryFilter();
   requestForm();
+  mapButton();
   year();
 })();
