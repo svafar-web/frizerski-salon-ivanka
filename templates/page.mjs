@@ -316,11 +316,7 @@ export function requestSection({ lang, S, data }) {
   const services = data.services.map((g) => [g.short?.[lang] ?? g.name[lang], g.name[lang]]);
   const cfg = { phone: s.phoneTel, dayPhrase: R.dayPhrase, partPhrase: R.partPhrase, msg: R.msg, and: R.and, or: R.or, stepOf: R.stepOf, next: R.next, finish: R.finish, copied: R.copied, qrSrc: (data._basePath || '') + '/js/qr.min.js' };
   return `<div id="zatrazi-termin" class="request-block">
-    <a class="request-card" href="sms:${s.phoneTel}" data-request-open>
-      <span class="request-card-icon">${icons.chat}</span>
-      <h2 class="request-card-title" id="zatrazi-h">${esc(R.heading)}</h2>
-      <span class="request-card-arrow" aria-hidden="true">→</span>
-    </a>
+    <a class="btn btn-primary" href="sms:${s.phoneTel}" data-request-open>${icons.chat}<span>${esc(R.heading)}</span></a>
   <dialog class="request-dialog" data-request-dialog aria-labelledby="zatrazi-dialog-h">
     <form class="request" data-request method="dialog">
       <div class="request-head">
@@ -376,26 +372,28 @@ export function hoursSection({ S, data }) {
 export function contact({ lang, S, data, urls }) {
   const s = data.site;
   const phone = lang === 'hr' ? s.phoneDisplay : s.phoneDisplayIntl;
-  const messenger = s.showMessenger ? `<p class="contact-messenger"><a class="btn btn-secondary" href="${s.messenger}" rel="noopener">${icons.messenger}<span>${esc(S.contact.messenger)}</span></a></p>` : '';
+  const messenger = s.showMessenger ? `<a class="btn btn-secondary" href="${s.messenger}" rel="noopener">${icons.messenger}<span>${esc(S.contact.messenger)}</span></a>` : '';
   return `<section id="kontakt" class="section" aria-labelledby="kontakt-h">
   <div class="wrap">
     <p class="eyebrow">05 <span>${esc(S.eyebrows.contact)}</span></p>
     <h2 id="kontakt-h">${esc(S.contact.heading)}</h2>
     <div class="contact-grid">
-      <div class="map-card">
+      <div class="contact-card">
         <h3>${icons.pin} ${esc(S.contact.addressLabel)}</h3>
-        <p class="map-address">${esc(s.address.street)}<br>${esc(s.address.postalCode)} ${esc(s.address.city)}${lang === 'hr' ? '' : ', Croatia'}</p>
-        <p class="map-buttons">
+        <p class="contact-big">${esc(s.address.street)}<br>${esc(s.address.postalCode)} ${esc(s.address.city)}${lang === 'hr' ? '' : ', Croatia'}</p>
+        <div class="contact-actions">
           <a class="btn btn-secondary" href="${urls.googleMaps}" rel="noopener">${esc(S.contact.googleMaps)}${icons.external}</a>
           <a class="btn btn-secondary" href="${urls.appleMaps}" rel="noopener">${esc(S.contact.appleMaps)}${icons.external}</a>
-        </p>
+        </div>
         <p class="directions"><strong>${esc(S.contact.directionsLabel)}</strong> ${ph(data.directions[lang])}</p>
       </div>
-      <div class="contact-details">
+      <div class="contact-card">
         <h3>${icons.phone} ${esc(S.contact.phoneLabel)}</h3>
-        <p class="contact-phone"><a class="phone-big" href="tel:${s.phoneTel}">${esc(phone)}</a></p>
-        ${requestSection({ lang, S, data })}
-        ${messenger}
+        <p class="contact-big"><a class="phone-big" href="tel:${s.phoneTel}">${esc(phone)}</a></p>
+        <div class="contact-actions">
+          ${requestSection({ lang, S, data })}
+          ${messenger}
+        </div>
         <ul class="social">
           <li><a href="${s.instagram}" rel="noopener">${icons.instagram}<span>${esc(S.contact.instagram)}</span></a></li>
           <li><a href="${s.facebook}" rel="noopener">${icons.facebook}<span>${esc(S.contact.facebook)}</span></a></li>

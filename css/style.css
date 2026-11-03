@@ -200,13 +200,6 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 }
 
 /* Request an appointment by text: one card, then a dialog */
-.request-block { margin: 0 0 1.5rem; }
-.request-card { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .9rem; width: 100%; max-width: 32rem; padding: 1.1rem 1.25rem; background: var(--accent); color: #fff; border-radius: 20px; text-decoration: none; box-shadow: 0 16px 36px -18px rgba(179, 18, 46, .7); transition: background-color .15s, transform .15s; }
-.request-card:hover { background: var(--accent-dark); color: #fff; transform: translateY(-2px); }
-.request-card-icon { width: 2.6rem; height: 2.6rem; border-radius: 50%; background: rgba(255,255,255,.18); display: inline-flex; align-items: center; justify-content: center; }
-.request-card-icon .ico { width: 1.6rem; height: 1.6rem; vertical-align: 0; }
-.request-card-title { font-family: var(--display); font-weight: 600; font-size: clamp(1.25rem, 3.5vw, 1.5rem); line-height: 1.15; margin: 0; color: inherit; }
-.request-card-arrow { font-size: 1.5rem; line-height: 1; }
 .request-dialog { border: 0; padding: 0; width: min(100vw - 2rem, 36rem); max-height: min(100dvh - 2rem, 48rem); background: var(--bg); color: var(--ink); border-radius: 20px; box-shadow: 0 30px 80px -20px rgba(28, 24, 22, .5); }
 .request-dialog::backdrop { background: rgba(28, 24, 22, .55); }
 .request { display: block; padding: 1.25rem 1.5rem 1.5rem; max-height: inherit; overflow: auto; }
@@ -328,22 +321,23 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 .hours-text .small { display: flex; gap: .4em; align-items: flex-start; }
 @media (min-width: 860px) { .hours-grid { grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; } .hours-card { padding: 2rem; } .hours-table { font-size: 1.2rem; } }
 
-/* Contact */
-.contact-grid { display: grid; gap: 2rem; }
-.contact-details h3 { display: flex; align-items: center; gap: .4em; font-size: 1.5rem; margin-bottom: .5rem; }
-.contact-details p { margin-bottom: 1.25rem; }
-.phone-big { font-family: var(--display); font-size: clamp(2.2rem, 7vw, 3rem); font-weight: 600; color: var(--accent); text-decoration: none; display: inline-block; padding: .1rem 0; letter-spacing: -0.01em; }
+/* Contact: two matching cards */
+.contact-grid { display: grid; gap: 1.25rem; }
+.contact-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 1.5rem; display: flex; flex-direction: column; gap: .9rem; }
+.contact-card h3 { display: flex; align-items: center; gap: .4em; font-size: 1.35rem; margin: 0; color: var(--muted); font-family: var(--text); font-weight: 600; }
+.contact-card h3 .ico { color: var(--accent); }
+.contact-big { font-family: var(--display); font-size: clamp(1.6rem, 5vw, 2rem); font-weight: 600; line-height: 1.2; margin: 0; }
+.phone-big { color: var(--accent); text-decoration: none; }
 .phone-big:hover { color: var(--accent-dark); text-decoration: underline; }
-.contact-messenger small { display: block; margin-top: .4rem; }
-.social { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; }
-.social a { display: inline-flex; align-items: center; gap: .45em; min-height: 48px; font-weight: 600; color: var(--ink); }
-.map-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 1.5rem; }
-.map-card h3 { display: flex; align-items: center; gap: .4em; font-size: 1.5rem; margin-bottom: .5rem; }
-.map-address { font-family: var(--display); font-size: 1.6rem; font-weight: 600; line-height: 1.2; }
-.map-buttons { display: flex; flex-direction: column; gap: .75rem; }
-.map-buttons .btn { justify-content: space-between; }
-.directions { margin: 1.25rem 0 0; font-size: 1.05rem; }
-@media (min-width: 860px) { .contact-grid { grid-template-columns: 1fr 1fr; gap: 3rem; } }
+.contact-actions { display: flex; flex-direction: column; gap: .6rem; margin: .25rem 0 0; }
+.contact-actions .btn { justify-content: flex-start; }
+.contact-actions .btn-secondary .ico-sm { margin-left: auto; }
+.request-block { display: contents; }
+.directions { margin: 0; font-size: 1rem; color: var(--muted); }
+.social { list-style: none; padding: 0; margin: .25rem 0 0; display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; }
+.social a { display: inline-flex; align-items: center; gap: .45em; min-height: 44px; font-weight: 600; color: var(--ink); text-decoration: none; }
+.social a:hover { color: var(--accent-dark); text-decoration: underline; }
+@media (min-width: 860px) { .contact-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: stretch; } }
 
 /* Footer */
 .site-footer { background: var(--ink); color: rgba(250, 246, 241, .75); padding: 2.25rem 0 2rem; font-size: 1rem; border-top: 6px solid var(--accent); }

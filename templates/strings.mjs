@@ -44,7 +44,7 @@ export const strings = {
 
     heroImgAlt: 'Radovi salona: ',
     openStatusLoading: 'Radno vrijeme pogledajte niže.',
-    remind: { label: 'Podsjeti me kad otvorimo', hint: 'Dodaje podsjetnik u Vaš kalendar, s brojem telefona.', title: 'Nazvati Frizerski salon Ivanka', desc: 'Naručite se telefonom: 021 568 427. Termine dogovaramo isključivo telefonom.', file: 'podsjetnik-salon-ivanka.ics' },
+    remind: { label: 'Podsjeti me kad otvorimo', hint: 'Dodaje podsjetnik u Vaš kalendar, s brojem telefona.', title: 'Nazvati Frizerski salon Ivanka', desc: 'Naručite se telefonom ili porukom: 021 568 427.', file: 'podsjetnik-salon-ivanka.ics' },
     services: {
       heading: 'Usluge',
       intro: 'Sve frizerske usluge za žene – od šišanja i feniranja do potpune promjene boje.',
@@ -180,7 +180,7 @@ export const strings = {
 
     heroImgAlt: 'Work from the salon: ',
     openStatusLoading: 'See opening hours below.',
-    remind: { label: 'Remind me when you open', hint: 'Adds a reminder with the phone number to your calendar.', title: 'Call Hair Salon Ivanka', desc: 'Book by phone: +385 21 568 427. Appointments are made by phone only.', file: 'reminder-salon-ivanka.ics' },
+    remind: { label: 'Remind me when you open', hint: 'Adds a reminder with the phone number to your calendar.', title: 'Call Hair Salon Ivanka', desc: 'Book by phone or text: +385 21 568 427.', file: 'reminder-salon-ivanka.ics' },
     services: {
       heading: 'Services',
       intro: 'All hairdressing services for women, from a cut and blow-dry to a complete colour change.',
