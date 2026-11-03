@@ -352,7 +352,7 @@ export function requestSection({ lang, S, data }) {
     </form>
   </dialog>
   <script type="application/json" id="request-data">${JSON.stringify(cfg).replace(/</g, '\\u003c')}</script>
-</section>`;
+</div>`;
 }
 
 export function hoursSection({ S, data }) {
