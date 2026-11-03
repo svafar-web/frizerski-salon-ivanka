@@ -414,16 +414,7 @@ export function footer({ lang, S, data, privacyHref, year }) {
   const L = data.legal;
   const email = L.email && L.email.trim() ? `<li><span>${esc(S.footer.email)}:</span> ${ph(L.email)}</li>` : '';
   return `<footer class="site-footer">
-  <div class="wrap footer-grid">
-    <div>
-      <p class="footer-name">${esc(s.name)}</p>
-      <p>${esc(s.address.street)}, ${esc(s.address.postalCode)} ${esc(s.address.city)}</p>
-      <p>${esc(S.footer.hoursSummary)}</p>
-      <ul class="social">
-        <li><a href="${s.instagram}" rel="noopener">${icons.instagram}<span>Instagram</span></a></li>
-        <li><a href="${s.facebook}" rel="noopener">${icons.facebook}<span>Facebook</span></a></li>
-      </ul>
-    </div>
+  <div class="wrap footer-row">
     <div class="legal">
       <p class="footer-name">${esc(S.footer.legalHeading)}</p>
       <ul>
@@ -432,8 +423,8 @@ export function footer({ lang, S, data, privacyHref, year }) {
         <li><span>${esc(S.footer.register)}:</span> ${ph(L.register)}</li>
         ${email}
       </ul>
-      <p><a href="${privacyHref}">${esc(S.footer.privacy)}</a> · © <span data-year>${year}</span> ${esc(s.name)}</p>
     </div>
+    <p class="footer-meta">© <span data-year>${year}</span> ${esc(s.name)} · <a href="${privacyHref}">${esc(S.footer.privacy)}</a></p>
   </div>
 </footer>
 <nav class="bottom-bar" aria-label="${lang === 'hr' ? 'Brze radnje' : 'Quick actions'}">
