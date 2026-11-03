@@ -83,21 +83,23 @@
     "image": "ivanka-i-valentina",
     "alt": { "hr": "Ivanka i Valentina, frizerke salona Ivanka", "en": "Ivanka and Valentina, the hairdressers of Salon Ivanka" }
   },
-  "_services_upute": "Cijenu upišite kao tekst, npr. \"od 20 €\" ili \"25 €\". Prazno (\"\") znači 'Cijena na upit'. Stavke (items) su neobavezne.",
+  "_services_upute": "Cijenu upišite kao tekst, npr. \"od 20 €\" ili \"25 €\". Prazno (\"\") znači 'Cijena na upit'. Stavke (items) su neobavezne. \"short\" je kratki naziv koji se koristi u SMS poruci (npr. \"Zanima me šišanje i bojanje\").",
   "services": [
     {
       "id": "sisanje",
       "name": { "hr": "Šišanje i styling", "en": "Cuts and styling" },
       "desc": { "hr": "Žensko šišanje, feniranje, kovrče i ravnanje – za svaki dan i za posebne prilike.", "en": "Women's haircuts, blow-dries, curls and straightening, for every day and for special occasions." },
       "price": "",
-      "items": []
+      "items": [],
+      "short": { "hr": "šišanje", "en": "a cut" }
     },
     {
       "id": "bojanje",
       "name": { "hr": "Bojanje i pramenovi", "en": "Colour and highlights" },
       "desc": { "hr": "Bojanje cijele kose, pramenovi, balayage i posvjetljivanje – plave, srebrne, bakrene i crvene nijanse.", "en": "Full colour, highlights, balayage and lightening, from blondes and silvers to coppers and reds." },
       "price": "",
-      "items": []
+      "items": [],
+      "short": { "hr": "bojanje", "en": "colour" }
     },
     {
       "id": "kreativne-boje",
@@ -105,21 +107,24 @@
       "desc": { "hr": "Pastelne i neonske nijanse, ružičasta, ljubičasta, plava, dugine boje. Ono po čemu nas prepoznaju.", "en": "Pastel and neon shades, pink, violet, blue, rainbow colour. What we are known for." },
       "price": "",
       "items": [],
-      "accent": "rainbow"
+      "accent": "rainbow",
+      "short": { "hr": "kreativna boja", "en": "creative colour" }
     },
     {
       "id": "svecane",
       "name": { "hr": "Svečane i svadbene frizure", "en": "Occasion and bridal hair" },
       "desc": { "hr": "Punđe, pletenice i valovi za vjenčanja, mature i proslave.", "en": "Updos, braids and waves for weddings, proms and celebrations." },
       "price": "",
-      "items": []
+      "items": [],
+      "short": { "hr": "svečana frizura", "en": "occasion hair" }
     },
     {
       "id": "njega",
       "name": { "hr": "Njega kose", "en": "Hair care" },
       "desc": { "hr": "Njega i tretmani za kosu nakon bojanja i posvjetljivanja, profesionalnim proizvodima.", "en": "Care and treatments for hair after colouring and lightening, with professional products." },
       "price": "",
-      "items": []
+      "items": [],
+      "short": { "hr": "njega kose", "en": "hair care" }
     }
   ],
   "_gallery_upute": "Svaka slika: naziv datoteke bez nastavka (iz mape images/source), opis slike na hrvatskom i engleskom, i po potrebi 'credit' (npr. šminkerica). Redoslijed ovdje je redoslijed na stranici. Slike u 'hero' (vrh stranice) i uz usluge ne ponavljaju se u galeriji.",

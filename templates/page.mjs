@@ -305,33 +305,30 @@ export function reviewsBlock({ lang, S, data, reviews }) {
   return `<div class="wrap">${list}</div>`;
 }
 
-// "Request an appointment by text": three questions, a composed message, an sms: link
-// (phones) or a QR code (desktop). Nothing is sent by the site itself.
+// "Request an appointment by text": a button opens three questions one at a time; the final
+// screen shows the composed message with an sms: link (phones) or a QR code (desktop).
+// Nothing is sent by the site itself.
 export function requestSection({ lang, S, data }) {
   const R = S.request;
   const s = data.site;
   const phone = lang === 'hr' ? s.phoneDisplay : s.phoneDisplayIntl;
   const pills = (name, opts, type = 'radio', checkedFirst = false) => opts.map(([val, label], i) =>
     `<label class="pill"><input type="${type}" name="${name}" value="${esc(val)}"${checkedFirst && i === 0 ? ' checked' : ''}><span>${esc(label)}</span></label>`).join('');
-  const services = data.services.map((g) => [g.name[lang], g.name[lang]]);
-  const cfg = { phone: s.phoneTel, phoneDisplay: phone, lengthPhrase: R.lengthPhrase, dayPhrase: R.dayPhrase, partPhrase: R.partPhrase, msg: R.msg, or: R.or, copied: R.copied, qrSrc: (data._basePath || '') + '/js/qr.min.js' };
+  const services = data.services.map((g) => [g.short?.[lang] ?? g.name[lang], g.name[lang]]);
+  const cfg = { phone: s.phoneTel, dayPhrase: R.dayPhrase, partPhrase: R.partPhrase, msg: R.msg, and: R.and, or: R.or, stepOf: R.stepOf, next: R.next, finish: R.finish, copied: R.copied, qrSrc: (data._basePath || '') + '/js/qr.min.js' };
   return `<section id="zatrazi-termin" class="section section-request" aria-labelledby="zatrazi-h">
   <div class="wrap">
     <p class="eyebrow">04 <span>${esc(R.eyebrow)}</span></p>
     <h2 id="zatrazi-h">${esc(R.heading)}</h2>
     <p class="lead">${esc(R.intro)}</p>
     <noscript><p class="request-nojs">${esc(t(R.noJs, { phone })).replace(esc(phone), `<a href="sms:${s.phoneTel}">${esc(phone)}</a>`)}</p></noscript>
+    <p class="request-open" data-request-open-wrap hidden><button type="button" class="btn btn-primary btn-big" data-request-open>${icons.messenger}<span>${esc(R.open)}</span></button></p>
     <form class="request" data-request hidden>
-      <div class="request-steps">
-        <fieldset class="step"><legend>${esc(R.q1)}</legend><div class="pills">${pills('service', services, 'radio', true)}</div></fieldset>
-        <fieldset class="step"><legend>${esc(R.q2)}</legend><div class="pills">${pills('length', R.lengths)}</div></fieldset>
-        <fieldset class="step"><legend>${esc(R.q3)}</legend><div class="pills">${pills('day', R.days, 'checkbox')}</div><div class="pills pills-sub">${pills('part', R.parts, 'radio', true)}</div></fieldset>
-        <div class="step step-inline">
-          <label class="field"><span>${esc(R.q4)} <small>(${esc(R.q4hint)})</small></span><input type="number" name="work" inputmode="numeric" min="1" max="${data.gallery.length}" placeholder="7"></label>
-          <label class="field"><span>${esc(R.q5)} <small>(${esc(R.q5hint)})</small></span><input type="text" name="name" autocomplete="given-name" maxlength="40"></label>
-        </div>
-      </div>
-      <div class="request-out">
+      <p class="request-progress" data-progress></p>
+      <fieldset class="step" data-step="1"><legend>${esc(R.q1)}</legend><p class="step-hint">${esc(R.q1hint)}</p><div class="pills">${pills('service', services, 'checkbox')}</div><p class="step-error" data-error hidden>${esc(R.q1error)}</p></fieldset>
+      <fieldset class="step" data-step="2" hidden><legend>${esc(R.q2)}</legend><div class="pills">${pills('day', R.days, 'checkbox')}</div><div class="pills pills-sub">${pills('part', R.parts, 'radio', true)}</div></fieldset>
+      <div class="step" data-step="3" hidden><label class="field"><span>${esc(R.q3)}</span><small>${esc(R.q3hint)}</small><input type="text" name="name" autocomplete="given-name" maxlength="40"></label></div>
+      <div class="step step-final" data-step="4" hidden>
         <p class="request-label">${esc(R.previewLabel)}</p>
         <div class="bubble" data-preview aria-live="polite"></div>
         <p class="request-actions">
@@ -345,6 +342,10 @@ export function requestSection({ lang, S, data }) {
         </div>
         <p class="small">${esc(t(R.smsNote, { phone }))}</p>
       </div>
+      <p class="request-nav">
+        <button type="button" class="btn btn-secondary" data-back hidden>${esc(R.back)}</button>
+        <button type="button" class="btn btn-primary" data-next>${esc(R.next)}</button>
+      </p>
     </form>
     <script type="application/json" id="request-data">${JSON.stringify(cfg).replace(/</g, '\\u003c')}</script>
   </div>

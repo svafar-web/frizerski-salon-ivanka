@@ -203,9 +203,16 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 /* Request an appointment by text */
 .section-request { background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .hero-alt { margin: .4rem 0 0; font-size: 1rem; }
-.request { display: grid; gap: 2rem; margin-top: 1.5rem; }
+.request-open { margin: 1.5rem 0 0; }
+.request { display: block; margin-top: 1.5rem; max-width: 40rem; }
+.request-progress { font-weight: 600; font-size: .95rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 .75rem; }
+.step-hint { color: var(--muted); font-size: 1rem; margin: -.3rem 0 .8rem; }
+.step-error { color: var(--accent-dark); font-weight: 600; margin: .8rem 0 0; }
+.request-nav { display: flex; gap: .75rem; margin: 1.5rem 0 0; }
+.request-nav .btn-primary { min-width: 9rem; }
 .request fieldset { border: 0; padding: 0; margin: 0 0 1.5rem; min-width: 0; }
-.request legend, .request .field > span { display: block; font-family: var(--display); font-weight: 600; font-size: 1.3rem; margin-bottom: .6rem; padding: 0; }
+.request legend, .request .field > span { display: block; font-family: var(--display); font-weight: 600; font-size: 1.5rem; margin-bottom: .6rem; padding: 0; outline: none; }
+.request .field > small { display: block; margin: -.3rem 0 .8rem; }
 .request .field > span small { font-family: var(--text); font-weight: 400; font-size: .95rem; color: var(--muted); }
 .pills { display: flex; flex-wrap: wrap; gap: .5rem; }
 .pills-sub { margin-top: .6rem; }
@@ -215,7 +222,6 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 .pill:hover span { border-color: var(--ink); }
 .pill input:checked + span { background: var(--ink); border-color: var(--ink); color: #fff; }
 .pill input:focus-visible + span { outline: 3px solid var(--ink); outline-offset: 3px; }
-.step-inline { display: grid; gap: 1rem; }
 .field input { width: 100%; max-width: 20rem; min-height: 48px; padding: .5em .9em; font: inherit; border: 1.5px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); }
 .field input:focus { border-color: var(--ink); outline: 3px solid var(--ink); outline-offset: 2px; }
 .request-label { font-weight: 600; font-size: 1rem; color: var(--muted); margin-bottom: .5rem; }
@@ -227,8 +233,6 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 .qr-code svg { width: 100%; height: 100%; display: block; }
 .qr-title { font-weight: 600; margin-bottom: .25rem; }
 .request-nojs { font-size: 1.15rem; }
-@media (min-width: 560px) { .step-inline { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 900px) { .request { grid-template-columns: 1.1fr 1fr; gap: 4rem; align-items: start; } .request-out { position: sticky; top: 6rem; } }
 @media (hover: none), (pointer: coarse) { .qr { display: none !important; } }
 
 /* About */

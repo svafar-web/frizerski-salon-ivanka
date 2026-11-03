@@ -222,51 +222,55 @@
   }
 
   /* ---------- 2c. Request an appointment by text ----------
-     Composes the message from the answers; the visitor sends it from their own phone
-     (sms: link) or scans a QR code on desktop. Nothing leaves the browser otherwise. */
+     A button opens three questions, one at a time. The answers compose the message; the
+     visitor sends it from their own phone (sms: link) or scans a QR code on desktop.
+     Nothing leaves the browser otherwise. */
   function requestForm() {
     var form = document.querySelector('[data-request]');
     var dataEl = document.getElementById('request-data');
-    if (!form || !dataEl) return;
+    var openWrap = document.querySelector('[data-request-open-wrap]');
+    var openBtn = document.querySelector('[data-request-open]');
+    if (!form || !dataEl || !openBtn) return;
     var cfg; try { cfg = JSON.parse(dataEl.textContent); } catch (e) { return; }
+    var steps = Array.prototype.slice.call(form.querySelectorAll('[data-step]'));
+    var progress = form.querySelector('[data-progress]');
+    var backBtn = form.querySelector('[data-back]');
+    var nextBtn = form.querySelector('[data-next]');
     var preview = form.querySelector('[data-preview]');
     var smsLink = form.querySelector('[data-sms]');
     var copyBtn = form.querySelector('[data-copy]');
     var qrWrap = form.querySelector('[data-qr]');
     var qrBox = form.querySelector('[data-qr-box]');
+    var errorEl = form.querySelector('[data-error]');
     var fmt = function (tpl, vars) { return tpl.replace(/\{(\w+)\}/g, function (_, k) { return vars[k] == null ? '' : vars[k]; }); };
-    var val = function (name) { var el = form.querySelector('input[name="' + name + '"]:checked, input[name="' + name + '"]:not([type=radio]):not([type=checkbox])'); return el ? el.value.trim() : ''; };
-    var smsUrl = '';
+    var checked = function (name) { return Array.prototype.slice.call(form.querySelectorAll('input[name="' + name + '"]:checked')).map(function (i) { return i.value; }); };
+    var join = function (arr, word) { return arr.length > 1 ? arr.slice(0, -1).join(', ') + word + arr[arr.length - 1] : (arr[0] || ''); };
+    var current = 1, last = steps.length, smsUrl = '';
+    var desktop = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
     function compose() {
       var M = cfg.msg;
-      var name = val('name').replace(/\s+/g, ' ').slice(0, 40);
-      var service = val('service');
-      var length = val('length');
-      var days = Array.prototype.slice.call(form.querySelectorAll('input[name="day"]:checked')).map(function (i) { return cfg.dayPhrase[i.value]; });
-      var part = val('part');
-      var work = val('work').replace(/\D/g, '');
+      var nameEl = form.querySelector('input[name="name"]');
+      var name = nameEl ? nameEl.value.replace(/\s+/g, ' ').trim().slice(0, 40) : '';
+      var services = checked('service');
+      var days = checked('day').map(function (v) { return cfg.dayPhrase[v]; });
+      var part = checked('part')[0] || '';
       var parts = [M.hi];
       if (name) parts.push(fmt(M.iam, { name: name }));
-      var want = fmt(M.want, { service: service }) + (length ? fmt(M.length, { length: cfg.lengthPhrase[length] }) : '') + (work ? fmt(M.work, { n: work }) : '') + '.';
-      parts.push(want);
-      if (days.length) {
-        var dayText = days.length > 1 ? days.slice(0, -1).join(', ') + cfg.or + days[days.length - 1] : days[0];
-        parts.push(fmt(M.when, { days: dayText, part: part ? cfg.partPhrase[part] : '' }));
-      }
+      if (services.length) parts.push(fmt(M.want, { services: join(services, cfg.and) }));
+      if (days.length) parts.push(fmt(M.when, { days: join(days, cfg.or), part: part ? cfg.partPhrase[part] : '' }));
       parts.push(M.ask);
       var text = parts.join(' ');
       preview.textContent = text;
-      // "?&body=" works in both iOS and Android messaging apps.
-      smsUrl = 'sms:' + cfg.phone + '?&body=' + encodeURIComponent(text);
+      smsUrl = 'sms:' + cfg.phone + '?&body=' + encodeURIComponent(text); // "?&body=" works on iOS and Android
       smsLink.href = smsUrl;
-      drawQr();
+      if (desktop) drawQr();
       return text;
     }
 
     var qrLib = null, qrLoading = false;
     function drawQr() {
-      if (!qrWrap || qrWrap.hidden || !qrBox) return;
+      if (!qrWrap || !qrBox) return;
       if (!qrLib) {
         if (typeof window.qrcode === 'function') qrLib = window.qrcode;
         else if (!qrLoading) {
@@ -285,29 +289,50 @@
         qrBox.innerHTML = q.createSvgTag({ cellSize: 4, margin: 16, scalable: true }); // 4-module quiet zone
         var svg = qrBox.querySelector('svg');
         if (svg) { svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', 'QR'); }
+        qrWrap.hidden = false;
       } catch (e) { qrWrap.hidden = true; }
     }
 
-    // Desktop (mouse + hover) gets the QR code; phones use the sms: link directly.
-    var desktop = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    if (desktop && qrWrap) {
-      qrWrap.hidden = false;
-      smsLink.hidden = true; // no messaging app on a desktop: scan the code or copy the text instead
-      var hint = form.querySelector('.request-send-hint');
-      if (hint) hint.hidden = true;
+    function show(n) {
+      current = n;
+      steps.forEach(function (st) { st.hidden = Number(st.getAttribute('data-step')) !== n; });
+      var isFinal = n === last;
+      progress.textContent = isFinal ? '' : fmt(cfg.stepOf, { i: n, n: last - 1 });
+      progress.hidden = isFinal;
+      backBtn.hidden = n === 1;
+      nextBtn.hidden = isFinal;
+      nextBtn.textContent = n === last - 1 ? cfg.finish : cfg.next;
+      if (errorEl) errorEl.hidden = true;
+      if (isFinal) compose();
+      var heading = steps[n - 1].querySelector('legend, .request-label, .field > span');
+      if (heading) { heading.setAttribute('tabindex', '-1'); heading.focus({ preventScroll: true }); }
+      form.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     }
 
-    form.addEventListener('input', compose);
-    form.addEventListener('change', compose);
-    form.addEventListener('submit', function (e) { e.preventDefault(); });
+    openBtn.addEventListener('click', function () {
+      openWrap.hidden = true;
+      form.hidden = false;
+      show(1);
+    });
+    nextBtn.addEventListener('click', function () {
+      if (current === 1 && !checked('service').length) { if (errorEl) errorEl.hidden = false; return; }
+      show(Math.min(current + 1, last));
+    });
+    backBtn.addEventListener('click', function () { show(Math.max(current - 1, 1)); });
+    form.addEventListener('change', function () { if (errorEl && checked('service').length) errorEl.hidden = true; });
+    form.addEventListener('submit', function (e) { e.preventDefault(); if (current < last) nextBtn.click(); });
     copyBtn.addEventListener('click', function () {
       var text = compose();
       var done = function () { var old = copyBtn.textContent; copyBtn.textContent = cfg.copied; setTimeout(function () { copyBtn.textContent = old; }, 1500); };
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, function () {});
       else { var r = document.createRange(); r.selectNodeContents(preview); var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r); try { document.execCommand('copy'); done(); } catch (e) {} }
     });
-    form.hidden = false;
-    compose();
+    if (desktop) {
+      smsLink.hidden = true; // no messaging app on a desktop: scan the code or copy the text instead
+      var hint = form.querySelector('.request-send-hint');
+      if (hint) hint.hidden = true;
+    }
+    openWrap.hidden = false;
   }
 
   /* ---------- 3. Footer year ---------- */
