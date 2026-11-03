@@ -385,7 +385,8 @@ export function contact({ lang, S, data, urls }) {
           <a class="btn btn-secondary" href="${urls.googleMaps}" data-map-google="${urls.googleMaps}" data-map-apple="${urls.appleMaps}" target="_blank" rel="noopener">${esc(S.contact.openMaps)}${icons.external}</a>
         </div>
         <p class="directions"><strong>${esc(S.contact.directionsLabel)}</strong> ${ph(data.directions[lang])}</p>
-        <div class="contact-card">
+      </div>
+      <div class="contact-card">
         <h3>${icons.phone} ${esc(S.contact.phoneLabel)}</h3>
         <p class="contact-big"><a class="phone-big" href="tel:${s.phoneTel}">${esc(phone)}</a></p>
         <div class="contact-actions">
@@ -397,7 +398,6 @@ export function contact({ lang, S, data, urls }) {
           <li><a href="${s.facebook}" rel="noopener">${icons.facebook}<span>${esc(S.contact.facebook)}</span></a></li>
         </ul>
       </div>
-    </div>
     </div>
   </div>
 </section>`;
