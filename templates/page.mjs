@@ -453,7 +453,7 @@ ${notice(data.notice[lang])}
       <div class="hero-text">
         <h1 id="hero-h"><span class="h1-small">Frizerski salon</span> <span class="h1-name">Ivanka</span></h1>
         <p class="tagline">${esc(S.heroTagline)}</p>
-        <p class="hero-cta">${callButton({ lang, S, data, className: 'btn btn-primary btn-big' })}</p>
+        <p class="hero-phone"><a class="phone-big" href="tel:${s.phoneTel}">${esc(phone)}</a></p>
         <p class="status" data-status></p>
       </div>
       <div class="hero-art">${heroTiles}</div>
