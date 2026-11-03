@@ -34,7 +34,7 @@ for (const page of pages) {
     if (/^(https?:)?\/\//.test(u)) { if (/^https?:/.test(u) && !u.startsWith(siteUrl)) externalUrls.add(u); continue; }
     if (/^(tel:|sms:|mailto:|data:)/.test(u)) continue;
     const [p0, hash] = u.split('#');
-    const p = stripBase(p0);
+    const p = stripBase(p0.split('?')[0]); // ignore cache-busting query strings
     if (!p) { if (hash && !ids.has(hash)) err(`${page}: anchor #${hash} not found`); continue; }
     if (hash && (p === '/' || p === '/en/')) {
       const target = readFileSync(join(root, p === '/' ? 'index.html' : 'en/index.html'), 'utf8');

@@ -306,9 +306,9 @@ export function reviewsBlock({ lang, S, data, reviews }) {
   return `<div class="wrap">${list}</div>`;
 }
 
-// "Request an appointment by text": a button opens three questions one at a time; the final
-// screen shows the composed message with an sms: link (phones) or a QR code (desktop).
-// Nothing is sent by the site itself.
+// "Request an appointment by text": the whole section is one button. It opens a dialog that
+// walks through three questions and ends with the composed message: an sms: link on phones,
+// a QR code on desktop, and a closing button. Nothing is sent by the site itself.
 export function requestSection({ lang, S, data }) {
   const R = S.request;
   const s = data.site;
@@ -320,13 +320,20 @@ export function requestSection({ lang, S, data }) {
   return `<section id="zatrazi-termin" class="section section-request" aria-labelledby="zatrazi-h">
   <div class="wrap">
     <p class="eyebrow">04 <span>${esc(R.eyebrow)}</span></p>
-    <h2 id="zatrazi-h">${esc(R.heading)}</h2>
-    <p class="lead">${esc(R.intro)}</p>
-    <noscript><p class="request-nojs">${esc(t(R.noJs, { phone })).replace(esc(phone), `<a href="sms:${s.phoneTel}">${esc(phone)}</a>`)}</p></noscript>
-    <p class="request-open" data-request-open-wrap hidden><button type="button" class="btn btn-primary btn-big" data-request-open>${icons.chat}<span>${esc(R.open)}</span></button></p>
-    <form class="request" data-request hidden>
-      <p class="request-progress" data-progress></p>
-      <fieldset class="step" data-step="1"><legend>${esc(R.q1)}</legend><p class="step-hint">${esc(R.q1hint)}</p><div class="pills">${pills('service', services, 'checkbox')}</div><p class="step-error" data-error hidden>${esc(R.q1error)}</p></fieldset>
+    <a class="request-card" href="sms:${s.phoneTel}" data-request-open>
+      <span class="request-card-icon">${icons.chat}</span>
+      <h2 class="request-card-title" id="zatrazi-h">${esc(R.heading)}</h2>
+      <span class="request-card-arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
+  <dialog class="request-dialog" data-request-dialog aria-labelledby="zatrazi-dialog-h">
+    <form class="request" data-request method="dialog">
+      <div class="request-head">
+        <p class="request-progress" data-progress></p>
+        <button type="button" class="dialog-close" data-request-close aria-label="${esc(R.close)}">${icons.close}</button>
+      </div>
+      <p class="visually-hidden" id="zatrazi-dialog-h">${esc(R.heading)}</p>
+      <fieldset class="step" data-step="1"><legend>${esc(R.q1)}</legend><div class="pills">${pills('service', services, 'checkbox')}</div><p class="step-error" data-error hidden>${esc(R.q1error)}</p></fieldset>
       <fieldset class="step" data-step="2" hidden><legend>${esc(R.q2)}</legend><div class="pills">${pills('day', R.days, 'checkbox')}</div><div class="pills pills-sub">${pills('part', R.parts, 'radio', true)}</div></fieldset>
       <div class="step" data-step="3" hidden><label class="field"><span>${esc(R.q3)}</span><small>${esc(R.q3hint)}</small><input type="text" name="name" autocomplete="given-name" maxlength="40"></label></div>
       <div class="step step-final" data-step="4" hidden>
@@ -336,20 +343,20 @@ export function requestSection({ lang, S, data }) {
           <a class="btn btn-primary btn-big" href="sms:${s.phoneTel}" data-sms>${icons.phone}<span>${esc(R.send)}</span></a>
           <button type="button" class="btn btn-secondary" data-copy>${esc(R.copy)}</button>
         </p>
-        <p class="small request-send-hint">${esc(R.sendHint)}</p>
         <div class="qr" data-qr hidden>
           <div class="qr-code" data-qr-box></div>
-          <div><p class="qr-title">${esc(R.qrTitle)}</p><p class="small">${esc(R.qrHint)}</p></div>
+          <p class="qr-title">${esc(R.qrHint)}</p>
         </div>
         <p class="small">${esc(t(R.smsNote, { phone }))}</p>
       </div>
       <p class="request-nav">
         <button type="button" class="btn btn-secondary" data-back hidden>${esc(R.back)}</button>
         <button type="button" class="btn btn-primary" data-next>${esc(R.next)}</button>
+        <button type="button" class="btn btn-primary" data-done hidden>${esc(R.done)}</button>
       </p>
     </form>
-    <script type="application/json" id="request-data">${JSON.stringify(cfg).replace(/</g, '\\u003c')}</script>
-  </div>
+  </dialog>
+  <script type="application/json" id="request-data">${JSON.stringify(cfg).replace(/</g, '\\u003c')}</script>
 </section>`;
 }
 

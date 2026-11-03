@@ -4,6 +4,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 import { strings } from '../templates/strings.mjs';
 import { homePage, privacyPage, notFoundPage } from '../templates/page.mjs';
 
@@ -32,7 +33,11 @@ const base = data.site.url.replace(/\/$/, '');
 // Sub-path support (e.g. https://user.github.io/repo): every root-relative URL gets this prefix.
 // Empty when the site lives at the root of its domain.
 const basePath = new URL(base).pathname.replace(/\/$/, '');
+// Script URLs carry a short content hash so browsers never run an old script with a new page.
+const jsHash = (p) => existsSync(join(root, p)) ? createHash('md5').update(readFileSync(join(root, p))).digest('hex').slice(0, 8) : '0';
+const mainV = jsHash('js/main.js'), qrV = jsHash('js/qr.min.js');
 const applyBase = (html) => {
+  html = html.replace('/js/main.js"', `/js/main.js?v=${mainV}"`).replace('/js/qr.min.js"', `/js/qr.min.js?v=${qrV}"`);
   if (!basePath) return html;
   return html
     .replace(/(href|src|data-full)="\/(?!\/)/g, `$1="${basePath}/`)

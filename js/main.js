@@ -222,20 +222,22 @@
   }
 
   /* ---------- 2c. Request an appointment by text ----------
-     A button opens three questions, one at a time. The answers compose the message; the
-     visitor sends it from their own phone (sms: link) or scans a QR code on desktop.
-     Nothing leaves the browser otherwise. */
+     The section is one button. It opens a dialog with three questions, one at a time; the
+     answers compose the message, which the visitor sends from their own phone (sms: link)
+     or scans as a QR code on desktop. Nothing leaves the browser otherwise. */
   function requestForm() {
+    var dlg = document.querySelector('[data-request-dialog]');
     var form = document.querySelector('[data-request]');
     var dataEl = document.getElementById('request-data');
-    var openWrap = document.querySelector('[data-request-open-wrap]');
     var openBtn = document.querySelector('[data-request-open]');
-    if (!form || !dataEl || !openBtn) return;
+    if (!dlg || !form || !dataEl || !openBtn || typeof dlg.showModal !== 'function') return;
     var cfg; try { cfg = JSON.parse(dataEl.textContent); } catch (e) { return; }
     var steps = Array.prototype.slice.call(form.querySelectorAll('[data-step]'));
     var progress = form.querySelector('[data-progress]');
     var backBtn = form.querySelector('[data-back]');
     var nextBtn = form.querySelector('[data-next]');
+    var doneBtn = form.querySelector('[data-done]');
+    var closeBtn = form.querySelector('[data-request-close]');
     var preview = form.querySelector('[data-preview]');
     var smsLink = form.querySelector('[data-sms]');
     var copyBtn = form.querySelector('[data-copy]');
@@ -298,27 +300,31 @@
       steps.forEach(function (st) { st.hidden = Number(st.getAttribute('data-step')) !== n; });
       var isFinal = n === last;
       progress.textContent = isFinal ? '' : fmt(cfg.stepOf, { i: n, n: last - 1 });
-      progress.hidden = isFinal;
       backBtn.hidden = n === 1;
       nextBtn.hidden = isFinal;
+      doneBtn.hidden = !isFinal;
       nextBtn.textContent = n === last - 1 ? cfg.finish : cfg.next;
       if (errorEl) errorEl.hidden = true;
       if (isFinal) compose();
       var heading = steps[n - 1].querySelector('legend, .request-label, .field > span');
       if (heading) { heading.setAttribute('tabindex', '-1'); heading.focus({ preventScroll: true }); }
-      form.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      form.scrollTop = 0;
     }
 
-    openBtn.addEventListener('click', function () {
-      openWrap.hidden = true;
-      form.hidden = false;
+    openBtn.addEventListener('click', function (e) {
+      e.preventDefault();
       show(1);
+      dlg.showModal();
     });
     nextBtn.addEventListener('click', function () {
       if (current === 1 && !checked('service').length) { if (errorEl) errorEl.hidden = false; return; }
       show(Math.min(current + 1, last));
     });
     backBtn.addEventListener('click', function () { show(Math.max(current - 1, 1)); });
+    doneBtn.addEventListener('click', function () { dlg.close(); });
+    closeBtn.addEventListener('click', function () { dlg.close(); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    dlg.addEventListener('close', function () { openBtn.focus(); });
     form.addEventListener('change', function () { if (errorEl && checked('service').length) errorEl.hidden = true; });
     form.addEventListener('submit', function (e) { e.preventDefault(); if (current < last) nextBtn.click(); });
     copyBtn.addEventListener('click', function () {
@@ -327,12 +333,7 @@
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, function () {});
       else { var r = document.createRange(); r.selectNodeContents(preview); var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r); try { document.execCommand('copy'); done(); } catch (e) {} }
     });
-    if (desktop) {
-      smsLink.hidden = true; // no messaging app on a desktop: scan the code or copy the text instead
-      var hint = form.querySelector('.request-send-hint');
-      if (hint) hint.hidden = true;
-    }
-    openWrap.hidden = false;
+    if (desktop) smsLink.hidden = true; // no messaging app on a desktop: scan the code or copy the text instead
   }
 
   /* ---------- 3. Footer year ---------- */
