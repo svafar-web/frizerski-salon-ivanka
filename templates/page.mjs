@@ -235,38 +235,46 @@ export function gallery({ lang, S, data, manifest }) {
     const alt = g.alt[lang];
     const full = fullImage(manifest, g.file);
     const credit = g.credit ? `<figcaption class="credit">${esc(t(S.gallery.credit, { credit: g.credit }))}</figcaption>` : '';
+    const n = i + 1;
+    const numbered = `${t(S.gallery.number, { n })} – ${t(S.gallery.open, { alt })}`;
     const pic = picture(manifest, g.file, { alt, sizes: '(min-width: 1100px) 260px, (min-width: 700px) 33vw, 50vw', className: 'gallery-pic' });
+    const badge = `<span class="num-badge" aria-hidden="true">${n}</span>`;
     const inner = full.jpg
-      ? `<a class="gallery-link" href="${full.jpg}" data-full="${full.webp}" data-alt="${esc(alt)}" data-credit="${esc(g.credit || '')}" aria-label="${esc(t(S.gallery.open, { alt }))}">${pic}</a>`
-      : pic;
-    return `<li><figure id="rad-${esc(g.file)}">${inner}${credit}</figure></li>`;
+      ? `<a class="gallery-link" href="${full.jpg}" data-full="${full.webp}" data-n="${n}" data-alt="${esc(alt)}" data-credit="${esc(g.credit || '')}" aria-label="${esc(numbered)}">${pic}${badge}</a>`
+      : `<div class="gallery-link">${pic}${badge}</div>`;
+    return `<li${i === 0 || i === 7 ? ' class="tall"' : ''} data-tags="${esc((g.tags || []).join(' '))}"><figure id="rad-${esc(g.file)}">${inner}${credit}</figure></li>`;
   }).join('\n');
-  const inGallery = new Set(data.gallery.map((g) => g.file));
-  const palette = (data.palette || []).length ? `<div class="palette">
-      <p class="palette-title">${esc(S.palette.title)} <span class="muted">· ${esc(S.palette.hint)}</span></p>
-      <ul class="palette-list">${data.palette.map((c) => {
-        const label = `<span class="chip" style="--chip:${esc(c.hex)}"></span><span class="chip-name">${esc(c.name[lang])}</span>`;
-        return inGallery.has(c.file) ? `<li><a href="#rad-${esc(c.file)}">${label}</a></li>` : `<li><span class="chip-static">${label}</span></li>`;
-      }).join('')}</ul>
-    </div>` : '';
+  const filters = (data.galleryFilters || []).length ? `<div class="filters" data-filters hidden>
+      <span class="filters-label">${esc(S.gallery.filterLabel)}</span>
+      <div class="filters-list" role="group" aria-label="${esc(S.gallery.filterLabel)}">
+        <button type="button" class="chip" data-filter="" aria-pressed="true">${esc(S.gallery.all)} <span class="count">${data.gallery.length}</span></button>
+        ${data.galleryFilters.map((f) => {
+          const count = data.gallery.filter((g) => (g.tags || []).includes(f.id)).length;
+          if (!count) return '';
+          const dot = f.dot === 'rainbow' ? '<span class="dot dot-rainbow" aria-hidden="true"></span>' : f.dot ? `<span class="dot" style="--chip:${esc(f.dot)}" aria-hidden="true"></span>` : '';
+          return `<button type="button" class="chip" data-filter="${esc(f.id)}" aria-pressed="false">${dot}${esc(f.name[lang])} <span class="count">${count}</span></button>`;
+        }).join('')}
+      </div>
+    </div>
+    <p class="gallery-empty muted" data-empty hidden>${esc(S.gallery.empty)}</p>` : '';
   return `<section id="galerija" class="section" aria-labelledby="galerija-h">
   <div class="wrap">
     <p class="eyebrow">03 <span>${esc(S.eyebrows.gallery)}</span></p>
     <h2 id="galerija-h">${esc(S.gallery.heading)}</h2>
-    <p class="lead">${esc(S.gallery.intro)}</p>
-    ${palette}
+    <p class="lead">${esc(S.gallery.intro)} ${esc(S.gallery.mention)}</p>
+    ${filters}
     <ul class="gallery-grid">${items}</ul>
     <p class="more"><a href="${data.site.instagram}" rel="noopener">${esc(S.gallery.more)}</a></p>
   </div>
 </section>
-<dialog class="lightbox" id="lightbox" aria-label="${esc(S.gallery.heading)}">
+<dialog class="lightbox" id="lightbox" aria-label="${esc(S.gallery.heading)}" data-number="${esc(S.gallery.number)}" data-mention="${esc(S.gallery.mention)}">
   <div class="lightbox-bar">
     <span class="lightbox-counter" aria-live="polite"></span>
     <button type="button" class="lightbox-btn" data-lb="close" aria-label="${esc(S.gallery.close)}">${icons.close}</button>
   </div>
   <figure class="lightbox-fig">
     <img src="data:," alt="" decoding="async">
-    <figcaption></figcaption>
+    <figcaption><span class="lightbox-caption"></span><small class="lightbox-mention"></small></figcaption>
   </figure>
   <button type="button" class="lightbox-btn lightbox-prev" data-lb="prev" aria-label="${esc(S.gallery.prev)}">${icons.prev}</button>
   <button type="button" class="lightbox-btn lightbox-next" data-lb="next" aria-label="${esc(S.gallery.next)}">${icons.next}</button>

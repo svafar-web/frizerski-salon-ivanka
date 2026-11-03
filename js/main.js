@@ -116,10 +116,15 @@
   /* ---------- 2. Lightbox ---------- */
   function lightbox() {
     var dlg = document.getElementById('lightbox');
-    var links = Array.prototype.slice.call(document.querySelectorAll('.gallery-link'));
-    if (!dlg || !links.length || typeof dlg.showModal !== 'function') return;
+    var all = Array.prototype.slice.call(document.querySelectorAll('a.gallery-link'));
+    if (!dlg || !all.length || typeof dlg.showModal !== 'function') return;
+    var links = all;
+    var visibleLinks = function () { return all.filter(function (a) { var li = a.closest('li'); return !(li && li.hidden); }); };
     var img = dlg.querySelector('img');
-    var cap = dlg.querySelector('figcaption');
+    var cap = dlg.querySelector('.lightbox-caption') || dlg.querySelector('figcaption');
+    var mention = dlg.querySelector('.lightbox-mention');
+    var numberTpl = dlg.getAttribute('data-number') || '';
+    if (mention) mention.textContent = dlg.getAttribute('data-mention') || '';
     var counter = dlg.querySelector('.lightbox-counter');
     var btnClose = dlg.querySelector('[data-lb="close"]');
     var btnPrev = dlg.querySelector('[data-lb="prev"]');
@@ -132,7 +137,8 @@
       img.src = a.getAttribute('data-full') || a.href;
       img.alt = a.getAttribute('data-alt') || '';
       var credit = a.getAttribute('data-credit');
-      cap.textContent = img.alt + (credit ? ' · ' + credit : '');
+      var n = a.getAttribute('data-n');
+      cap.textContent = (n && numberTpl ? numberTpl.replace('{n}', n) + ' · ' : '') + img.alt + (credit ? ' · ' + credit : '');
       counter.textContent = (current + 1) + ' / ' + links.length;
       // Warm the cache for the neighbours.
       [current + 1, current - 1].forEach(function (n) {
@@ -142,6 +148,9 @@
     }
     function open(i, from) {
       opener = from;
+      links = visibleLinks(); // respect the active gallery filter
+      i = links.indexOf(from);
+      if (i < 0) i = 0;
       show(i);
       dlg.showModal();
       btnClose.focus();
@@ -149,7 +158,7 @@
     function close() {
       dlg.close();
     }
-    links.forEach(function (a, i) {
+    all.forEach(function (a, i) {
       a.addEventListener('click', function (e) {
         if (e.metaKey || e.ctrlKey || e.shiftKey) return;
         e.preventDefault();
@@ -185,6 +194,33 @@
     }, { passive: true });
   }
 
+  /* ---------- 2b. Gallery filter by colour family ---------- */
+  function galleryFilter() {
+    var box = document.querySelector('[data-filters]');
+    if (!box) return;
+    var items = Array.prototype.slice.call(document.querySelectorAll('.gallery-grid > li'));
+    var chips = Array.prototype.slice.call(box.querySelectorAll('[data-filter]'));
+    var empty = document.querySelector('[data-empty]');
+    box.hidden = false;
+    function apply(tag) {
+      var visible = [];
+      items.forEach(function (li) {
+        var on = !tag || (' ' + (li.getAttribute('data-tags') || '') + ' ').indexOf(' ' + tag + ' ') !== -1;
+        li.hidden = !on;
+        li.classList.remove('tall');
+        if (on) visible.push(li);
+      });
+      // Two tall tiles for rhythm: the first and the eighth visible item.
+      if (visible[0]) visible[0].classList.add('tall');
+      if (visible[7]) visible[7].classList.add('tall');
+      if (empty) empty.hidden = visible.length > 0;
+      chips.forEach(function (c) { c.setAttribute('aria-pressed', String((c.getAttribute('data-filter') || '') === tag)); });
+    }
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () { apply(c.getAttribute('data-filter') || ''); });
+    });
+  }
+
   /* ---------- 3. Footer year ---------- */
   function year() {
     var y = document.querySelector('[data-year]');
@@ -193,5 +229,6 @@
 
   openingStatus();
   lightbox();
+  galleryFilter();
   year();
 })();

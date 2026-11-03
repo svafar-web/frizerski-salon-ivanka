@@ -245,6 +245,26 @@
       1080
     ]
   },
+  "svecana-pletenica": {
+    "width": 960,
+    "height": 960,
+    "sizes": [
+      400,
+      600,
+      800,
+      960
+    ]
+  },
+  "svecana-punda-plava": {
+    "width": 960,
+    "height": 960,
+    "sizes": [
+      400,
+      600,
+      800,
+      960
+    ]
+  },
   "svecana-punda": {
     "width": 1080,
     "height": 1350,
