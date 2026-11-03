@@ -22,6 +22,7 @@ export const icons = {
   close: '<svg class="ico" aria-hidden="true" viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M18.3 5.7 12 12l-6.3-6.3-1.4 1.4L10.6 13.4l-6.3 6.3 1.4 1.4L12 14.8l6.3 6.3 1.4-1.4-6.3-6.3 6.3-6.3z"/></svg>',
   prev: '<svg class="ico" aria-hidden="true" viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M15.4 7.4 14 6l-6 6 6 6 1.4-1.4L10.8 12z"/></svg>',
   next: '<svg class="ico" aria-hidden="true" viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="m8.6 16.6 1.4 1.4 6-6-6-6-1.4 1.4 4.6 4.6z"/></svg>',
+  chat: '<svg class="ico" aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M4 3h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm3 5v2h10V8H7zm0 4v2h7v-2H7z"/></svg>',
   external: '<svg class="ico ico-sm" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M14 3v2h3.6l-9.8 9.8 1.4 1.4L19 6.4V10h2V3h-7zm5 16H5V5h6V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6h-2v6z"/></svg>'
 };
 
@@ -322,7 +323,7 @@ export function requestSection({ lang, S, data }) {
     <h2 id="zatrazi-h">${esc(R.heading)}</h2>
     <p class="lead">${esc(R.intro)}</p>
     <noscript><p class="request-nojs">${esc(t(R.noJs, { phone })).replace(esc(phone), `<a href="sms:${s.phoneTel}">${esc(phone)}</a>`)}</p></noscript>
-    <p class="request-open" data-request-open-wrap hidden><button type="button" class="btn btn-primary btn-big" data-request-open>${icons.messenger}<span>${esc(R.open)}</span></button></p>
+    <p class="request-open" data-request-open-wrap hidden><button type="button" class="btn btn-primary btn-big" data-request-open>${icons.chat}<span>${esc(R.open)}</span></button></p>
     <form class="request" data-request hidden>
       <p class="request-progress" data-progress></p>
       <fieldset class="step" data-step="1"><legend>${esc(R.q1)}</legend><p class="step-hint">${esc(R.q1hint)}</p><div class="pills">${pills('service', services, 'checkbox')}</div><p class="step-error" data-error hidden>${esc(R.q1error)}</p></fieldset>
