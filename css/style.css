@@ -322,8 +322,8 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 @media (min-width: 860px) { .hours-grid { grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; } .hours-card { padding: 2rem; } .hours-table { font-size: 1.2rem; } }
 
 /* Contact: two matching cards */
-.contact-grid { display: grid; gap: 1.25rem; }
-.contact-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 1.5rem; display: flex; flex-direction: column; gap: .9rem; }
+.contact-grid { display: grid; gap: 2.5rem; }
+.contact-card { display: flex; flex-direction: column; gap: .9rem; max-width: 30rem; }
 .contact-card h3 { display: flex; align-items: center; gap: .4em; font-size: 1.35rem; margin: 0; color: var(--muted); font-family: var(--text); font-weight: 600; }
 .contact-card h3 .ico { color: var(--accent); }
 .contact-big { font-family: var(--display); font-size: clamp(1.6rem, 5vw, 2rem); font-weight: 600; line-height: 1.2; margin: 0; }
@@ -337,7 +337,7 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 .social { list-style: none; padding: 0; margin: .25rem 0 0; display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; }
 .social a { display: inline-flex; align-items: center; gap: .45em; min-height: 44px; font-weight: 600; color: var(--ink); text-decoration: none; }
 .social a:hover { color: var(--accent-dark); text-decoration: underline; }
-@media (min-width: 860px) { .contact-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: stretch; } }
+@media (min-width: 860px) { .contact-grid { grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; } }
 
 /* Footer */
 .site-footer { background: var(--ink); color: rgba(250, 246, 241, .75); padding: 2.25rem 0 2rem; font-size: 1rem; border-top: 6px solid var(--accent); }
