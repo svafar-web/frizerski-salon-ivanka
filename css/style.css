@@ -275,7 +275,6 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 .more { margin-top: 1.5rem; font-weight: 600; font-size: 1.15rem; }
 .gallery-grid li[hidden] { display: none; }
 .gallery-link { position: relative; }
-.num-badge { position: absolute; left: .5rem; bottom: .5rem; min-width: 1.9em; height: 1.9em; padding: 0 .5em; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; background: rgba(28, 24, 22, .78); color: #fff; font-weight: 600; font-size: .95rem; font-variant-numeric: tabular-nums; pointer-events: none; }
 .lightbox-fig figcaption small { display: block; color: #a89f96; margin-top: .25rem; }
 @media (min-width: 700px) {
   .gallery-grid { grid-template-columns: repeat(3, 1fr); gap: .75rem; grid-auto-flow: dense; }

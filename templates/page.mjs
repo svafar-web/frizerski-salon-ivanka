@@ -237,12 +237,10 @@ export function gallery({ lang, S, data, manifest }) {
     const full = fullImage(manifest, g.file);
     const credit = g.credit ? `<figcaption class="credit">${esc(t(S.gallery.credit, { credit: g.credit }))}</figcaption>` : '';
     const n = i + 1;
-    const numbered = `${t(S.gallery.number, { n })} – ${t(S.gallery.open, { alt })}`;
     const pic = picture(manifest, g.file, { alt, sizes: '(min-width: 1100px) 260px, (min-width: 700px) 33vw, 50vw', className: 'gallery-pic' });
-    const badge = `<span class="num-badge" aria-hidden="true">${n}</span>`;
     const inner = full.jpg
-      ? `<a class="gallery-link" href="${full.jpg}" data-full="${full.webp}" data-n="${n}" data-alt="${esc(alt)}" data-credit="${esc(g.credit || '')}" aria-label="${esc(numbered)}">${pic}${badge}</a>`
-      : `<div class="gallery-link">${pic}${badge}</div>`;
+      ? `<a class="gallery-link" href="${full.jpg}" data-full="${full.webp}" data-n="${n}" data-alt="${esc(alt)}" data-credit="${esc(g.credit || '')}" aria-label="${esc(t(S.gallery.open, { alt }))}">${pic}</a>`
+      : `<div class="gallery-link">${pic}</div>`;
     return `<li${i === 0 || i === 7 ? ' class="tall"' : ''} data-tags="${esc((g.tags || []).join(' '))}"><figure id="rad-${esc(g.file)}">${inner}${credit}</figure></li>`;
   }).join('\n');
   const filters = (data.galleryFilters || []).length ? `<div class="filters" data-filters hidden>
@@ -262,13 +260,13 @@ export function gallery({ lang, S, data, manifest }) {
   <div class="wrap">
     <p class="eyebrow">03 <span>${esc(S.eyebrows.gallery)}</span></p>
     <h2 id="galerija-h">${esc(S.gallery.heading)}</h2>
-    <p class="lead">${esc(S.gallery.intro)} ${esc(S.gallery.mention)}</p>
+    <p class="lead">${esc(S.gallery.intro)}</p>
     ${filters}
     <ul class="gallery-grid">${items}</ul>
     <p class="more"><a href="${data.site.instagram}" rel="noopener">${esc(S.gallery.more)}</a></p>
   </div>
 </section>
-<dialog class="lightbox" id="lightbox" aria-label="${esc(S.gallery.heading)}" data-number="${esc(S.gallery.number)}" data-mention="${esc(S.gallery.mention)}">
+<dialog class="lightbox" id="lightbox" aria-label="${esc(S.gallery.heading)}">
   <div class="lightbox-bar">
     <span class="lightbox-counter" aria-live="polite"></span>
     <button type="button" class="lightbox-btn" data-lb="close" aria-label="${esc(S.gallery.close)}">${icons.close}</button>
