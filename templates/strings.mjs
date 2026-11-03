@@ -95,8 +95,8 @@ export const strings = {
     },
     contact: {
       heading: 'Kontakt i lokacija',
-      addressLabel: 'Adresa',
-      phoneLabel: 'Telefon',
+      addressLabel: 'Lokacija',
+      phoneLabel: 'Kontakt',
       messenger: 'Pitanja: poruka na Messengeru',
       messengerNote: 'Za pitanja. Termine dogovaramo telefonom.',
       instagram: 'Instagram',
@@ -231,8 +231,8 @@ export const strings = {
     },
     contact: {
       heading: 'Contact and location',
-      addressLabel: 'Address',
-      phoneLabel: 'Phone',
+      addressLabel: 'Location',
+      phoneLabel: 'Contact',
       messenger: 'Questions: message us on Messenger',
       messengerNote: 'For questions. Appointments are made by phone.',
       instagram: 'Instagram',

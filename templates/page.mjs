@@ -379,6 +379,14 @@ export function contact({ lang, S, data, urls }) {
     <h2 id="kontakt-h">${esc(S.contact.heading)}</h2>
     <div class="contact-grid">
       <div class="contact-card">
+        <h3>${icons.pin} ${esc(S.contact.addressLabel)}</h3>
+        <p class="contact-big">${esc(s.address.street)}<br>${esc(s.address.postalCode)} ${esc(s.address.city)}${lang === 'hr' ? '' : ', Croatia'}</p>
+        <div class="contact-actions">
+          <a class="btn btn-secondary" href="${urls.googleMaps}" rel="noopener">${esc(S.contact.googleMaps)}${icons.external}</a>
+          <a class="btn btn-secondary" href="${urls.appleMaps}" rel="noopener">${esc(S.contact.appleMaps)}${icons.external}</a>
+        </div>
+        <p class="directions"><strong>${esc(S.contact.directionsLabel)}</strong> ${ph(data.directions[lang])}</p>
+        <div class="contact-card">
         <h3>${icons.phone} ${esc(S.contact.phoneLabel)}</h3>
         <p class="contact-big"><a class="phone-big" href="tel:${s.phoneTel}">${esc(phone)}</a></p>
         <div class="contact-actions">
@@ -389,14 +397,6 @@ export function contact({ lang, S, data, urls }) {
           <li><a href="${s.instagram}" rel="noopener">${icons.instagram}<span>${esc(S.contact.instagram)}</span></a></li>
           <li><a href="${s.facebook}" rel="noopener">${icons.facebook}<span>${esc(S.contact.facebook)}</span></a></li>
         </ul>
-        <div class="contact-card">
-        <h3>${icons.pin} ${esc(S.contact.addressLabel)}</h3>
-        <p class="contact-big">${esc(s.address.street)}<br>${esc(s.address.postalCode)} ${esc(s.address.city)}${lang === 'hr' ? '' : ', Croatia'}</p>
-        <div class="contact-actions">
-          <a class="btn btn-secondary" href="${urls.googleMaps}" rel="noopener">${esc(S.contact.googleMaps)}${icons.external}</a>
-          <a class="btn btn-secondary" href="${urls.appleMaps}" rel="noopener">${esc(S.contact.appleMaps)}${icons.external}</a>
-        </div>
-        <p class="directions"><strong>${esc(S.contact.directionsLabel)}</strong> ${ph(data.directions[lang])}</p>
       </div>
     </div>
     </div>
