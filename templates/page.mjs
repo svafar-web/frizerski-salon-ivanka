@@ -315,15 +315,12 @@ export function requestSection({ lang, S, data }) {
     `<label class="pill"><input type="${type}" name="${name}" value="${esc(val)}"${checkedFirst && i === 0 ? ' checked' : ''}><span>${esc(label)}</span></label>`).join('');
   const services = data.services.map((g) => [g.short?.[lang] ?? g.name[lang], g.name[lang]]);
   const cfg = { phone: s.phoneTel, dayPhrase: R.dayPhrase, partPhrase: R.partPhrase, msg: R.msg, and: R.and, or: R.or, stepOf: R.stepOf, next: R.next, finish: R.finish, copied: R.copied, qrSrc: (data._basePath || '') + '/js/qr.min.js' };
-  return `<section id="zatrazi-termin" class="section section-request" aria-labelledby="zatrazi-h">
-  <div class="wrap">
-    <p class="eyebrow">04 <span>${esc(R.eyebrow)}</span></p>
+  return `<div id="zatrazi-termin" class="request-block">
     <a class="request-card" href="sms:${s.phoneTel}" data-request-open>
       <span class="request-card-icon">${icons.chat}</span>
       <h2 class="request-card-title" id="zatrazi-h">${esc(R.heading)}</h2>
       <span class="request-card-arrow" aria-hidden="true">→</span>
     </a>
-  </div>
   <dialog class="request-dialog" data-request-dialog aria-labelledby="zatrazi-dialog-h">
     <form class="request" data-request method="dialog">
       <div class="request-head">
@@ -362,7 +359,7 @@ export function hoursSection({ S, data }) {
   return `<section id="radno-vrijeme" class="section section-tint" aria-labelledby="radno-vrijeme-h">
   <div class="wrap hours-grid">
     <div class="hours-text">
-      <p class="eyebrow">05 <span>${esc(S.eyebrows.hours)}</span></p>
+      <p class="eyebrow">04 <span>${esc(S.eyebrows.hours)}</span></p>
       <h2 id="radno-vrijeme-h">${esc(S.hours.heading)}</h2>
       <p class="lead">${esc(S.hours.intro)}</p>
       <p class="small">${icons.clock} ${esc(S.hours.holidays)}</p>
@@ -382,7 +379,7 @@ export function contact({ lang, S, data, urls }) {
   const messenger = s.showMessenger ? `<p class="contact-messenger"><a class="btn btn-secondary" href="${s.messenger}" rel="noopener">${icons.messenger}<span>${esc(S.contact.messenger)}</span></a></p>` : '';
   return `<section id="kontakt" class="section" aria-labelledby="kontakt-h">
   <div class="wrap">
-    <p class="eyebrow">06 <span>${esc(S.eyebrows.contact)}</span></p>
+    <p class="eyebrow">05 <span>${esc(S.eyebrows.contact)}</span></p>
     <h2 id="kontakt-h">${esc(S.contact.heading)}</h2>
     <div class="contact-grid">
       <div class="map-card">
@@ -397,6 +394,7 @@ export function contact({ lang, S, data, urls }) {
       <div class="contact-details">
         <h3>${icons.phone} ${esc(S.contact.phoneLabel)}</h3>
         <p class="contact-phone"><a class="phone-big" href="tel:${s.phoneTel}">${esc(phone)}</a><br><small>${esc(S.phoneOnly)}</small></p>
+        ${requestSection({ lang, S, data })}
         ${messenger}
         <ul class="social">
           <li><a href="${s.instagram}" rel="noopener">${icons.instagram}<span>${esc(S.contact.instagram)}</span></a></li>
@@ -463,7 +461,6 @@ ${notice(data.notice[lang])}
   ${about({ lang, S, data, manifest })}
   ${gallery({ lang, S, data, manifest })}
   ${reviewsBlock({ lang, S, data, reviews })}
-  ${requestSection({ lang, S, data })}
   ${hoursSection({ S, data })}
   ${contact({ lang, S, data, urls })}
 </main>
