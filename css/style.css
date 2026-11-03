@@ -89,7 +89,7 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 .skip:focus { top: 1rem; }
 
 /* Buttons */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: .55em; min-height: 48px; padding: .6em 1.2em; border-radius: 999px; font-weight: 600; text-decoration: none; line-height: 1.2; border: 2px solid transparent; transition: background-color .15s, color .15s, border-color .15s, transform .15s; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .55em; min-height: 48px; padding: .6em 1.2em; border-radius: 999px; font: inherit; font-weight: 600; cursor: pointer; text-decoration: none; line-height: 1.2; border: 2px solid transparent; transition: background-color .15s, color .15s, border-color .15s, transform .15s; }
 .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 8px 24px -10px rgba(179, 18, 46, .6); }
 .btn-primary:hover { background: var(--accent-dark); color: #fff; transform: translateY(-1px); }
 .btn-big { min-height: 62px; font-size: 1.25rem; padding: .7em 1.6em; }
