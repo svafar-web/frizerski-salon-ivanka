@@ -331,10 +331,10 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 .contact-big .phone-big { font-size: inherit; padding: 0; }
 .phone-big:hover { color: var(--accent-dark); text-decoration: underline; }
 .contact-actions { display: flex; flex-direction: column; gap: .6rem; margin: .25rem 0 0; }
-.contact-actions .btn { justify-content: flex-start; }
-.contact-actions .btn-secondary .ico-sm { margin-left: auto; }
-.contact-actions .btn-secondary { background: var(--ink); color: #fff; border-color: var(--ink); }
-.contact-actions .btn-secondary:hover { background: #fff; color: var(--ink); border-color: var(--ink); }
+.contact-actions > .btn, .contact-actions > .request-block > .btn { justify-content: flex-start; }
+.contact-actions > .btn-secondary .ico-sm { margin-left: auto; }
+.contact-actions > .btn-secondary { background: var(--ink); color: #fff; border-color: var(--ink); }
+.contact-actions > .btn-secondary:hover { background: #fff; color: var(--ink); border-color: var(--ink); }
 .request-block { display: contents; }
 .directions { margin: 0; font-size: 1rem; color: var(--muted); }
 .social { list-style: none; padding: 0; margin: .25rem 0 0; display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; }
