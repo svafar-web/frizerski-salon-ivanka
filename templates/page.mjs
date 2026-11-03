@@ -371,6 +371,7 @@ export function hoursSection({ S, data }) {
     </div>
     <div class="hours-card">
       <p class="status" data-status></p>
+      <p class="remind" data-remind-wrap hidden><a class="btn btn-ghost" href="#radno-vrijeme" data-remind>${icons.clock}<span>${esc(S.remind.label)}</span></a></p>
       ${hoursTable({ S, data })}
     </div>
   </div>
@@ -464,10 +465,7 @@ ${notice(data.notice[lang])}
         <h1 id="hero-h"><span class="h1-small">Frizerski salon</span> <span class="h1-name">Ivanka</span></h1>
         <p class="tagline">${esc(S.heroTagline)}</p>
         <p class="hero-cta">${callButton({ lang, S, data, className: 'btn btn-primary btn-big' })}</p>
-        <p class="hero-alt"><a href="#zatrazi-termin">${esc(S.request.heroLink)}</a></p>
-        <p class="hero-address">${icons.pin}<a href="${urls.googleMaps}" rel="noopener">${esc(s.address.street)}, ${esc(s.address.postalCode)} ${esc(s.address.city)}</a></p>
         <p class="status" data-status></p>
-        <p class="hero-remind" data-remind-wrap hidden><a class="btn btn-secondary" href="#radno-vrijeme" data-remind>${icons.clock}<span>${esc(S.remind.label)}</span></a><br><small>${esc(S.remind.hint)}</small></p>
       </div>
       <div class="hero-art">${heroTiles}</div>
     </div>
