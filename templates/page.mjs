@@ -393,7 +393,7 @@ export function contact({ lang, S, data, urls }) {
       </div>
       <div class="contact-details">
         <h3>${icons.phone} ${esc(S.contact.phoneLabel)}</h3>
-        <p class="contact-phone"><a class="phone-big" href="tel:${s.phoneTel}">${esc(phone)}</a><br><small>${esc(S.phoneOnly)}</small></p>
+        <p class="contact-phone"><a class="phone-big" href="tel:${s.phoneTel}">${esc(phone)}</a></p>
         ${requestSection({ lang, S, data })}
         ${messenger}
         <ul class="social">
