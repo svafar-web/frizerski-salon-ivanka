@@ -96,7 +96,7 @@
     var ics = [
       'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Frizerski salon Ivanka//Podsjetnik//HR', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
       'BEGIN:VEVENT',
-      'UID:' + stamp(start) + '-ivanka@svafar.github.io',
+      'UID:' + stamp(start) + '-ivanka@frizerskisalonivanka.hr',
       'DTSTAMP:' + stamp(Date.now()),
       'DTSTART:' + stamp(start),
       'DTEND:' + stamp(start + 15 * 60000),

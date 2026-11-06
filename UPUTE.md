@@ -39,7 +39,7 @@ koja je stranicu postavila; ona vam može dati korisnički račun.
 3. Kliknite zeleni gumb **Commit changes…** i još jednom **Commit changes**.
 
 Za otprilike dvije minute promjena je vidljiva na stranici
-(`https://svafar.github.io/frizerski-salon-ivanka/`). Osvježite stranicu u pregledniku
+(`https://frizerskisalonivanka.hr/`). Osvježite stranicu u pregledniku
 (na mobitelu povucite prema dolje).
 
 ## Radno vrijeme

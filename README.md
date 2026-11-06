@@ -54,7 +54,7 @@ Add a gallery entry in `site-data.json` with Croatian and English alt text.
 
 The repository `svafar/frizerski-salon-ivanka` deploys automatically. On every push to `main`,
 `.github/workflows/deploy.yml` runs `node scripts/build.mjs` and publishes the folder to
-GitHub Pages at `https://svafar.github.io/frizerski-salon-ivanka/`. Editing
+GitHub Pages at `https://frizerskisalonivanka.hr/`. Editing
 `content/site-data.json` in the GitHub web editor is therefore enough to republish.
 
 Because the site lives under a sub-path, `site.url` in `site-data.json` includes `/frizerski-salon-ivanka`
