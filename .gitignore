@@ -9,3 +9,5 @@ images/og-share.png
 *.log
 .DS_Store
 Thumbs.db
+dist/
+WhatsApp Image*

@@ -50,42 +50,40 @@ Add a gallery entry in `site-data.json` with Croatian and English alt text.
 
 ## Deployment
 
-### Current: GitHub Pages via GitHub Actions
+### Current: Cloudflare Pages, published by GitHub Actions
 
-The repository `svafar/frizerski-salon-ivanka` deploys automatically. On every push to `main`,
-`.github/workflows/deploy.yml` runs `node scripts/build.mjs` and publishes the folder to
-GitHub Pages at `https://frizerskisalonivanka.hr/`. Editing
-`content/site-data.json` in the GitHub web editor is therefore enough to republish.
+The code lives in the GitHub repository `svafar/frizerski-salon-ivanka`; the site is served by
+Cloudflare Pages (project `frizerski-salon-ivanka`) at `https://frizerskisalonivanka.hr/`.
+On every push to `main`, `.github/workflows/deploy.yml`:
 
-Because the site lives under a sub-path, `site.url` in `site-data.json` includes `/frizerski-salon-ivanka`
-and the build prefixes every root-relative URL with it. When the site moves to its own domain
-(or to Cloudflare Pages), set `site.url` to the new origin and rebuild; the prefix disappears.
-`.nojekyll` keeps GitHub from running Jekyll over the files. GitHub Pages ignores `_headers`
-(no custom caching or CSP there); `404.html` is honoured.
+1. runs `node scripts/build.mjs` (pages, sitemap, robots, manifest),
+2. runs `node scripts/check.mjs` (placeholders and broken links; warns only),
+3. runs `node scripts/dist.mjs`, which copies just the published files into `dist/`
+   (no scripts, templates, content or source photos),
+4. uploads `dist/` with `wrangler pages deploy`.
 
-### Cloudflare Pages (free, alternative with better caching headers)
+Editing `content/site-data.json` in the GitHub web editor and pressing *Commit changes* is
+therefore enough to republish; the site updates in about a minute.
 
-1. Push this folder to a GitHub repository (do **not** commit `node_modules/` or `images/source/`; `.gitignore` handles it).
-2. Cloudflare dashboard → Workers & Pages → Create → Pages → Connect to Git → pick the repo.
-3. Build settings: Framework preset **None**, Build command `npm run build`, Build output directory `/`.
-4. Deploy. The site is live at `https://<project>.pages.dev`. Put that URL into `site.url` in `content/site-data.json` (used for canonical, hreflang, Open Graph and the sitemap), commit, and it rebuilds.
-5. `_headers` is picked up automatically: one-year immutable caching for `/images/*` and `/fonts/*`, a strict Content-Security-Policy, no framing. Clean URLs (`/en/`, `/privatnost/`) and `404.html` work out of the box. HTTPS is automatic.
+The workflow needs two repository secrets (Settings → Secrets and variables → Actions):
+`CLOUDFLARE_API_TOKEN` (a token with *Cloudflare Pages: Edit*) and `CLOUDFLARE_ACCOUNT_ID`.
 
-From then on, editing `content/site-data.json` in the GitHub web editor and pressing *Commit changes* republishes the site in about a minute.
+Cloudflare Pages honours `_headers` (one-year immutable caching for `/images/*` and `/fonts/*`,
+a strict Content-Security-Policy, no framing) and `404.html`. HTTPS is automatic.
+
+The domain `frizerskisalonivanka.hr` is a free CARNET domain registered to the salon (renew yearly
+at domene.hr; the authorisation link goes to the owner's e-mail). Its DNS is on Cloudflare:
+proxied CNAME records for the apex and `www` pointing at `frizerski-salon-ivanka.pages.dev`.
+The old GitHub Pages address `svafar.github.io/frizerski-salon-ivanka` still redirects here.
+
+`site.url` in `site-data.json` is the origin used for canonical links, hreflang, Open Graph and the
+sitemap. If the site ever lives under a sub-path again, put that path in `site.url` and the build
+prefixes every root-relative URL with it.
 
 ### Alternatives
 
 - **GitHub Pages**: Settings → Pages → Deploy from branch (`main`, `/`). Works as-is (generated files are committed). `_headers` is ignored there (no custom cache headers or CSP), `404.html` is honoured.
 - **Netlify drag-and-drop**: run `npm run build`, then drag the folder onto app.netlify.com/drop. `_headers` and `404.html` are both honoured. Not automatic on later edits; repeat the drop.
-
-### Custom domain (later)
-
-The domain is not registered yet. A `.hr` domain (e.g. `frizerskisalonivanka.hr`) is registered
-through a CARNET-accredited registrar (list at domene.hr); expect a few euros to low tens of
-euros per year. Then: Cloudflare Pages → Custom domains → add the domain → follow the DNS
-instructions (CNAME to the `pages.dev` host). Finally change `site.url` in `site-data.json` and
-rebuild so canonical/hreflang/OG URLs point at the new domain. Until then the free `*.pages.dev`
-address is fine.
 
 ## Google Business Profile
 
@@ -97,7 +95,7 @@ in both places in sync whenever they change.
 
 ## Notes
 
-- Total JS ≈ 6 KB. Only the open/closed line and the lightbox need it.
+- Total JS ≈ 15 KB: open/closed status, calendar reminder, lightbox, gallery filters and the SMS request stepper (QR library loads only on desktop).
 - The open/closed status is computed client-side in the `Europe/Zagreb` time zone, not the visitor's zone.
 - "Zatražite termin porukom": three questions compose an appointment request; phones get an `sms:` link with the text prefilled, desktops get a QR code (vendored `js/qr.min.js`, qrcode-generator, MIT, loaded only there) plus a copy button. Nothing is sent by the site. The owner must answer incoming texts.
 - While the salon is closed, the hero shows "Podsjeti me kad otvorimo": a calendar event (.ics) for the next opening time, with the phone number, generated in the browser as a Blob. No server, no tracking. Hidden without JS and while the salon is open.
