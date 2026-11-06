@@ -15,7 +15,8 @@ export const strings = {
     phoneOnly: 'Termine dogovaramo isključivo telefonom.',
     heroTagline: 'Šišanje, bojanje i styling u Splitu. Od tople plave i bakrene do ružičaste, ljubičaste i plave – boja je naš potpis.',
     about: { heading: 'O nama', eyebrow: 'Tko smo' },
-    eyebrows: { services: 'Što radimo', gallery: 'Naši radovi', hours: 'Kad smo tu', contact: 'Gdje smo' },
+    eyebrows: { services: 'Što radimo', gallery: 'Naši radovi', hours: 'Kad smo tu', contact: 'Gdje smo', faq: 'Pitate nas' },
+    faq: { heading: 'Česta pitanja' },
     request: {
       eyebrow: 'Zatražite termin',
       heroLink: 'Radije pišete? Zatražite termin porukom →',
@@ -145,7 +146,8 @@ export const strings = {
     phoneOnly: 'Appointments are made by phone only.',
     heroTagline: 'Cuts, colour and styling in Split. From warm blondes and coppers to pink, violet and blue, colour is our signature.',
     about: { heading: 'About us', eyebrow: 'Who we are' },
-    eyebrows: { services: 'What we do', gallery: 'Our work', hours: 'When we are open', contact: 'Where to find us' },
+    eyebrows: { services: 'What we do', gallery: 'Our work', hours: 'When we are open', contact: 'Where to find us', faq: 'You ask us' },
+    faq: { heading: 'Frequently asked questions' },
     request: {
       eyebrow: 'Request an appointment',
       heroLink: 'Prefer texting? Request an appointment by message →',

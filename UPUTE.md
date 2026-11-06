@@ -174,6 +174,20 @@ Super boja, točno kakvu sam htjela.
 
 Dok je datoteka prazna, na stranici stoji samo rečenica o postotku preporuka na Facebooku.
 
+## Česta pitanja
+
+Pri dnu stranice je popis čestih pitanja. Nalazi se u dijelu `"faq"`. Svako pitanje izgleda ovako:
+
+```
+{
+  "q": { "hr": "Kako se mogu naručiti?", "en": "How do I book an appointment?" },
+  "a": { "hr": "Telefonom ili porukom.", "en": "By phone or by message." }
+},
+```
+
+Pitanja možete mijenjati, brisati ili dodavati. U odgovoru se `{hours}` zamjenjuje radnim
+vremenom, a `{address}` adresom, pa ih ne treba prepisivati. Pazite na zarez između pitanja.
+
 ## Podaci o obrtu
 
 U dijelu `"legal"` je naziv obrta koji se prikazuje u podnožju stranice. OIB i registar su

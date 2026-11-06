@@ -292,5 +292,32 @@
       "name": { "hr": "Kratke", "en": "Short" },
       "dot": ""
     }
+  ],
+  "_faq_upute": "Česta pitanja pri dnu stranice. Svako pitanje ima \"q\" (pitanje) i \"a\" (odgovor) na hrvatskom i engleskom. {hours} se zamjenjuje radnim vremenom, a {address} adresom. Obrišite ili dodajte pitanja po želji.",
+  "faq": [
+    {
+      "q": { "hr": "Kako se mogu naručiti?", "en": "How do I book an appointment?" },
+      "a": { "hr": "Telefonom ili porukom. Broj i gumb za slanje poruke nalaze se u dijelu Kontakt.", "en": "By phone or by message. The number and the message button are in the Contact section." }
+    },
+    {
+      "q": { "hr": "Radite li kreativne i fashion boje?", "en": "Do you do creative and fashion colours?" },
+      "a": { "hr": "Da. Pastelne i neonske nijanse, ružičasta, ljubičasta, plava i dugine boje su ono po čemu nas prepoznaju. Primjere pogledajte u galeriji.", "en": "Yes. Pastel and neon shades, pink, violet, blue and rainbow colour are what we are known for. See the gallery for examples." }
+    },
+    {
+      "q": { "hr": "S kojim proizvodima radite?", "en": "Which products do you work with?" },
+      "a": { "hr": "Radimo s profesionalnim proizvodima Nook, Cotril i Montibello.", "en": "We work with professional products from Nook, Cotril and Montibello." }
+    },
+    {
+      "q": { "hr": "Radite li svečane i svadbene frizure?", "en": "Do you do occasion and bridal hair?" },
+      "a": { "hr": "Da. Punđe, pletenice i valovi za vjenčanja, mature i proslave.", "en": "Yes. Updos, braids and waves for weddings, proms and celebrations." }
+    },
+    {
+      "q": { "hr": "Gdje se nalazi salon?", "en": "Where is the salon?" },
+      "a": { "hr": "Na adresi {address}. Gumb „Otvori u kartama” u dijelu Kontakt otvara navigaciju.", "en": "At {address}. The “Open in Maps” button in the Contact section opens directions." }
+    },
+    {
+      "q": { "hr": "Koje je radno vrijeme?", "en": "What are the opening hours?" },
+      "a": { "hr": "{hours}. Na vrhu stranice piše je li salon trenutno otvoren.", "en": "{hours}. The top of the page shows whether the salon is open right now." }
+    }
   ]
 }

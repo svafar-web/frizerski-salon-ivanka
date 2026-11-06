@@ -89,4 +89,5 @@ ${pages.map((p) => `  <url>
 </urlset>
 `;
 write('sitemap.xml', sitemap);
-write('robots.txt', `User-agent: *\nAllow: /\nDisallow: ${basePath}/images/source/\n\nSitemap: ${base}/sitemap.xml\n`);
+const aiBots = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'PerplexityBot', 'Google-Extended', 'Bingbot', 'Applebot'];
+write('robots.txt', `User-agent: *\nAllow: /\nDisallow: ${basePath}/images/source/\n\n# AI crawlers and assistants are welcome\n${aiBots.map((b) => `User-agent: ${b}`).join('\n')}\nAllow: /\n\nSitemap: ${base}/sitemap.xml\n`);

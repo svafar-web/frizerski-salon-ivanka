@@ -62,7 +62,13 @@ export function jsonLd(data, lang, urls) {
     geo: { '@type': 'GeoCoordinates', latitude: s.geo.lat, longitude: s.geo.lng },
     hasMap: urls.googleMaps,
     openingHoursSpecification: openingHoursSpecification(data.hours),
-    sameAs: [s.facebook, s.instagram]
+    sameAs: [s.facebook, s.instagram],
+    brand: (s.brands || []).map((name) => ({ '@type': 'Brand', name })),
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: lang === 'hr' ? 'Usluge' : 'Services',
+      itemListElement: data.services.map((g) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: g.name[lang], description: g.desc[lang] } }))
+    }
   };
   return `<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>`;
 }
@@ -401,6 +407,39 @@ export function contact({ lang, S, data, urls }) {
 </section>`;
 }
 
+// FAQ: plain <details> list at the end of the page plus FAQPage structured data with the
+// same text, so search engines and AI assistants can quote the answers.
+export function faqAnswers({ lang, S, data }) {
+  const s = data.site;
+  const vars = { hours: S.footer.hoursSummary, address: `${s.address.street}, ${s.address.postalCode} ${s.address.city}` };
+  return (data.faq || []).map((f) => ({ q: f.q[lang], a: t(f.a[lang], vars) }));
+}
+
+export function faqSection({ lang, S, data }) {
+  const items = faqAnswers({ lang, S, data });
+  if (!items.length) return '';
+  return `<section id="pitanja" class="section" aria-labelledby="pitanja-h">
+  <div class="wrap narrow">
+    <p class="eyebrow">06 <span>${esc(S.eyebrows.faq)}</span></p>
+    <h2 id="pitanja-h">${esc(S.faq.heading)}</h2>
+    <div class="faq">
+      ${items.map((f) => `<details class="faq-item"><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join('\n      ')}
+    </div>
+  </div>
+</section>`;
+}
+
+export function faqJsonLd({ lang, S, data }) {
+  const items = faqAnswers({ lang, S, data });
+  if (!items.length) return '';
+  const ld = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }))
+  };
+  return `<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>`;
+}
+
 export function footer({ lang, S, data, privacyHref, year }) {
   const s = data.site;
   const phone = lang === 'hr' ? s.phoneDisplay : s.phoneDisplayIntl;
@@ -457,10 +496,12 @@ ${notice(data.notice[lang])}
   ${reviewsBlock({ lang, S, data, reviews })}
   ${hoursSection({ S, data })}
   ${contact({ lang, S, data, urls })}
+  ${faqSection({ lang, S, data })}
 </main>
 ${footer({ lang, S, data, privacyHref: lang === 'hr' ? '/privatnost/' : '/en/privacy/', year })}
 ${hoursData({ S, data })}
 ${jsonLd(data, lang, urls)}
+${faqJsonLd({ lang, S, data })}
 <script src="/js/main.js" defer></script>
 </body>
 </html>
