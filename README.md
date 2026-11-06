@@ -52,7 +52,7 @@ Add a gallery entry in `site-data.json` with Croatian and English alt text.
 
 ### Current: Cloudflare Pages, published by GitHub Actions
 
-The code lives in the GitHub repository `svafar/frizerski-salon-ivanka`; the site is served by
+The code lives in the GitHub repository `svafar-web/frizerski-salon-ivanka`; the site is served by
 Cloudflare Pages (project `frizerski-salon-ivanka`) at `https://frizerskisalonivanka.hr/`.
 On every push to `main`, `.github/workflows/deploy.yml`:
 
@@ -74,7 +74,7 @@ a strict Content-Security-Policy, no framing) and `404.html`. HTTPS is automatic
 The domain `frizerskisalonivanka.hr` is a free CARNET domain registered to the salon (renew yearly
 at domene.hr; the authorisation link goes to the owner's e-mail). Its DNS is on Cloudflare:
 proxied CNAME records for the apex and `www` pointing at `frizerski-salon-ivanka.pages.dev`.
-The old GitHub Pages address `svafar.github.io/frizerski-salon-ivanka` still redirects here.
+The old GitHub Pages addresses (`svafar.github.io/…` and `svafar-web.github.io/…`) still redirect here.
 
 `site.url` in `site-data.json` is the origin used for canonical links, hreflang, Open Graph and the
 sitemap. If the site ever lives under a sub-path again, put that path in `site.url` and the build

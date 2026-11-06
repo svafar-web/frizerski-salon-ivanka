@@ -34,7 +34,7 @@ Pravila koja treba poštovati da se ništa ne pokvari:
 Stranica se nalazi na GitHubu (to je mjesto gdje su spremljene datoteke). Pristup ima osoba
 koja je stranicu postavila; ona vam može dati korisnički račun.
 
-1. Otvorite u pregledniku: `https://github.com/svafar/frizerski-salon-ivanka/blob/main/content/site-data.json`
+1. Otvorite u pregledniku: `https://github.com/svafar-web/frizerski-salon-ivanka/blob/main/content/site-data.json`
 2. Kliknite ikonu olovke (gore desno, „Edit this file”). Promijenite što trebate.
 3. Kliknite zeleni gumb **Commit changes…** i još jednom **Commit changes**.
 
