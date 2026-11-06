@@ -99,7 +99,9 @@ export function head({ lang, S, data, urls, css, manifest, preloadHero }) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(urls.title)}</title>
-<meta name="description" content="${esc(urls.description)}">
+<meta name="description" content="${esc(urls.description)}">${s.verification?.google ? `
+<meta name="google-site-verification" content="${esc(s.verification.google)}">` : ""}${s.verification?.bing ? `
+<meta name="msvalidate.01" content="${esc(s.verification.bing)}">` : ""}
 <link rel="canonical" href="${urls.canonical}">
 <link rel="alternate" hreflang="hr" href="${urls.hr}">
 <link rel="alternate" hreflang="en" href="${urls.en}">

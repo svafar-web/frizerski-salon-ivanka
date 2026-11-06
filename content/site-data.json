@@ -2,6 +2,8 @@
   "_upute": "Ovo je jedina datoteka koju trebate mijenjati. Upute su u UPUTE.md. Sve u uglatim zagradama [OVAKO] je privremeno i treba ga zamijeniti pravim podatkom.",
   "site": {
     "url": "https://frizerskisalonivanka.hr",
+    "_verification_upute": "Kodovi za potvrdu vlasništva u Google Search Console i Bing Webmaster Tools. Prazno (\"\") znači da se oznaka ne ispisuje.",
+    "verification": { "google": "", "bing": "7C7B65F1078F11A68AB9FC24832B4B83" },
     "name": "Frizerski salon Ivanka",
     "instagramName": "Hair Salon Ivanka",
     "phoneDisplay": "095 855 5532",
