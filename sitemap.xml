@@ -28,4 +28,18 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://frizerskisalonivanka.hr/en/privacy/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://frizerskisalonivanka.hr/privatnost/"/>
   </url>
+  <url>
+    <loc>https://frizerskisalonivanka.hr/pitanja/</loc>
+    <lastmod>2026-11-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="hr" href="https://frizerskisalonivanka.hr/pitanja/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://frizerskisalonivanka.hr/en/faq/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://frizerskisalonivanka.hr/pitanja/"/>
+  </url>
+  <url>
+    <loc>https://frizerskisalonivanka.hr/en/faq/</loc>
+    <lastmod>2026-11-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="hr" href="https://frizerskisalonivanka.hr/pitanja/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://frizerskisalonivanka.hr/en/faq/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://frizerskisalonivanka.hr/pitanja/"/>
+  </url>
 </urlset>

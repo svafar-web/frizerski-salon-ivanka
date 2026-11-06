@@ -6,7 +6,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const pages = ['index.html', 'en/index.html', 'privatnost/index.html', 'en/privacy/index.html', '404.html'];
+const pages = ['index.html', 'en/index.html', 'privatnost/index.html', 'en/privacy/index.html', 'pitanja/index.html', 'en/faq/index.html', '404.html'];
 const external = process.argv.includes('--external');
 const siteUrl = JSON.parse(readFileSync(join(root, 'content/site-data.json'), 'utf8')).site.url.replace(/\/$/, '');
 const basePath = new URL(siteUrl).pathname.replace(/\/$/, '');

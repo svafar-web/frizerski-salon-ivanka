@@ -15,8 +15,8 @@ export const strings = {
     phoneOnly: 'Termine dogovaramo isključivo telefonom.',
     heroTagline: 'Šišanje, bojanje i styling u Splitu. Od tople plave i bakrene do ružičaste, ljubičaste i plave – boja je naš potpis.',
     about: { heading: 'O nama', eyebrow: 'Tko smo' },
-    eyebrows: { services: 'Što radimo', gallery: 'Naši radovi', hours: 'Kad smo tu', contact: 'Gdje smo', faq: 'Pitate nas' },
-    faq: { heading: 'Česta pitanja' },
+    eyebrows: { services: 'Što radimo', gallery: 'Naši radovi', hours: 'Kad smo tu', contact: 'Gdje smo' },
+    faq: { heading: 'Česta pitanja', title: 'Česta pitanja – Frizerski salon Ivanka', description: 'Odgovori na česta pitanja o naručivanju, bojama, proizvodima i radnom vremenu Frizerskog salona Ivanka u Splitu.', back: '← Natrag na početnu' },
     request: {
       eyebrow: 'Zatražite termin',
       heroLink: 'Radije pišete? Zatražite termin porukom →',
@@ -106,6 +106,7 @@ export const strings = {
     footer: {
       hoursSummary: 'Pon–Uto 08–15 · Sri–Pet 13–20 · Sub 08–13 · Ned zatvoreno',
       privacy: 'Privatnost',
+      faq: 'Česta pitanja',
       legalHeading: 'Podaci o pružatelju usluge',
       oib: 'OIB',
       register: 'Registar'
@@ -117,7 +118,7 @@ export const strings = {
       body: [
         'Ova web stranica ne prikuplja nikakve osobne podatke.',
         'Stranica ne koristi kolačiće, ne prati posjetitelje, nema analitiku ni oglase. Nema obrazaca za slanje podataka. Zbog toga nema ni obavijesti o kolačićima.',
-        'Stranica se prikazuje s poslužitelja Cloudflare Pages. Kao i svaki web poslužitelj, Cloudflare tehnički obrađuje IP adresu posjetitelja da bi stranicu mogao isporučiti.',
+        'Stranica se prikazuje s poslužitelja GitHub Pages. Kao i svaki web poslužitelj, GitHub tehnički obrađuje IP adresu posjetitelja da bi stranicu mogao isporučiti.',
         'Na stranici se nalaze poveznice na Facebook, Instagram, Messenger te Google i Apple karte. Kad kliknete na njih, napuštate ovu stranicu i vrijede pravila privatnosti tih usluga.',
         'Ako nas nazovete, Vaš broj vidimo kao i kod svakog poziva. Ne spremamo ga nigdje osim ako to sami ne zatražite (npr. za podsjetnik na termin).',
         'Za sva pitanja o privatnosti nazovite nas ili se javite u salon.'
@@ -146,8 +147,8 @@ export const strings = {
     phoneOnly: 'Appointments are made by phone only.',
     heroTagline: 'Cuts, colour and styling in Split. From warm blondes and coppers to pink, violet and blue, colour is our signature.',
     about: { heading: 'About us', eyebrow: 'Who we are' },
-    eyebrows: { services: 'What we do', gallery: 'Our work', hours: 'When we are open', contact: 'Where to find us', faq: 'You ask us' },
-    faq: { heading: 'Frequently asked questions' },
+    eyebrows: { services: 'What we do', gallery: 'Our work', hours: 'When we are open', contact: 'Where to find us' },
+    faq: { heading: 'Frequently asked questions', title: 'FAQ – Hair Salon Ivanka', description: 'Answers to common questions about booking, colour, products and opening hours at Hair Salon Ivanka in Split.', back: '← Back to the home page' },
     request: {
       eyebrow: 'Request an appointment',
       heroLink: 'Prefer texting? Request an appointment by message →',
@@ -237,6 +238,7 @@ export const strings = {
     footer: {
       hoursSummary: 'Mon–Tue 08–15 · Wed–Fri 13–20 · Sat 08–13 · Sun closed',
       privacy: 'Privacy',
+      faq: 'FAQ',
       legalHeading: 'Service provider details',
       oib: 'OIB (tax ID)',
       register: 'Register'
@@ -248,7 +250,7 @@ export const strings = {
       body: [
         'This website collects no personal data.',
         'It sets no cookies, does not track visitors and has no analytics or advertising. There are no forms. For that reason there is no cookie banner.',
-        'The site is served by Cloudflare Pages. Like any web server, Cloudflare technically processes your IP address in order to deliver the page.',
+        'The site is served by GitHub Pages. Like any web server, GitHub technically processes your IP address in order to deliver the page.',
         'The site links to Facebook, Instagram, Messenger, Google Maps and Apple Maps. When you follow those links you leave this site and the privacy policies of those services apply.',
         'If you call us, we see your number as with any phone call. We do not store it unless you ask us to (for example, for an appointment reminder).',
         'For any privacy question, call us or ask in the salon.'

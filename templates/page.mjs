@@ -415,18 +415,29 @@ export function faqAnswers({ lang, S, data }) {
   return (data.faq || []).map((f) => ({ q: f.q[lang], a: t(f.a[lang], vars) }));
 }
 
-export function faqSection({ lang, S, data }) {
+export function faqPage(ctx) {
+  const { lang, S, data, manifest, urls, css, year } = ctx;
+  const home = lang === 'hr' ? '/' : '/en/';
+  const self = lang === 'hr' ? `${urls.base}/pitanja/` : `${urls.base}/en/faq/`;
   const items = faqAnswers({ lang, S, data });
-  if (!items.length) return '';
-  return `<section id="pitanja" class="section" aria-labelledby="pitanja-h">
-  <div class="wrap narrow">
-    <p class="eyebrow">06 <span>${esc(S.eyebrows.faq)}</span></p>
-    <h2 id="pitanja-h">${esc(S.faq.heading)}</h2>
+  return `${head({ lang, S, data, urls: { ...urls, title: S.faq.title, description: S.faq.description, canonical: self, hr: `${urls.base}/pitanja/`, en: `${urls.base}/en/faq/` }, css, manifest })}
+<body>
+${header({ lang, S, data, switchHref: lang === 'hr' ? '/en/faq/' : '/pitanja/', home })}
+<main id="main">
+  <section class="section"><div class="wrap narrow prose">
+    <h1>${esc(S.faq.heading)}</h1>
     <div class="faq">
       ${items.map((f) => `<details class="faq-item"><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join('\n      ')}
     </div>
-  </div>
-</section>`;
+    <p><a href="${home}">${esc(S.faq.back)}</a></p>
+  </div></section>
+</main>
+${footer({ lang, S, data, privacyHref: lang === 'hr' ? '/privatnost/' : '/en/privacy/', year })}
+${faqJsonLd({ lang, S, data })}
+<script src="/js/main.js" defer></script>
+</body>
+</html>
+`;
 }
 
 export function faqJsonLd({ lang, S, data }) {
@@ -455,7 +466,7 @@ export function footer({ lang, S, data, privacyHref, year }) {
         ${optional(S.footer.register, L.register)}
       </ul>
     </div>
-    <p class="footer-meta">© <span data-year>${year}</span> ${esc(s.name)} · <a href="${privacyHref}">${esc(S.footer.privacy)}</a></p>
+    <p class="footer-meta">© <span data-year>${year}</span> ${esc(s.name)} · <a href="${lang === 'hr' ? '/pitanja/' : '/en/faq/'}">${esc(S.footer.faq)}</a> · <a href="${privacyHref}">${esc(S.footer.privacy)}</a></p>
   </div>
 </footer>
 <nav class="bottom-bar" aria-label="${lang === 'hr' ? 'Brze radnje' : 'Quick actions'}">
@@ -496,12 +507,10 @@ ${notice(data.notice[lang])}
   ${reviewsBlock({ lang, S, data, reviews })}
   ${hoursSection({ S, data })}
   ${contact({ lang, S, data, urls })}
-  ${faqSection({ lang, S, data })}
 </main>
 ${footer({ lang, S, data, privacyHref: lang === 'hr' ? '/privatnost/' : '/en/privacy/', year })}
 ${hoursData({ S, data })}
 ${jsonLd(data, lang, urls)}
-${faqJsonLd({ lang, S, data })}
 <script src="/js/main.js" defer></script>
 </body>
 </html>

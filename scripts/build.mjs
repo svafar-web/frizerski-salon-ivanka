@@ -6,7 +6,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { strings } from '../templates/strings.mjs';
-import { homePage, privacyPage, notFoundPage } from '../templates/page.mjs';
+import { homePage, privacyPage, faqPage, notFoundPage } from '../templates/page.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const read = (p) => readFileSync(join(root, p), 'utf8');
@@ -63,6 +63,8 @@ write('index.html', applyBase(homePage({ lang: 'hr', S: strings.hr, data, manife
 write('en/index.html', applyBase(homePage({ lang: 'en', S: strings.en, data, manifest, urls: { ...urls, home: urls.en }, css, reviews, year })));
 write('privatnost/index.html', applyBase(privacyPage({ lang: 'hr', S: strings.hr, data, manifest, urls, css, year })));
 write('en/privacy/index.html', applyBase(privacyPage({ lang: 'en', S: strings.en, data, manifest, urls, css, year })));
+write('pitanja/index.html', applyBase(faqPage({ lang: 'hr', S: strings.hr, data, manifest, urls, css, year })));
+write('en/faq/index.html', applyBase(faqPage({ lang: 'en', S: strings.en, data, manifest, urls, css, year })));
 write('404.html', applyBase(notFoundPage({ strings, data, urls, css, year })));
 write('site.webmanifest', JSON.stringify({
   name: data.site.name, short_name: 'Salon Ivanka', lang: 'hr', start_url: `${basePath}/`, display: 'browser',
@@ -75,7 +77,9 @@ const pages = [
   { loc: `${base}/`, hr: `${base}/`, en: `${base}/en/` },
   { loc: `${base}/en/`, hr: `${base}/`, en: `${base}/en/` },
   { loc: `${base}/privatnost/`, hr: `${base}/privatnost/`, en: `${base}/en/privacy/` },
-  { loc: `${base}/en/privacy/`, hr: `${base}/privatnost/`, en: `${base}/en/privacy/` }
+  { loc: `${base}/en/privacy/`, hr: `${base}/privatnost/`, en: `${base}/en/privacy/` },
+  { loc: `${base}/pitanja/`, hr: `${base}/pitanja/`, en: `${base}/en/faq/` },
+  { loc: `${base}/en/faq/`, hr: `${base}/pitanja/`, en: `${base}/en/faq/` }
 ];
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">

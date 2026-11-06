@@ -176,7 +176,7 @@ Dok je datoteka prazna, na stranici stoji samo rečenica o postotku preporuka na
 
 ## Česta pitanja
 
-Pri dnu stranice je popis čestih pitanja. Nalazi se u dijelu `"faq"`. Svako pitanje izgleda ovako:
+Česta pitanja su na zasebnoj stranici (poveznica „Česta pitanja” u podnožju). Nalaze se u dijelu `"faq"`. Svako pitanje izgleda ovako:
 
 ```
 {
