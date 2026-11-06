@@ -125,10 +125,12 @@
     "magenta-ruzicasta-duga",
     "plave-kovrce-tamne"
   ],
+  "_heroAlt_upute": "Opisi slika na vrhu stranice i slike uz usluge (za čitače ekrana i Google). Ključ je naziv datoteke bez nastavka.",
   "heroAlt": {
     "plava-valovita-duga": { "hr": "Duga plava kosa s mekim valovima", "en": "Long blonde hair with soft waves" },
     "magenta-ruzicasta-duga": { "hr": "Duga ravna kosa obojana u intenzivnu magenta ružičastu nijansu", "en": "Long straight hair coloured an intense magenta pink" },
-    "plave-kovrce-tamne": { "hr": "Tamnoplave kovrče", "en": "Dark blue curls" }
+    "plave-kovrce-tamne": { "hr": "Tamnoplave kovrče", "en": "Dark blue curls" },
+    "kratka-plavo-ljubicasta": { "hr": "Kratka kovrčava frizura u plavim, ljubičastim i magenta nijansama, s obrijanim potiljkom", "en": "Short curly cut in blue, violet and magenta shades with a shaved nape" }
   },
   "gallery": [
     {
