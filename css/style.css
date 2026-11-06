@@ -104,9 +104,13 @@ mark.todo { background: var(--todo); color: var(--ink); padding: 0 .25em; border
 .wordmark { grid-area: mark; font-family: var(--display); font-size: 1rem; color: var(--ink); text-decoration: none; line-height: 1.05; }
 .wordmark strong { color: var(--accent); font-weight: 600; display: block; font-size: 1.5rem; }
 .header-tools { grid-area: tools; display: flex; align-items: center; gap: .6rem; }
+/* Language switch: the current language is the strong one (ink + accent bar), the other is a quiet link */
 .lang-switch { font-weight: 600; font-size: 1rem; white-space: nowrap; }
-.lang-switch a { padding: .5rem .25rem; }
-.lang-switch span[aria-current] { color: var(--muted); }
+.lang-switch a, .lang-switch span[aria-current] { padding: .5rem .25rem; }
+.lang-switch span[aria-current] { color: var(--ink); border-bottom: 2px solid var(--accent); padding-bottom: .1rem; }
+.lang-switch span[aria-hidden] { color: var(--line); }
+.lang-switch a { color: var(--muted); text-decoration: none; }
+.lang-switch a:hover, .lang-switch a:focus-visible { color: var(--ink); text-decoration: none; }
 .btn-call-num { display: none; }
 .btn-call { display: none; } /* on phones the fixed bottom bar is the call button */
 .site-nav { grid-area: nav; }
